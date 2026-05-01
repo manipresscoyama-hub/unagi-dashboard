@@ -8,6 +8,2113 @@
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Hiragino Kaku Gothic ProN','Hiragino Sans','Yu Gothic',sans-serif;
   background:#0f172a;color:#e2e8f0;min-height:100vh;padding:12px}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>鰻の成瀬 小岩店</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Hiragino Kaku Gothic ProN','Hiragino Sans','Yu Gothic',sans-serif;
+  background:#0f172a;color:#e2e8f0;min-height:100vh;padding:12px}
+
+/* ─ ヘッダー ─ */
+.hdr{display:flex;justify-content:space-between;align-items:flex-start;
+  margin-bottom:14px;gap:10px;flex-wrap:wrap}
+.hdr h1{font-size:22px;font-weight:700;color:#f8fafc}
+.hdr .sub{font-size:12px;color:#94a3b8;letter-spacing:2px}
+.upbtn{cursor:pointer;padding:8px 14px;border-radius:8px;font-size:12px;
+  border:2px dashed #334155;background:transparent;color:#64748b;
+  font-family:inherit;white-space:nowrap;transition:all .2s}
+.upbtn:hover{border-color:#38bdf8;color:#38bdf8}
+
+/* ─ ナビ ─ */
+.nav{display:flex;border-radius:12px;overflow:hidden;border:1px solid #1e293b;
+  margin-bottom:14px;background:#1e293b}
+.nav-btn{flex:1;cursor:pointer;padding:12px 4px;font-size:15px;border:none;
+  font-family:inherit;transition:all .2s;text-align:center;line-height:1.3}
+.nav-btn.act{background:#38bdf8;color:#0f172a;font-weight:700}
+.nav-btn:not(.act){background:transparent;color:#64748b}
+
+/* ─ タブ ─ */
+.tab-row{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-bottom:8px}
+.tab-lbl{font-size:12px;color:#475569;min-width:18px}
+.tab{cursor:pointer;padding:6px 12px;border-radius:6px;font-size:13px;
+  border:1px solid #334155;background:transparent;color:#64748b;
+  transition:all .2s;font-family:inherit;white-space:nowrap}
+.tab:hover{background:#1e293b;color:#e2e8f0}
+.tab.act{background:#0284c7;color:#fff;border-color:#0284c7}
+.ctab-row{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap}
+
+/* ─ KPI ─ */
+.kpi-grid{display:grid;gap:10px;margin-bottom:12px;grid-template-columns:1fr 1fr}
+.kpi{background:#1e293b;border:1px solid #334155;border-radius:12px;padding:14px}
+.kpi.labor{border-color:#7c3aed;background:#1a1035}
+.kpi-lbl{font-size:12px;color:#94a3b8;letter-spacing:.5px;margin-bottom:4px}
+.kpi.labor .kpi-lbl{color:#a78bca}
+.kpi-val{font-size:22px;font-weight:700;color:#f8fafc;line-height:1.2}
+.kpi-sub{font-size:12px;color:#64748b;margin-top:3px}
+
+/* ─ カード ─ */
+.card{background:#1e293b;border:1px solid #334155;border-radius:12px;
+  padding:14px;margin-bottom:12px}
+.card-ttl{font-size:13px;color:#94a3b8;margin-bottom:10px;font-weight:600}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+
+/* ─ テーブル ─ */
+.tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+table{width:100%;border-collapse:collapse;font-size:12px}
+th{padding:8px 8px;color:#94a3b8;font-weight:600;text-align:left;
+  white-space:nowrap;border-bottom:1px solid #334155;font-size:12px;
+  background:#0f172a}
+td{padding:8px 8px;border-bottom:1px solid #1e293b;white-space:nowrap;font-size:13px}
+tr:hover td{background:rgba(56,189,248,.04)}
+.td-g{color:#38bdf8;font-weight:600}
+.td-m{color:#64748b}
+.td-r{color:#e2e8f0}
+
+/* ─ バッジ ─ */
+.bdg{display:inline-block;padding:3px 8px;border-radius:20px;font-size:12px;font-weight:600}
+.bdg-up{background:#064e3b;color:#34d399;border:1px solid #065f46}
+.bdg-mid{background:#431407;color:#fb923c;border:1px solid #7c2d12}
+.bdg-dn{background:#450a0a;color:#f87171;border:1px solid #7f1d1d}
+.lbdg{display:inline-block;padding:3px 8px;border-radius:20px;font-size:12px;font-weight:700}
+.lbdg-ex{background:#0c4a6e;color:#38bdf8;border:1px solid #0369a1}
+.lbdg-ok{background:#064e3b;color:#34d399;border:1px solid #065f46}
+.lbdg-warn{background:#451a03;color:#fb923c;border:1px solid #7c2d12}
+.lbdg-ng{background:#450a0a;color:#f87171;border:1px solid #7f1d1d}
+
+/* ─ Canvas ─ */
+canvas{display:block;width:100%;height:200px}
+
+/* ─ 着地予想 ─ */
+.proj-row{display:flex;justify-content:space-between;align-items:center;
+  border-bottom:1px solid #1e293b;padding:8px 0}
+.proj-lbl{font-size:11px;color:#64748b}
+.proj-val{font-size:13px;color:#e2e8f0}
+.proj-val.big{font-size:19px;font-weight:700;color:#34d399}
+
+/* ─ 人件費カード ─ */
+.lb-card{background:#1a1035;border:1px solid #7c3aed;
+  border-radius:12px;padding:14px;margin-bottom:12px}
+.lb-ttl{font-size:11px;color:#a78bca;margin-bottom:12px}
+.lb-inp{background:#0f0820;border:1px solid #7c3aed;border-radius:8px;
+  color:#e2d4f5;font-size:18px;font-family:inherit;padding:10px 14px;
+  width:100%;text-align:right}
+.lb-inp:focus{outline:none;border-color:#a78bca}
+.lb-save{cursor:pointer;padding:12px;border-radius:8px;font-size:14px;
+  border:1px solid #7c3aed;background:#2d1060;color:#e2d4f5;
+  font-family:inherit;font-weight:700;width:100%;margin-top:8px}
+.lb-saved{font-size:11px;color:#34d399;text-align:center;
+  margin-top:6px;opacity:0;transition:opacity .5s;height:16px}
+.lb-saved.show{opacity:1}
+.lb-rate-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.lb-rate-item{background:rgba(20,12,30,.7);border:1px solid #4a2a7a;
+  border-radius:8px;padding:10px}
+.lb-rate-lbl{font-size:10px;color:#a78bca;margin-bottom:4px}
+.lb-rate-val{font-size:17px;font-weight:700}
+.lb-rate-sub{font-size:10px;color:#5a3a7a;margin-top:2px}
+
+/* ─ データ管理 ─ */
+.dm-card{background:#1e293b;border:1px solid #334155;
+  border-radius:12px;padding:14px;margin-bottom:12px}
+.dm-row{padding:12px 0;border-bottom:1px solid #1e293b}
+.dm-row:last-child{border-bottom:none}
+.dm-month{font-size:15px;font-weight:700;color:#38bdf8;margin-bottom:6px}
+.dm-stats{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px}
+.dm-stat{font-size:11px;color:#64748b}
+.dm-stat span{color:#e2e8f0;font-weight:600}
+.btn-del{cursor:pointer;padding:8px;border-radius:6px;font-size:12px;
+  border:1px solid #7f1d1d;background:#450a0a;color:#f87171;
+  font-family:inherit;width:100%}
+
+/* ─ フッター ─ */
+.footer{margin-top:12px;text-align:right;font-size:10px;color:#334155}
+
+::-webkit-scrollbar{width:4px;height:4px}
+::-webkit-scrollbar-thumb{background:#334155;border-radius:4px}
+
+/* ─ レスポンシブ ─ */
+canvas{height:180px}
+.g2{grid-template-columns:1fr}
+
+@media(min-width:600px){
+  body{padding:16px}
+  canvas{height:220px}
+  .g2{grid-template-columns:1fr 1fr}
+  .kpi-grid{grid-template-columns:repeat(2,1fr)}
+  .kpi-val{font-size:18px}
+}
+
+/* PC */
+@media(min-width:900px){
+  body{padding:20px;max-width:1100px;margin:0 auto}
+  canvas{height:240px}
+  .kpi-grid{grid-template-columns:repeat(4,1fr)}
+  .kpi-grid.col5{grid-template-columns:repeat(5,1fr)}
+  .kpi-val{font-size:19px}
+  .nav-btn{font-size:13px;padding:10px 20px}
+  .tab{font-size:12px;padding:7px 14px}
+}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+// Polyfill for older Safari
+if(!Array.prototype.find){Array.prototype.find=function(fn){for(var i=0;i<this.length;i++){if(fn(this[i],i,this))return this[i];}return undefined;};}
+if(!Array.prototype.findIndex){Array.prototype.findIndex=function(fn){for(var i=0;i<this.length;i++){if(fn(this[i],i,this))return i;}return -1;};}
+// ══ ユーティリティ ══════════════════════════════════
+function parseCSVRows(text){
+  var lines=text.split('\n');
+  var headers=lines[0].split('\t').map(function(h){return h.replace(/"/g,'').trim();});
+  var rows=[];
+  for(var i=1;i<lines.length;i++){
+    var line=lines[i].trim();
+    if(!line)continue;
+    var cols=line.split('\t').map(function(c){return c.replace(/"/g,'').trim();});
+    var obj={};
+    headers.forEach(function(h,j){obj[h]=cols[j]||'';});
+    rows.push(obj);
+  }
+  return rows;
+}
+function pn(s){if(!s)return 0;return parseInt((s+'').replace(/,/g,'').replace(/[^0-9\-]/g,''))||0;}
+function pp(s){if(!s||s==='\u2010'||s==='-')return null;return parseFloat((s+'').replace('%',''))||null;}
+function yen(n){return '\u00a5'+Math.round(n).toLocaleString('ja-JP');}
+function fmt(n){if(n>=1e6)return(n/1e6).toFixed(1)+'M';if(n>=1000)return(n/1000).toFixed(0)+'K';return Math.round(n).toLocaleString();}
+function yoyColor(v){return v==null?'#888':v>=100?'#4ade80':v>=80?'#facc15':'#f87171';}
+function rateLabel(v){return v==null?'':v<=25?'優秀':v<=30?'普通':v<=35?'注意':'危険';}
+function rateColor(v){return v==null?'#a78bca':v<=25?'#60a5fa':v<=30?'#86efac':v<=35?'#facc15':'#f87171';}
+var MN=['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
+var WD=['日','月','火','水','木','金','土'];
+var WE={'快晴':'☀️','晴れ':'🌤','曇り':'☁️','雨':'🌧','雪':'❄️','にわか雨':'🌦'};
+
+// ══ CSV パース ════════════════════════════════════
+function processCSV(csvText){
+  var rows=parseCSVRows(csvText);
+  var map={};var lastKey=null;
+  rows.forEach(function(r){
+    var d=r['当年日付'];
+    if(!d||d==='TOTAL')return;
+    if(d.slice(0,2)==='MD'){
+      if(!lastKey||!map[lastKey])return;
+      map[lastKey].weekly.push({week:d,
+        sales:pn(r['当年実績']),prevSales:pn(r['前年実績']),
+        customers:pn(r['当年客数']),yoy:pp(r['前年差異'])});
+      return;
+    }
+    if(d.length===8){
+      var yr=parseInt(d.slice(0,4)),mo=parseInt(d.slice(4,6)),dy=parseInt(d.slice(6,8));
+      var key=yr+'-'+(mo<10?'0':'')+mo;
+      if(!map[key])map[key]={year:yr,month:mo,daily:[],weekly:[]};
+      lastKey=key;
+      map[key].daily.push({
+        date:mo+'/'+dy,year:yr,month:mo,day:dy,
+        weekday:r['曜日'],weather:r['当年天気'],
+        sales:pn(r['当年実績']),prevSales:pn(r['前年実績']),
+        customers:pn(r['当年客数']),prevCustomers:pn(r['前年客数']),
+        perCustomer:pn(r['当年客単']),yoy:pp(r['前年差異'])
+      });
+    }
+  });
+  return Object.keys(map).sort().map(function(k){var o={key:k};var m=map[k];Object.keys(m).forEach(function(p){o[p]=m[p];});return o;});
+}
+
+// ══ ストレージ ════════════════════════════════════
+var SKEY='unagi_v70',LKEY='unagi_labor_v3';
+function saveData(){
+  try{localStorage.setItem(SKEY,JSON.stringify(state.allData.map(function(m){
+    return{key:m.key,year:m.year,month:m.month,daily:m.daily,weekly:m.weekly};
+  })));}catch(e){}
+}
+function loadData(){try{var r=localStorage.getItem(SKEY);return r?JSON.parse(r):null;}catch(e){return null;}}
+function saveLabor(){try{localStorage.setItem(LKEY,JSON.stringify(state.laborData));}catch(e){}}
+function loadLabor(){try{var r=localStorage.getItem(LKEY);return r?JSON.parse(r):{};}catch(e){return{};}}
+function getLabor(key){return state.laborData[key]||0;}
+function getLaborRate(key){
+  var labor=getLabor(key);if(!labor)return null;
+  var md=state.allData.find(function(d){return d.key===key;});if(!md)return null;
+  var sales=md.daily.reduce(function(s,d){return s+d.sales;},0);
+  return sales>0?labor/sales*100:null;
+}
+function deleteMonth(key){
+  state.allData=state.allData.filter(function(d){return d.key!==key;});
+  saveData();
+  if(state.allData.length){var l=state.allData[state.allData.length-1];state.selYear=getFiscalYear(l.key);state.selKey=null;}
+  render();
+}
+
+// ══ 計算 ══════════════════════════════════════════
+function getMonthlySummary(md){
+  if(!md)return null;
+  var daily=md.daily;
+  var ts=daily.reduce(function(s,d){return s+d.sales;},0);
+  var tc=daily.reduce(function(s,d){return s+d.customers;},0);
+  var apc=tc>0?Math.round(ts/tc):0;
+  var m=md.month,mdays=m===2?28:[4,6,9,11].indexOf(m)>=0?30:31;
+  var open=daily.filter(function(d){return d.sales>0;});
+  var avgD=open.length>0?ts/open.length:0;
+  var proj=avgD*mdays;
+  // 前年比：state.allDataから前年同月を参照（CSVの前年列は曜日ズレのため使用しない）
+  var prevKey=(md.year-1)+'-'+(md.month<10?'0':'')+md.month;
+  var prevMd=state.allData.find(function(d){return d.key===prevKey;});
+  var tps=prevMd?prevMd.daily.reduce(function(s,d){return s+d.sales;},0):0;
+  var yoy=(md.key<='2024-10'||!prevMd||tps===0)?null:ts/tps*100;
+  return{totalSales:ts,totalPrevSales:tps,totalCustomers:tc,avgPerCustomer:apc,
+    daysInMonth:daily.length,monthDays:mdays,openDays:open.length,
+    avgDaily:avgD,projected:proj,yoy:yoy};
+}
+function getAnnualData(year){
+  var yd=state.allData.filter(function(d){return d.year===year;});
+  var yd2=state.allData;  // 前年参照用
+  return MN.map(function(name,i){
+    var m=i+1,md=yd.find(function(d){return d.month===m;});
+    if(!md)return{month:name,sales:0,prevSales:0,customers:0,yoy:null,hasData:false,key:null};
+    var s=md.daily.reduce(function(a,d){return a+d.sales;},0);
+    var ps=md.daily.reduce(function(a,d){return a+d.prevSales;},0);
+    var c=md.daily.reduce(function(a,d){return a+d.customers;},0);
+    var prevKey2=(md.year-1)+'-'+(md.month<10?'0':'')+md.month;
+    var prevMd2=yd2.find(function(d){return d.key===prevKey2;});
+    var ps2=prevMd2?prevMd2.daily.reduce(function(a,d){return a+d.sales;},0):0;
+    var yoyVal=(md.key<='2024-10'||!prevMd2||ps2===0)?null:s/ps2*100;
+    return{month:name,sales:s,prevSales:ps2,customers:c,yoy:yoyVal,hasData:true,key:md.key};
+  });
+}
+function getAnnualSummary(ad){
+  var filled=ad.filter(function(d){return d.hasData;});
+  if(!filled.length)return null;
+  var ts=filled.reduce(function(s,d){return s+d.sales;},0);
+  var tps=filled.reduce(function(s,d){return s+(d.prevSales||0);},0);
+  var tc=filled.reduce(function(s,d){return s+d.customers;},0);
+  var avg=ts/filled.length;
+  return{totalSales:ts,totalPrevSales:tps,totalCustomers:tc,
+    monthsWithData:filled.length,avgMonthly:avg,projected:avg*12,
+    yoy:tps>0?ts/tps*100:null};
+}
+
+// ══ 年度ユーティリティ（4月〜3月）══════════════════
+// 月→年度を返す（4〜3月）例: 2025-04→2025, 2026-03→2025
+function getFiscalYear(key){
+  var yr=parseInt(key.slice(0,4)),mo=parseInt(key.slice(5,7));
+  return mo>=4?yr:yr-1;
+}
+// 年度に属するキー一覧を返す
+function getFiscalMonths(fy){
+  var keys=[];
+  for(var m=4;m<=12;m++) keys.push(fy+'-'+(m<10?'0':'')+m);
+  for(var m=1;m<=3;m++) keys.push((fy+1)+'-'+(m<10?'0':'')+m);
+  return keys;
+}
+// 全年度一覧を返す
+function getAllFiscalYears(){
+  var fys={};
+  state.allData.forEach(function(d){ fys[getFiscalYear(d.key)]=1; });
+  return Object.keys(fys).map(Number).sort(function(a,b){return a-b;});
+}
+// 年度表示文字列
+function fyLabel(fy){ return fy+'年度'; }
+// ══ DOM ヘルパー ══════════════════════════════════
+function el(tag,attrs,children){
+  var e=document.createElement(tag);
+  if(attrs)Object.keys(attrs).forEach(function(k){
+    if(k==='class')e.className=attrs[k];
+    else if(k.slice(0,2)==='on')e[k]=attrs[k];
+    else if(k==='width'||k==='height')e[k]=parseInt(attrs[k]);
+    else e.setAttribute(k,attrs[k]);
+  });
+  if(children)children.forEach(function(c){
+    if(c==null)return;
+    e.appendChild(typeof c==='string'?document.createTextNode(c):c);
+  });
+  return e;
+}
+function mkbdg(v){
+  if(v==null)return document.createTextNode('—');
+  return el('span',{'class':v>=100?'bdg bdg-up':v>=80?'bdg bdg-mid':'bdg bdg-dn'},[v.toFixed(1)+'%']);
+}
+function mklbdg(v){
+  if(v==null)return document.createTextNode('—');
+  var cls=v<=25?'lbdg lbdg-ex':v<=30?'lbdg lbdg-ok':v<=35?'lbdg lbdg-warn':'lbdg lbdg-ng';
+  return el('span',{'class':cls},[v.toFixed(1)+'%']);
+}
+
+// ══ Canvas グラフ ══════════════════════════════════
+function drawBar(cv,data,opts){
+  var W=cv.width,H=cv.height,ctx=cv.getContext('2d');
+  if(!W||!H)return;
+  var pad={t:14,r:10,b:34,l:56};
+  var cW=W-pad.l-pad.r,cH=H-pad.t-pad.b;
+  ctx.clearRect(0,0,W,H);
+  var maxV=Math.max.apply(null,data.map(function(d){return Math.max(d.v1||0,d.v2||0);}));
+  if(!maxV)maxV=1;
+  var bgW=cW/data.length;
+  var bw=opts.colorFn?bgW*.55:bgW*.28,gap=bgW*.04;
+  for(var gi=0;gi<=4;gi++){
+    var gy=pad.t+cH-cH/4*gi;
+    ctx.strokeStyle='#2a1e08';ctx.lineWidth=1;
+    ctx.beginPath();ctx.moveTo(pad.l,gy);ctx.lineTo(pad.l+cW,gy);ctx.stroke();
+    ctx.fillStyle='#8B6914';ctx.font='9px sans-serif';ctx.textAlign='right';
+    ctx.fillText(fmt(maxV/4*gi),pad.l-3,gy+3);
+  }
+  if(opts.ref100){
+    var ry=pad.t+cH-(100/maxV)*cH;
+    ctx.strokeStyle='rgba(212,168,67,.6)';ctx.lineWidth=1;ctx.setLineDash([4,3]);
+    ctx.beginPath();ctx.moveTo(pad.l,ry);ctx.lineTo(pad.l+cW,ry);ctx.stroke();
+    ctx.setLineDash([]);
+  }
+  data.forEach(function(d,i){
+    var cx=pad.l+bgW*i+bgW/2;
+    if(opts.colorFn){
+      var bh=Math.max((d.v1||0)/maxV*cH,1);
+      ctx.fillStyle=opts.colorFn(d.v1);ctx.fillRect(cx-bw/2,pad.t+cH-bh,bw,bh);
+    } else {
+      var bh1=Math.max((d.v1||0)/maxV*cH,1);
+      ctx.fillStyle='#d4a843';ctx.fillRect(cx-bw-gap,pad.t+cH-bh1,bw,bh1);
+      if(d.v2!=null){var bh2=Math.max(d.v2/maxV*cH,1);ctx.fillStyle='#4a3510';ctx.fillRect(cx+gap,pad.t+cH-bh2,bw,bh2);}
+    }
+    ctx.fillStyle='#8B6914';ctx.font='9px sans-serif';ctx.textAlign='center';
+    ctx.fillText(d.label,cx,pad.t+cH+14);
+  });
+}
+function drawLine(cv,data){
+  var W=cv.width,H=cv.height,ctx=cv.getContext('2d');
+  if(!W||!H)return;
+  var pad={t:14,r:10,b:34,l:56};
+  var cW=W-pad.l-pad.r,cH=H-pad.t-pad.b;
+  ctx.clearRect(0,0,W,H);
+  var maxV=Math.max.apply(null,data.map(function(d){return Math.max(d.v1||0,d.v2||0);}));
+  if(!maxV)maxV=1;
+  var xs=cW/(data.length>1?data.length-1:1);
+  for(var gi=0;gi<=4;gi++){
+    var gy=pad.t+cH-cH/4*gi;
+    ctx.strokeStyle='#2a1e08';ctx.lineWidth=1;
+    ctx.beginPath();ctx.moveTo(pad.l,gy);ctx.lineTo(pad.l+cW,gy);ctx.stroke();
+    ctx.fillStyle='#8B6914';ctx.font='9px sans-serif';ctx.textAlign='right';
+    ctx.fillText(fmt(maxV/4*gi),pad.l-3,gy+3);
+  }
+  ['v2','v1'].forEach(function(key){
+    ctx.strokeStyle=key==='v1'?'#d4a843':'#4a3510';
+    ctx.lineWidth=key==='v1'?2:1.5;
+    ctx.setLineDash(key==='v2'?[4,3]:[]);
+    ctx.beginPath();var first=true;
+    data.forEach(function(d,i){
+      var v=d[key];if(v==null||v===0&&key==='v2')return;
+      var x=pad.l+xs*i,y=pad.t+cH-(v/maxV)*cH;
+      if(first){ctx.moveTo(x,y);first=false;}else ctx.lineTo(x,y);
+    });
+    ctx.stroke();
+  });
+  ctx.setLineDash([]);
+  var step=Math.ceil(data.length/8);
+  data.forEach(function(d,i){
+    if(i%step!==0&&i!==data.length-1)return;
+    ctx.fillStyle='#8B6914';ctx.font='9px sans-serif';ctx.textAlign='center';
+    ctx.fillText(d.label,pad.l+xs*i,pad.t+cH+14);
+  });
+}
+function sizeCanvas(cv){
+  cv.width=cv.parentElement?cv.parentElement.clientWidth||300:300;
+  cv.height=180;
+}
+
+// ══ 状態 ══════════════════════════════════════════
+var state={allData:[],laborData:{},view:'data',selYear:null,selKey:null,ctab:'daily'};
+
+// ══ レンダリング ══════════════════════════════════
+function render(){
+  var app=document.getElementById('app');
+  app.innerHTML='';
+  var allData=state.allData;
+  var years=getAllFiscalYears(); // 年度リスト（4月〜3月）
+  var selYear=state.selYear||years[years.length-1];
+  // 選択年度の月リスト（4〜3月順）
+  var fyKeys=getFiscalMonths(selYear);
+  var monthsForYear=fyKeys.map(function(k){return allData.find(function(d){return d.key===k;});}).filter(Boolean);
+  var cur=allData.find(function(d){return d.key===state.selKey;})||monthsForYear[monthsForYear.length-1]||allData[allData.length-1];
+  var ms=getMonthlySummary(cur);
+  var ad=getAnnualData(selYear);
+  var as=getAnnualSummary(ad);
+  var mLabel=cur?cur.year+'年'+cur.month+'月':'';
+
+  // ── ヘッダー
+  var hdr=el('div',{class:'hdr'},[
+    el('div',{},[
+      el('div',{class:'sub'},['鰻の成瀬 小岩店']),
+      el('div',{class:''},[el('h1',{},['売上管理'])]),
+    ]),
+  ]);
+  app.appendChild(hdr);
+
+  // ── ナビ
+  var nav=el('div',{class:'nav'});
+  [['data','📋 年度売上'],['graph','📈 グラフ']].forEach(function(pair){
+    var id=pair[0],label=pair[1];
+    var btn=el('button',{class:'nav-btn'+(state.view===id?' act':'')},[ label]);
+    btn.onclick=function(){state.view=id;render();};
+    nav.appendChild(btn);
+  });
+  app.appendChild(nav);
+
+  if(state.view==='graph') renderGraph(app,{years:years,selYear:selYear});
+  else renderDataMgr(app);
+
+  app.appendChild(el('div',{class:'footer'},['鰻の成瀬 小岩店 · Uレジオーナー']));
+}
+
+
+
+// ══ 月次ビュー ════════════════════════════════════
+function renderMonthly(app,o){
+  var years=o.years,selYear=o.selYear,monthsForYear=o.monthsForYear,cur=o.cur,ms=o.ms,mLabel=o.mLabel;
+
+  // 年・月プルダウン
+  var tsec=el('div',{style:'display:flex;gap:10px;align-items:center;margin-bottom:12px;flex-wrap:wrap'});
+  // 年セレクト
+  var ySel=el('select',{style:'flex:1;background:#1e293b;border:1px solid #334155;border-radius:8px;color:#e2e8f0;font-size:15px;padding:8px 12px;font-family:inherit;min-width:0'});
+  years.forEach(function(y){
+    var opt=el('option',{value:y},[fyLabel(y)]);
+    if(y===selYear) opt.selected=true;
+    ySel.appendChild(opt);
+  });
+  ySel.onchange=function(){
+    var y=parseInt(this.value);
+    state.selYear=y;
+    var first=state.allData.filter(function(d){return d.year===y;}).sort(function(a,b){return a.month-b.month;})[0];
+    if(first)state.selKey=first.key;
+    render();
+  };
+  tsec.appendChild(ySel);
+  // 月セレクト
+  var mSel=el('select',{style:'flex:1;background:#1e293b;border:1px solid #334155;border-radius:8px;color:#e2e8f0;font-size:15px;padding:8px 12px;font-family:inherit;min-width:0'});
+  if(!monthsForYear.length){
+    mSel.appendChild(el('option',{},[' データなし']));
+  } else {
+    monthsForYear.forEach(function(md){
+      var opt=el('option',{value:md.key},[md.month+'月']);
+      if(md.key===state.selKey) opt.selected=true;
+      mSel.appendChild(opt);
+    });
+  }
+  mSel.onchange=function(){state.selKey=this.value;render();};
+  tsec.appendChild(mSel);
+  app.appendChild(tsec);
+
+  // KPI（5枚: 2+2+labor）
+  if(ms){
+    var labor=cur?getLabor(cur.key):0;
+    var lr=cur?getLaborRate(cur.key):null;
+    var projLr=ms.projected>0&&labor?labor/ms.projected*100:null;
+    var kg=el('div',{class:'kpi-grid'});
+    [
+      {l:'月間累計売上',v:yen(ms.totalSales),s:'前年 '+yen(ms.totalPrevSales),c:'#d4a843',cls:'kpi'},
+      {l:'前年同月比',v:ms.yoy!=null?ms.yoy.toFixed(1)+'%':'— ',s:ms.yoy!=null?'当月前年比':'前年データなし',c:yoyColor(ms.yoy),cls:'kpi'},
+      {l:'来客数 / 客単価',v:ms.totalCustomers+'名',s:'客単価 '+yen(ms.avgPerCustomer),c:'#d4a843',cls:'kpi'},
+      {l:'月末着地予想',v:yen(ms.projected),s:'営業日平均×'+ms.monthDays+'日',c:'#4ade80',cls:'kpi'},
+    ].forEach(function(k){
+      kg.appendChild(el('div',{class:k.cls},[
+        el('div',{class:'kpi-lbl'},[k.l]),
+        el('div',{class:'kpi-val',style:'color:'+k.c},[k.v]),
+        el('div',{class:'kpi-sub'},[k.s]),
+      ]));
+    });
+
+    // 人件費カード（左：人件費金額、右：人件費率）
+    var tdLabor=el('div',{class:'kpi labor'});
+    tdLabor.appendChild(el('div',{class:'kpi-lbl'},['人件費']));
+    tdLabor.appendChild(el('div',{class:'kpi-val',style:'color:#d4a843'},[labor?yen(labor):'—']));
+    tdLabor.appendChild(el('div',{class:'kpi-sub'},[' ']));
+    kg.appendChild(tdLabor);
+    var tdLaborRate=el('div',{class:'kpi labor'});
+    tdLaborRate.appendChild(el('div',{class:'kpi-lbl'},['人件費率']));
+    tdLaborRate.appendChild(el('div',{class:'kpi-val',style:'color:#d4a843'},[lr!=null?lr.toFixed(1)+'%':'—']));
+
+    kg.appendChild(tdLaborRate);
+    app.appendChild(kg);
+  }
+
+  // 日次明細（折りたたみ）
+  if(!cur)return;
+
+  {
+    var isOpen = !!state.dailyOpen;
+    var card=el('div',{class:'card'});
+
+    // ヘッダー行（タイトル＋トグルボタン）
+    var cardHdr=el('div',{style:'display:flex;justify-content:space-between;align-items:center'});
+    cardHdr.appendChild(el('div',{class:'card-ttl',style:'margin-bottom:0'},['日次明細（'+mLabel+'）']));
+    var toggleBtn=el('button',{style:'background:#0f172a;border:1px solid #334155;border-radius:8px;'+
+      'color:#64748b;font-size:12px;padding:6px 12px;cursor:pointer;font-family:inherit'});
+    toggleBtn.textContent = isOpen ? '▲ 閉じる' : '▼ 詳細はこちら';
+    card.appendChild(cardHdr);
+    cardHdr.appendChild(toggleBtn);
+
+    // 明細テーブル（折りたたみ）
+    var detailWrap=el('div',{style:'display:'+(isOpen?'block':'none')+';margin-top:10px'});
+    var tw=el('div',{class:'tbl-wrap'});
+    var tbl=el('table');
+    tbl.appendChild(el('thead',{},[el('tr',{},[
+      '日付','曜','天気','売上','前年','前年比'
+    ].map(function(h){return el('th',{},[h]);}))]));
+    var tb=el('tbody');
+    cur.daily.forEach(function(d){
+      var tr=el('tr');
+      [el('td',{class:'td-g'},[d.date]),
+       el('td',{class:['日','土'].indexOf(d.weekday)>=0?'td-r':''},[d.weekday]),
+       el('td',{},[WE[d.weather]||d.weather||'']),
+       el('td',{style:'font-weight:600'},[yen(d.sales)]),
+       el('td',{class:'td-m'},[yen(d.prevSales)]),
+       el('td',{},[d.yoy!=null?mkbdg(d.yoy):document.createTextNode('')]),
+      ].forEach(function(td){tr.appendChild(td);});
+      tb.appendChild(tr);
+    });
+    tbl.appendChild(tb);tw.appendChild(tbl);detailWrap.appendChild(tw);
+    card.appendChild(detailWrap);
+
+    toggleBtn.onclick=function(){
+      state.dailyOpen=!state.dailyOpen;
+      if(state.dailyOpen){
+        detailWrap.style.display='block';
+        toggleBtn.textContent='▲ 閉じる';
+      } else {
+        detailWrap.style.display='none';
+        toggleBtn.textContent='▼ 詳細はこちら';
+      }
+    };
+
+    app.appendChild(card);
+  }
+
+}
+
+// ══ グラフ ════════════════════════════════════════
+function renderGraph(app,o){
+  var years=o.years;
+  // グラフタブは常に最新年度を初期表示
+  var selYear=state.graphYear||(years.length?years[years.length-1]:null);
+  if(!state.allData.length){
+    app.appendChild(el('div',{class:'card'},[el('div',{style:'text-align:center;padding:20px;color:#64748b'},['データがありません'])]));
+    return;
+  }
+
+  // ─ 年間売上推移（全期間・月別棒グラフ）
+  var card1=el('div',{class:'card'});
+  card1.appendChild(el('div',{class:'card-ttl'},['📊 月別売上推移（全期間）']));
+
+  // 凡例
+  var legend=el('div',{style:'display:flex;gap:14px;margin-bottom:8px;font-size:11px;color:#94a3b8'});
+  var lg1=el('div',{style:'display:flex;align-items:center;gap:4px'});
+  lg1.appendChild(el('span',{style:'display:inline-block;width:10px;height:10px;border-radius:2px;background:#f97316'}));
+  lg1.appendChild(document.createTextNode('当年'));
+  var lg2=el('div',{style:'display:flex;align-items:center;gap:4px'});
+  lg2.appendChild(el('span',{style:'display:inline-block;width:10px;height:10px;border-radius:2px;background:#64748b'}));
+  lg2.appendChild(document.createTextNode('前年'));
+  legend.appendChild(lg1);legend.appendChild(lg2);
+  card1.appendChild(legend);
+
+  // 年タブ
+  var ytabs=el('div',{style:'display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px'});
+  years.forEach(function(y){
+    var btn=el('button',{style:'padding:5px 12px;border-radius:6px;font-size:12px;cursor:pointer;font-family:inherit;'+
+      'border:1px solid '+(y===selYear?'#38bdf8':'#334155')+';'+
+      'background:'+(y===selYear?'#0284c7':'transparent')+';'+
+      'color:'+(y===selYear?'#fff':'#64748b')});
+    btn.textContent=y+'年';
+    btn.onclick=function(){state.graphYear=y;render();};
+    ytabs.appendChild(btn);
+  });
+  card1.appendChild(ytabs);
+
+  // 月別棒グラフ（当年度 vs 前年度・4〜3月順）
+  var fyKeysCur=getFiscalMonths(selYear);
+  var fyKeysPrev=getFiscalMonths(selYear-1);
+  var barData=fyKeysCur.map(function(k,i){
+    var md=state.allData.find(function(d){return d.key===k;});
+    var prevK=fyKeysPrev[i];
+    var prevMd=state.allData.find(function(d){return d.key===prevK;});
+    var v1=md?md.daily.reduce(function(s,d){return s+d.sales;},0):0;
+    var v2=prevMd?prevMd.daily.reduce(function(s,d){return s+d.sales;},0):0;
+    var mo=parseInt(k.slice(5,7));
+    return{label:mo+'月',v1:v1>0?v1:null,v2:v2>0?v2:null};
+  });
+  var cv1=el('canvas',{width:'300',height:'180'});
+  card1.appendChild(cv1);
+  app.appendChild(card1);
+
+  // ─ 年間売上推移（年次折れ線グラフ）
+  var card2=el('div',{class:'card'});
+  card2.appendChild(el('div',{class:'card-ttl'},['📈 年間売上推移']));
+  var annualData=years.map(function(y){
+    var fyKs=getFiscalMonths(y);
+    var total=fyKs.reduce(function(s,k){
+      var md=state.allData.find(function(d){return d.key===k;});
+      return s+(md?md.daily.reduce(function(a,d){return a+d.sales;},0):0);
+    },0);
+    return{label:y+'年度',v1:total};
+  });
+  var cv2=el('canvas',{width:'300',height:'180'});
+  card2.appendChild(cv2);
+  app.appendChild(card2);
+
+  // グラフ描画（DOM描画後）
+  setTimeout(function(){
+    cv1.width=cv1.parentElement?cv1.parentElement.clientWidth||320:320;
+    cv1.height=200;
+    drawBarCustom(cv1,barData);
+    cv2.width=cv2.parentElement?cv2.parentElement.clientWidth||320:320;
+    cv2.height=200;
+    drawLineCustom(cv2,annualData,{color:'#22c55e'});
+  },50);
+}
+
+// カスタム棒グラフ（当年：青・前年：暗青）
+function drawBarCustom(cv,data){
+  var W=cv.width,H=cv.height,ctx=cv.getContext('2d');
+  if(!W||!H)return;
+  var pad={t:20,r:10,b:36,l:58};
+  var cW=W-pad.l-pad.r,cH=H-pad.t-pad.b;
+  ctx.clearRect(0,0,W,H);
+  var maxV=Math.max.apply(null,data.map(function(d){return Math.max(d.v1||0,d.v2||0);}));
+  if(!maxV)maxV=1;
+  // グリッド
+  for(var gi=0;gi<=4;gi++){
+    var gy=pad.t+cH*(1-gi/4);
+    ctx.strokeStyle='rgba(255,255,255,.06)';ctx.lineWidth=1;
+    ctx.beginPath();ctx.moveTo(pad.l,gy);ctx.lineTo(pad.l+cW,gy);ctx.stroke();
+    ctx.fillStyle='#475569';ctx.font='9px sans-serif';ctx.textAlign='right';
+    ctx.fillText(fmtM(maxV*gi/4),pad.l-4,gy+3);
+  }
+  var bgW=cW/data.length;
+  var bw=bgW*.28,gap=bgW*.03;
+  data.forEach(function(d,i){
+    var cx=pad.l+bgW*i+bgW/2;
+    if(d.v2!=null&&d.v2>0){
+      var bh2=Math.max(d.v2/maxV*cH,1);
+      ctx.fillStyle='#64748b';
+      ctx.fillRect(cx-bw-gap,pad.t+cH-bh2,bw,bh2);
+    }
+    if(d.v1!=null&&d.v1>0){
+      var bh1=Math.max(d.v1/maxV*cH,1);
+      ctx.fillStyle='#f97316';
+      ctx.fillRect(cx+gap,pad.t+cH-bh1,bw,bh1);
+    }
+    ctx.fillStyle='#475569';ctx.font='9px sans-serif';ctx.textAlign='center';
+    ctx.fillText(d.label,cx,pad.t+cH+14);
+  });
+}
+
+// カスタム折れ線グラフ
+function drawLineCustom(cv,data,opts){
+  var W=cv.width,H=cv.height,ctx=cv.getContext('2d');
+  if(!W||!H||!data.length)return;
+  var pad={t:20,r:14,b:36,l:48};
+  var cW=W-pad.l-pad.r,cH=H-pad.t-pad.b;
+  ctx.clearRect(0,0,W,H);
+  var vals=data.map(function(d){return d.v1||0;});
+  var maxV=Math.max.apply(null,vals)||1;
+  var minV=opts.ref100?0:Math.max(0,Math.min.apply(null,vals)-maxV*.1);
+  var range=maxV-minV||1;
+  // グリッド
+  for(var gi=0;gi<=4;gi++){
+    var gy=pad.t+cH*(1-gi/4);
+    var gv=minV+range*gi/4;
+    ctx.strokeStyle='rgba(255,255,255,.06)';ctx.lineWidth=1;
+    ctx.beginPath();ctx.moveTo(pad.l,gy);ctx.lineTo(pad.l+cW,gy);ctx.stroke();
+    ctx.fillStyle='#475569';ctx.font='9px sans-serif';ctx.textAlign='right';
+    ctx.fillText(opts.ref100||opts.ref35?Math.round(gv)+'%':fmtM(gv),pad.l-4,gy+3);
+  }
+  // 基準ライン
+  if(opts.ref100&&maxV>=100){
+    var ry=pad.t+cH*(1-(100-minV)/range);
+    ctx.strokeStyle='rgba(212,168,67,.5)';ctx.lineWidth=1;ctx.setLineDash([4,3]);
+    ctx.beginPath();ctx.moveTo(pad.l,ry);ctx.lineTo(pad.l+cW,ry);ctx.stroke();
+    ctx.setLineDash([]);
+  }
+  if(opts.ref35){
+    [25,30,35].forEach(function(v,vi){
+      if(v>=minV&&v<=maxV){
+        var ry2=pad.t+cH*(1-(v-minV)/range);
+        ctx.strokeStyle=['rgba(56,189,248,.4)','rgba(52,211,153,.4)','rgba(251,146,60,.4)'][vi];
+        ctx.lineWidth=1;ctx.setLineDash([3,3]);
+        ctx.beginPath();ctx.moveTo(pad.l,ry2);ctx.lineTo(pad.l+cW,ry2);ctx.stroke();
+        ctx.setLineDash([]);
+      }
+    });
+  }
+  // 折れ線
+  var xs=cW/(data.length>1?data.length-1:1);
+  // グラデーション塗りつぶし
+  var grad=ctx.createLinearGradient(0,pad.t,0,pad.t+cH);
+  var gc=opts.color||'#38bdf8';
+  var gr=parseInt(gc.slice(1,3),16),gg=parseInt(gc.slice(3,5),16),gb=parseInt(gc.slice(5,7),16);
+  grad.addColorStop(0,'rgba('+gr+','+gg+','+gb+',.2)');
+  grad.addColorStop(1,'rgba('+gr+','+gg+','+gb+',0)');
+  ctx.beginPath();
+  data.forEach(function(d,i){
+    var x=pad.l+xs*i,y=pad.t+cH*(1-(d.v1-minV)/range);
+    i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+  });
+  ctx.lineTo(pad.l+xs*(data.length-1),pad.t+cH);
+  ctx.lineTo(pad.l,pad.t+cH);
+  ctx.closePath();ctx.fillStyle=grad;ctx.fill();
+  // 線
+  ctx.strokeStyle=opts.color||'#38bdf8';ctx.lineWidth=2;ctx.setLineDash([]);
+  ctx.beginPath();
+  data.forEach(function(d,i){
+    var x=pad.l+xs*i,y=pad.t+cH*(1-(d.v1-minV)/range);
+    i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+  });
+  ctx.stroke();
+  // 点
+  data.forEach(function(d,i){
+    var x=pad.l+xs*i,y=pad.t+cH*(1-(d.v1-minV)/range);
+    ctx.beginPath();ctx.arc(x,y,3,0,Math.PI*2);
+    ctx.fillStyle=opts.color||'#38bdf8';ctx.fill();
+  });
+  // ラベル
+  var step=Math.ceil(data.length/8);
+  data.forEach(function(d,i){
+    if(i%step!==0&&i!==data.length-1)return;
+    ctx.fillStyle='#475569';ctx.font='9px sans-serif';ctx.textAlign='center';
+    ctx.fillText(d.label,pad.l+xs*i,pad.t+cH+14);
+  });
+}
+
+function fmtM(v){
+  if(v>=1000000)return (v/1000000).toFixed(1)+'M';
+  if(v>=1000)return Math.round(v/1000)+'K';
+  return Math.round(v)+'';
+}
+
+// ══ 一覧 ══════════════════════════════════════════
+// 展開状態を管理
+var expandedYears = {};
+
+function renderDataMgr(app){
+  if(!state.allData.length){
+    app.appendChild(el('div',{class:'dm-card'},[el('div',{style:'font-size:12px;color:#64748b;text-align:center;padding:20px'},['登録データがありません'])]));
+    return;
+  }
+
+  var fyList=getAllFiscalYears().slice().reverse(); // 新しい年度が上
+
+  fyList.forEach(function(fy){
+    var fyKeys=getFiscalMonths(fy); // 4月〜3月のキー配列
+    var mds=fyKeys.map(function(k){return state.allData.find(function(d){return d.key===k;});}).filter(Boolean);
+
+    // 年度合計
+    var yrSales=mds.reduce(function(s,md){return s+md.daily.reduce(function(a,d){return a+d.sales;},0);},0);
+    var yrLabor=mds.reduce(function(s,md){return s+getLabor(md.key);},0);
+    var yrLr=yrSales>0&&yrLabor?yrLabor/yrSales*100:null;
+    var yrTc=mds.reduce(function(s,md){return s+md.daily.reduce(function(a,d){return a+d.customers;},0);},0);
+    var isExpanded=!!expandedYears[fy];
+
+    var sec=el('div',{class:'dm-card',style:'margin-bottom:16px'});
+
+    // ── 年度サマリー（常時表示）
+    var yrHd=el('div',{style:'margin-bottom:0;padding-bottom:0'});
+    var titleRow=el('div',{style:'display:flex;align-items:center;margin-bottom:10px'});
+    titleRow.appendChild(el('div',{style:'font-size:18px;font-weight:700;color:#f8fafc'},[fy+'年度（'+fy+'/4〜'+(fy+1)+'/3）']));
+    var toggleBtn=el('button',{style:'background:#0f172a;border:1px solid #334155;border-radius:8px;'+
+      'color:#64748b;font-size:12px;padding:6px 16px;cursor:pointer;font-family:inherit;'+
+      'display:block;width:100%;text-align:center;margin-top:4px'});
+    toggleBtn.appendChild(document.createTextNode(isExpanded?'▲ 閉じる':'▼ 月別詳細'));
+    yrHd.appendChild(titleRow);
+
+    // 年度KPIカード3枚
+    var yrStats=el('div',{style:'display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px'});
+    var yrStatSales=el('div',{style:'background:#1e293b;border:1px solid #334155;border-radius:8px;padding:10px'});
+    yrStatSales.appendChild(el('div',{style:'font-size:10px;color:#94a3b8;margin-bottom:3px'},['年度売上']));
+    yrStatSales.appendChild(el('div',{style:'font-size:18px;font-weight:700;color:#f8fafc'},[yen(yrSales)]));
+    yrStats.appendChild(yrStatSales);
+    if(yrLabor>0){
+      var yrStatLabor=el('div',{style:'background:#1e293b;border:1px solid #334155;border-radius:8px;padding:10px'});
+      yrStatLabor.appendChild(el('div',{style:'font-size:10px;color:#94a3b8;margin-bottom:3px'},['年度人件費']));
+      yrStatLabor.appendChild(el('div',{style:'font-size:18px;font-weight:700;color:#e2e8f0'},[yen(yrLabor)]));
+      yrStats.appendChild(yrStatLabor);
+      var yrStatLr=el('div',{style:'background:#0f172a;border:1px solid '+rateColor(yrLr)+'55;border-radius:8px;padding:10px'});
+      yrStatLr.appendChild(el('div',{style:'font-size:10px;color:#94a3b8;margin-bottom:3px'},['人件費率']));
+      yrStatLr.appendChild(el('div',{style:'font-size:18px;font-weight:700;color:'+rateColor(yrLr)},[yrLr!=null?yrLr.toFixed(1)+'%':'—']));
+      yrStats.appendChild(yrStatLr);
+    } else {
+      yrStats.style.gridTemplateColumns='1fr';
+    }
+    yrHd.appendChild(yrStats);
+
+    toggleBtn.appendChild(document.createTextNode(''));
+    var detailWrap=el('div',{style:'display:'+(isExpanded?'block':'none')});
+    // 閉じるボタン（詳細の下に設置）
+    var closeBtn=el('button',{style:'background:#0f172a;border:1px solid #334155;border-radius:8px;'+
+      'color:#64748b;font-size:12px;padding:6px 16px;cursor:pointer;font-family:inherit;'+
+      'display:block;width:100%;text-align:center;margin-top:10px'});
+    closeBtn.textContent='▲ 閉じる';
+
+    function syncBtns(expanded, btn, cb){
+      if(expanded){
+        btn.textContent='▲ 閉じる';
+        cb.style.display='block';
+      } else {
+        btn.textContent='▼ 月別詳細';
+        cb.style.display='none';
+      }
+    }
+    syncBtns(isExpanded, toggleBtn, closeBtn);
+
+    toggleBtn.onclick=(function(y,dw,btn,cb){
+      return function(){
+        expandedYears[y]=!expandedYears[y];
+        dw.style.display=expandedYears[y]?'block':'none';
+        if(!expandedYears[y]){ state.selKey=null; render(); return; }
+        syncBtns(expandedYears[y],btn,cb);
+      };
+    })(fy,detailWrap,toggleBtn,closeBtn);
+
+    closeBtn.onclick=(function(y,dw,btn,cb){
+      return function(){
+        expandedYears[y]=false;
+        state.selKey=null;
+        render();
+      };
+    })(fy,detailWrap,toggleBtn,closeBtn);
+
+    yrHd.appendChild(toggleBtn);
+    sec.appendChild(yrHd);
+
+    // ── 月別テーブル（折りたたみ・4月〜3月順）
+    detailWrap.appendChild(el('div',{style:'height:1px;background:#334155;margin-bottom:10px'}));
+    var tw=el('div',{class:'tbl-wrap'});
+    var tbl=el('table',{class:'tbl'});
+    var thead=el('thead');
+    var hrw=el('tr');
+    ['月','売上','前年比','人件費','人件費率','客数'].forEach(function(h){hrw.appendChild(el('th',{},[h]));});
+    thead.appendChild(hrw);tbl.appendChild(thead);
+    var tbody=el('tbody');
+
+    mds.forEach(function(md){
+      var ts=md.daily.reduce(function(s,d){return s+d.sales;},0);
+      var tc=md.daily.reduce(function(s,d){return s+d.customers;},0);
+      var labor=getLabor(md.key);
+      var lr=getLaborRate(md.key);
+      // 前年同月（前年度の同じ月）
+      var prevKey=(md.year-1)+'-'+(md.month<10?'0':'')+md.month;
+      var prevMd=state.allData.find(function(d){return d.key===prevKey;});
+      var ps=prevMd?prevMd.daily.reduce(function(s,d){return s+d.sales;},0):0;
+      var yoy=(!prevMd||ps===0)?null:ts/ps*100;
+
+      var isSelMonth=(state.selKey===md.key);
+      var tr=el('tr',{style:'cursor:pointer;'+(isSelMonth?'background:rgba(56,189,248,.1);':'')});
+      tr.onmouseover=function(){if(!isSelMonth)this.style.background='rgba(56,189,248,.05)';};
+      tr.onmouseout=function(){if(!isSelMonth)this.style.background='';};
+      tr.onclick=(function(key){return function(){
+        state.selKey=(state.selKey===key)?null:key;
+        render();
+      };})(md.key);
+      var tdM=el('td',{style:'font-weight:700;color:#38bdf8;white-space:nowrap'});
+      tdM.appendChild(document.createTextNode(md.month+'月'));
+      tdM.appendChild(el('span',{style:'font-size:10px;color:#475569;margin-left:4px'},[isSelMonth?'▲':'▼']));
+      var tdS=el('td',{class:'td-r',style:'font-weight:700'},[yen(ts)]);
+      var yoyTd=el('td',{class:'td-r'});
+      if(yoy!=null){var bdg=el('span',{class:'bdg',style:'background:'+yoyColor(yoy)+'22;color:'+yoyColor(yoy)+';border:1px solid '+yoyColor(yoy)+'55'},[yoy.toFixed(1)+'%']);yoyTd.appendChild(bdg);}
+      else{yoyTd.appendChild(document.createTextNode('—'));}
+      var tdL=el('td',{class:'td-r'},[labor>0?yen(labor):'—']);
+      var tdLr=el('td',{class:'td-r'});
+      tdLr.appendChild(document.createTextNode(lr!=null?lr.toFixed(1)+'%':'—'));
+      var tdC=el('td',{class:'td-r'},[tc>0?tc+'名':'—']);
+      [tdM,tdS,yoyTd,tdL,tdLr,tdC].forEach(function(td){tr.appendChild(td);});
+      tbody.appendChild(tr);
+
+      // 選択中の月は直下に日次テーブルを展開
+      if(isSelMonth){
+        var dtr=el('tr');
+        var dtd=el('td',{colspan:'6',style:'padding:0;background:#f0f9ff'});
+        var dtbl=el('table',{style:'width:100%;border-collapse:collapse;font-size:12px'});
+        dtbl.appendChild(el('thead',{},[el('tr',{style:'background:#e0f2fe'},[
+          '日付','曜','天気','売上','前年','前年比'
+        ].map(function(h){return el('th',{style:'padding:6px 8px;color:#0369a1;font-size:11px;text-align:left;border-bottom:1px solid #bae6fd'},[h]);}))]));
+        var dtb=el('tbody');
+        md.daily.forEach(function(d){
+          var drow=el('tr');
+          [el('td',{style:'padding:6px 8px;color:#0284c7;font-weight:600'},[d.date]),
+           el('td',{style:'padding:6px 8px;color:'+(d.weekday==='日'||d.weekday==='土'?'#dc2626':'#64748b')},[d.weekday]),
+           el('td',{style:'padding:6px 8px'},[WE[d.weather]||d.weather||'']),
+           el('td',{style:'padding:6px 8px;font-weight:600;color:#1e293b'},[yen(d.sales)]),
+           el('td',{style:'padding:6px 8px;color:#94a3b8'},[yen(d.prevSales)]),
+           el('td',{style:'padding:6px 8px'},[d.yoy!=null?mkbdg(d.yoy):document.createTextNode('')]),
+          ].forEach(function(td){drow.appendChild(td);});
+          dtb.appendChild(drow);
+        });
+        dtbl.appendChild(dtb);dtd.appendChild(dtbl);dtr.appendChild(dtd);
+        tbody.appendChild(dtr);
+        // 日次明細の閉じるボタン行
+        var closeDtr=el('tr');
+        var closeDtd=el('td',{colspan:'6',style:'padding:6px 8px;background:#e0f2fe;text-align:center'});
+        var closeDayBtn=el('button',{style:'background:#0f172a;border:1px solid #334155;border-radius:8px;'+
+          'color:#64748b;font-size:12px;padding:6px 16px;cursor:pointer;font-family:inherit;width:100%'});
+        closeDayBtn.textContent='▲ 閉じる';
+        closeDayBtn.onclick=(function(k){return function(){state.selKey=null;render();};})(md.key);
+        closeDtd.appendChild(closeDayBtn);closeDtr.appendChild(closeDtd);
+        tbody.appendChild(closeDtr);
+      }
+    });
+
+    // 合計行
+    var totalRow=el('tr',{style:'border-top:2px solid #334155;background:rgba(56,189,248,.04)'});
+    [
+      el('td',{style:'font-weight:700;color:#38bdf8'},['合計']),
+      el('td',{class:'td-r',style:'font-weight:700'},[yen(yrSales)]),
+      el('td',{class:'td-r'},['—']),
+      el('td',{class:'td-r'},[yrLabor>0?yen(yrLabor):'—']),
+      el('td',{class:'td-r'},[yrLr!=null?yrLr.toFixed(1)+'%':'—']),
+      el('td',{class:'td-r'},[yrTc>0?yrTc+'名':'—']),
+    ].forEach(function(td){totalRow.appendChild(td);});
+    tbody.appendChild(totalRow);
+
+    tbl.appendChild(tbody);tw.appendChild(tbl);detailWrap.appendChild(tw);
+    detailWrap.appendChild(closeBtn);
+    sec.appendChild(detailWrap);
+    app.appendChild(sec);
+  });
+}
+
+// ══ ファイル読み込み ══════════════════════════════
+function loadFile(file){
+  if(!file)return;
+  var reader=new FileReader();
+  reader.onload=function(e){
+    var buf=e.target.result,arr=new Uint8Array(buf),text;
+    if(arr[0]===0xFF&&arr[1]===0xFE)text=new TextDecoder('utf-16le').decode(buf);
+    else if(arr[0]===0xFE&&arr[1]===0xFF)text=new TextDecoder('utf-16be').decode(buf);
+    else text=new TextDecoder('utf-8').decode(buf);
+    try{
+      var newM=processCSV(text);
+      if(!newM.length)return;
+      var nkArr=newM.map(function(m){return m.key;});
+      state.allData=state.allData.filter(function(d){return nkArr.indexOf(d.key)<0;}).concat(newM)
+        .sort(function(a,b){return a.key.localeCompare(b.key);});
+      var last=newM[newM.length-1];
+      state.selYear=last.year;state.selKey=last.key;
+      state.view='monthly';state.ctab='overview';
+      saveData();render();
+    }catch(ex){console.error(ex);}
+  };
+  reader.readAsArrayBuffer(file);
+}
+
+// ══ 初期化 ════════════════════════════════════════
+var SAMPLE_CSV=`﻿"当年日付"	"前年日付"	"曜日"	"当年天気"	"前年天気"	"当年予算"	"当年実績"	"当年達成率"	"前年差異"	"前年実績"	"当年実績(定価)"	"定価・実績差異"	"当年客数"	"前年客数"	"前年差客"	"当年客単"	"前年客単"	"前差客単"
+"20231001"	"20221002"	"日"	"‐"	"‐"	"0"	"0"	"0%"	"0%"	"0"	"0"	"0"	"0"	"0"	"0%"	"0"	"0"	"0%"
+"20231002"	"20221003"	"月"	"‐"	"‐"	"0"	"0"	"0%"	"0%"	"0"	"0"	"0"	"0"	"0"	"0%"	"0"	"0"	"0%"
+"20231003"	"20221004"	"火"	"‐"	"‐"	"0"	"0"	"0%"	"0%"	"0"	"0"	"0"	"0"	"0"	"0%"	"0"	"0"	"0%"
+"20231004"	"20221005"	"水"	"‐"	"‐"	"0"	"0"	"0%"	"0%"	"0"	"0"	"0"	"0"	"0"	"0%"	"0"	"0"	"0%"
+"20231005"	"20221006"	"木"	"‐"	"‐"	"0"	"0"	"0%"	"0%"	"0"	"0"	"0"	"0"	"0"	"0%"	"0"	"0"	"0%"
+"20231006"	"20221007"	"金"	"‐"	"‐"	"0"	"0"	"0%"	"0%"	"0"	"0"	"0"	"0"	"0"	"0%"	"0"	"0"	"0%"
+"20231007"	"20221008"	"土"	"‐"	"‐"	"0"	"0"	"0%"	"0%"	"0"	"0"	"0"	"0"	"0"	"0%"	"0"	"0"	"0%"
+"MD40週"	""	""	"‐"	"‐"	"0"	"0"	"0%"	"0%"	"0"	"0"	"0"	"0"	"0"	"0%"	"0"	"0"	"0%"
+"20231008"	"20221009"	"日"	"‐"	"‐"	"0"	"0"	"0%"	"0%"	"0"	"0"	"0"	"0"	"0"	"0%"	"0"	"0"	"0%"
+"20231009"	"20221010"	"月"	"‐"	"‐"	"0"	"0"	"0%"	"0%"	"0"	"0"	"0"	"0"	"0"	"0%"	"0"	"0"	"0%"
+"20231010"	"20221011"	"火"	"‐"	"‐"	"0"	"0"	"0%"	"0%"	"0"	"0"	"0"	"0"	"0"	"0%"	"0"	"0"	"0%"
+"20231011"	"20221012"	"水"	"‐"	"‐"	"0"	"0"	"0%"	"0%"	"0"	"0"	"0"	"0"	"0"	"0%"	"0"	"0"	"0%"
+"20231012"	"20221013"	"木"	"‐"	"‐"	"0"	"0"	"0%"	"0%"	"0"	"0"	"0"	"0"	"0"	"0%"	"0"	"0"	"0%"
+"20231013"	"20221014"	"金"	"‐"	"‐"	"0"	"0"	"0%"	"0%"	"0"	"0"	"0"	"0"	"0"	"0%"	"0"	"0"	"0%"
+"20231014"	"20221015"	"土"	"‐"	"‐"	"0"	"0"	"0%"	"0%"	"0"	"0"	"0"	"0"	"0"	"0%"	"0"	"0"	"0%"
+"MD41週"	""	""	"‐"	"‐"	"0"	"0"	"0%"	"0%"	"0"	"0"	"0"	"0"	"0"	"0%"	"0"	"0"	"0%"
+"20231015"	"20221016"	"日"	"‐"	"‐"	"0"	"0"	"0%"	"0%"	"0"	"0"	"0"	"0"	"0"	"0%"	"0"	"0"	"0%"
+"20231016"	"20221017"	"月"	"‐"	"‐"	"0"	"0"	"0%"	"0%"	"0"	"0"	"0"	"0"	"0"	"0%"	"0"	"0"	"0%"
+"20231017"	"20221018"	"火"	"‐"	"‐"	"0"	"0"	"0%"	"0%"	"0"	"0"	"0"	"0"	"0"	"0%"	"0"	"0"	"0%"
+"20231018"	"20221019"	"水"	"‐"	"‐"	"0"	"0"	"0%"	"0%"	"0"	"0"	"0"	"0"	"0"	"0%"	"0"	"0"	"0%"
+"20231019"	"20221020"	"木"	"‐"	"‐"	"0"	"0"	"0%"	"0%"	"0"	"0"	"0"	"0"	"0"	"0%"	"0"	"0"	"0%"
+"20231020"	"20221021"	"金"	"‐"	"‐"	"0"	"0"	"0%"	"0%"	"0"	"0"	"0"	"0"	"0"	"0%"	"0"	"0"	"0%"
+"20231021"	"20221022"	"土"	"‐"	"‐"	"0"	"0"	"0%"	"0%"	"0"	"0"	"0"	"0"	"0"	"0%"	"0"	"0"	"0%"
+"MD42週"	""	""	"‐"	"‐"	"0"	"0"	"0%"	"0%"	"0"	"0"	"0"	"0"	"0"	"0%"	"0"	"0"	"0%"
+"20231022"	"20221023"	"日"	"‐"	"‐"	"0"	"0"	"0%"	"0%"	"0"	"0"	"0"	"0"	"0"	"0%"	"0"	"0"	"0%"
+"20231023"	"20221024"	"月"	"‐"	"‐"	"0"	"0"	"0%"	"0%"	"0"	"0"	"0"	"0"	"0"	"0%"	"0"	"0"	"0%"
+"20231024"	"20221025"	"火"	"‐"	"‐"	"0"	"0"	"0%"	"0%"	"0"	"0"	"0"	"0"	"0"	"0%"	"0"	"0"	"0%"
+"20231025"	"20221026"	"水"	"‐"	"‐"	"0"	"0"	"0%"	"0%"	"0"	"0"	"0"	"0"	"0"	"0%"	"0"	"0"	"0%"
+"20231026"	"20221027"	"木"	"晴れ"	"‐"	"0"	"0"	"0%"	"0%"	"0"	"0"	"0"	"0"	"0"	"0%"	"0"	"0"	"0%"
+"20231027"	"20221028"	"金"	"快晴"	"‐"	"0"	"0"	"0%"	"0%"	"0"	"0"	"0"	"0"	"0"	"0%"	"0"	"0"	"0%"
+"20231028"	"20221029"	"土"	"曇り"	"‐"	"0"	"240,592"	"0%"	"0%"	"0"	"240,592"	"0"	"95"	"0"	"0%"	"2,533"	"0"	"0%"
+"MD43週"	""	""	"‐"	"‐"	"0"	"240,592"	"0%"	"0%"	"0"	"240,592"	"0"	"95"	"0"	"0%"	"2,533"	"0"	"0%"
+"20231029"	"20221030"	"日"	"にわか雨"	"‐"	"0"	"163,433"	"0%"	"0%"	"0"	"163,433"	"0"	"55"	"0"	"0%"	"2,972"	"0"	"0%"
+"20231030"	"20221031"	"月"	"晴れ"	"‐"	"0"	"93,849"	"0%"	"0%"	"0"	"93,849"	"0"	"34"	"0"	"0%"	"2,760"	"0"	"0%"
+"20231031"	"20221101"	"火"	"曇り"	"‐"	"0"	"78,061"	"0%"	"0%"	"0"	"78,061"	"0"	"23"	"0"	"0%"	"3,394"	"0"	"0%"
+"20231101"	"20221102"	"水"	"快晴"	"‐"	"0"	"82,019"	"0%"	"0%"	"0"	"82,019"	"0"	"30"	"0"	"0%"	"2,734"	"0"	"0%"
+"20231102"	"20221103"	"木"	"快晴"	"‐"	"0"	"59,823"	"0%"	"0%"	"0"	"59,823"	"0"	"23"	"0"	"0%"	"2,601"	"0"	"0%"
+"20231103"	"20221104"	"金"	"晴れ"	"‐"	"0"	"96,967"	"0%"	"0%"	"0"	"97,167"	"200"	"34"	"0"	"0%"	"2,852"	"0"	"0%"
+"20231104"	"20221105"	"土"	"晴れ"	"‐"	"0"	"111,364"	"0%"	"0%"	"0"	"113,564"	"2,200"	"35"	"0"	"0%"	"3,182"	"0"	"0%"
+"MD44週"	""	""	"‐"	"‐"	"0"	"685,516"	"0%"	"0%"	"0"	"687,916"	"2,400"	"234"	"0"	"0%"	"2,930"	"0"	"0%"
+"20231105"	"20221106"	"日"	"曇り"	"‐"	"0"	"160,746"	"0%"	"0%"	"0"	"160,746"	"0"	"62"	"0"	"0%"	"2,593"	"0"	"0%"
+"20231106"	"20221107"	"月"	"雨"	"‐"	"0"	"95,322"	"0%"	"0%"	"0"	"95,322"	"0"	"35"	"0"	"0%"	"2,723"	"0"	"0%"
+"20231107"	"20221108"	"火"	"にわか雨"	"‐"	"0"	"106,715"	"0%"	"0%"	"0"	"106,715"	"0"	"42"	"0"	"0%"	"2,541"	"0"	"0%"
+"20231108"	"20221109"	"水"	"快晴"	"‐"	"0"	"88,748"	"0%"	"0%"	"0"	"89,148"	"400"	"28"	"0"	"0%"	"3,170"	"0"	"0%"
+"20231109"	"20221110"	"木"	"曇り"	"‐"	"0"	"89,052"	"0%"	"0%"	"0"	"89,052"	"0"	"27"	"0"	"0%"	"3,298"	"0"	"0%"
+"20231110"	"20221111"	"金"	"曇り"	"‐"	"0"	"49,755"	"0%"	"0%"	"0"	"49,755"	"0"	"17"	"0"	"0%"	"2,927"	"0"	"0%"
+"20231111"	"20221112"	"土"	"曇り"	"‐"	"0"	"126,104"	"0%"	"0%"	"0"	"126,104"	"0"	"32"	"0"	"0%"	"3,941"	"0"	"0%"
+"MD45週"	""	""	"‐"	"‐"	"0"	"716,442"	"0%"	"0%"	"0"	"716,842"	"400"	"243"	"0"	"0%"	"2,948"	"0"	"0%"
+"20231112"	"20221113"	"日"	"雨"	"‐"	"0"	"117,431"	"0%"	"0%"	"0"	"117,431"	"0"	"29"	"0"	"0%"	"4,049"	"0"	"0%"
+"20231113"	"20221114"	"月"	"曇り"	"‐"	"0"	"45,502"	"0%"	"0%"	"0"	"45,502"	"0"	"19"	"0"	"0%"	"2,395"	"0"	"0%"
+"20231114"	"20221115"	"火"	"快晴"	"‐"	"0"	"58,579"	"0%"	"0%"	"0"	"58,579"	"0"	"22"	"0"	"0%"	"2,663"	"0"	"0%"
+"20231115"	"20221116"	"水"	"曇り"	"‐"	"0"	"72,654"	"0%"	"0%"	"0"	"72,654"	"0"	"27"	"0"	"0%"	"2,691"	"0"	"0%"
+"20231116"	"20221117"	"木"	"晴れ"	"‐"	"0"	"56,259"	"0%"	"0%"	"0"	"56,259"	"0"	"21"	"0"	"0%"	"2,679"	"0"	"0%"
+"20231117"	"20221118"	"金"	"にわか雨"	"‐"	"0"	"41,116"	"0%"	"0%"	"0"	"41,116"	"0"	"12"	"0"	"0%"	"3,426"	"0"	"0%"
+"20231118"	"20221119"	"土"	"快晴"	"‐"	"0"	"113,507"	"0%"	"0%"	"0"	"113,507"	"0"	"40"	"0"	"0%"	"2,838"	"0"	"0%"
+"MD46週"	""	""	"‐"	"‐"	"0"	"505,048"	"0%"	"0%"	"0"	"505,048"	"0"	"170"	"0"	"0%"	"2,971"	"0"	"0%"
+"20231119"	"20221120"	"日"	"晴れ"	"‐"	"0"	"83,774"	"0%"	"0%"	"0"	"83,774"	"0"	"28"	"0"	"0%"	"2,992"	"0"	"0%"
+"20231120"	"20221121"	"月"	"快晴"	"‐"	"0"	"35,185"	"0%"	"0%"	"0"	"35,185"	"0"	"13"	"0"	"0%"	"2,707"	"0"	"0%"
+"20231121"	"20221122"	"火"	"快晴"	"‐"	"0"	"45,523"	"0%"	"0%"	"0"	"45,523"	"0"	"17"	"0"	"0%"	"2,678"	"0"	"0%"
+"20231122"	"20221123"	"水"	"快晴"	"‐"	"0"	"56,331"	"0%"	"0%"	"0"	"56,331"	"0"	"27"	"0"	"0%"	"2,086"	"0"	"0%"
+"20231123"	"20221124"	"木"	"曇り"	"‐"	"0"	"125,039"	"0%"	"0%"	"0"	"125,039"	"0"	"32"	"0"	"0%"	"3,907"	"0"	"0%"
+"20231124"	"20221125"	"金"	"快晴"	"‐"	"0"	"37,017"	"0%"	"0%"	"0"	"37,017"	"0"	"13"	"0"	"0%"	"2,847"	"0"	"0%"
+"20231125"	"20221126"	"土"	"曇り"	"‐"	"0"	"56,450"	"0%"	"0%"	"0"	"56,450"	"0"	"12"	"0"	"0%"	"4,704"	"0"	"0%"
+"MD47週"	""	""	"‐"	"‐"	"0"	"439,319"	"0%"	"0%"	"0"	"439,319"	"0"	"142"	"0"	"0%"	"3,094"	"0"	"0%"
+"20231126"	"20221127"	"日"	"霧"	"‐"	"0"	"68,096"	"0%"	"0%"	"0"	"68,096"	"0"	"23"	"0"	"0%"	"2,961"	"0"	"0%"
+"20231127"	"20221128"	"月"	"晴れ"	"‐"	"0"	"31,871"	"0%"	"0%"	"0"	"31,871"	"0"	"13"	"0"	"0%"	"2,452"	"0"	"0%"
+"20231128"	"20221129"	"火"	"晴れ"	"‐"	"0"	"38,802"	"0%"	"0%"	"0"	"38,802"	"0"	"12"	"0"	"0%"	"3,234"	"0"	"0%"
+"20231129"	"20221130"	"水"	"快晴"	"‐"	"0"	"61,942"	"0%"	"0%"	"0"	"61,942"	"0"	"22"	"0"	"0%"	"2,816"	"0"	"0%"
+"20231130"	"20221201"	"木"	"曇り"	"‐"	"0"	"49,761"	"0%"	"0%"	"0"	"49,761"	"0"	"15"	"0"	"0%"	"3,317"	"0"	"0%"
+"20231201"	"20221202"	"金"	"曇り"	"‐"	"0"	"54,974"	"0%"	"0%"	"0"	"54,974"	"0"	"21"	"0"	"0%"	"2,618"	"0"	"0%"
+"20231202"	"20221203"	"土"	"晴れ"	"‐"	"0"	"53,487"	"0%"	"0%"	"0"	"53,487"	"0"	"15"	"0"	"0%"	"3,566"	"0"	"0%"
+"MD48週"	""	""	"‐"	"‐"	"0"	"358,933"	"0%"	"0%"	"0"	"358,933"	"0"	"121"	"0"	"0%"	"2,966"	"0"	"0%"
+"20231203"	"20221204"	"日"	"晴れ"	"‐"	"0"	"73,230"	"0%"	"0%"	"0"	"73,230"	"0"	"24"	"0"	"0%"	"3,051"	"0"	"0%"
+"20231204"	"20221205"	"月"	"晴れ"	"‐"	"0"	"45,083"	"0%"	"0%"	"0"	"45,083"	"0"	"20"	"0"	"0%"	"2,254"	"0"	"0%"
+"20231205"	"20221206"	"火"	"曇り"	"‐"	"0"	"69,516"	"0%"	"0%"	"0"	"69,516"	"0"	"21"	"0"	"0%"	"3,310"	"0"	"0%"
+"20231206"	"20221207"	"水"	"晴れ"	"‐"	"0"	"45,486"	"0%"	"0%"	"0"	"45,486"	"0"	"12"	"0"	"0%"	"3,791"	"0"	"0%"
+"20231207"	"20221208"	"木"	"快晴"	"‐"	"0"	"60,244"	"0%"	"0%"	"0"	"60,244"	"0"	"18"	"0"	"0%"	"3,347"	"0"	"0%"
+"20231208"	"20221209"	"金"	"快晴"	"‐"	"0"	"36,070"	"0%"	"0%"	"0"	"36,070"	"0"	"18"	"0"	"0%"	"2,004"	"0"	"0%"
+"20231209"	"20221210"	"土"	"快晴"	"‐"	"0"	"145,879"	"0%"	"0%"	"0"	"145,879"	"0"	"39"	"0"	"0%"	"3,740"	"0"	"0%"
+"MD49週"	""	""	"‐"	"‐"	"0"	"475,508"	"0%"	"0%"	"0"	"475,508"	"0"	"152"	"0"	"0%"	"3,128"	"0"	"0%"
+"20231210"	"20221211"	"日"	"快晴"	"‐"	"0"	"62,745"	"0%"	"0%"	"0"	"62,745"	"0"	"20"	"0"	"0%"	"3,137"	"0"	"0%"
+"20231211"	"20221212"	"月"	"曇り"	"‐"	"0"	"68,368"	"0%"	"0%"	"0"	"68,368"	"0"	"22"	"0"	"0%"	"3,108"	"0"	"0%"
+"20231212"	"20221213"	"火"	"霧"	"‐"	"0"	"68,247"	"0%"	"0%"	"0"	"68,247"	"0"	"19"	"0"	"0%"	"3,592"	"0"	"0%"
+"20231213"	"20221214"	"水"	"晴れ"	"‐"	"0"	"42,573"	"0%"	"0%"	"0"	"42,573"	"0"	"17"	"0"	"0%"	"2,504"	"0"	"0%"
+"20231214"	"20221215"	"木"	"曇り"	"‐"	"0"	"29,055"	"0%"	"0%"	"0"	"29,055"	"0"	"9"	"0"	"0%"	"3,228"	"0"	"0%"
+"20231215"	"20221216"	"金"	"曇り"	"‐"	"0"	"53,799"	"0%"	"0%"	"0"	"53,799"	"0"	"16"	"0"	"0%"	"3,362"	"0"	"0%"
+"20231216"	"20221217"	"土"	"曇り"	"‐"	"0"	"79,791"	"0%"	"0%"	"0"	"79,791"	"0"	"28"	"0"	"0%"	"2,850"	"0"	"0%"
+"MD50週"	""	""	"‐"	"‐"	"0"	"404,578"	"0%"	"0%"	"0"	"404,578"	"0"	"131"	"0"	"0%"	"3,088"	"0"	"0%"
+"20231217"	"20221218"	"日"	"晴れ"	"‐"	"0"	"71,945"	"0%"	"0%"	"0"	"71,945"	"0"	"18"	"0"	"0%"	"3,997"	"0"	"0%"
+"20231218"	"20221219"	"月"	"曇り"	"‐"	"0"	"33,812"	"0%"	"0%"	"0"	"33,812"	"0"	"11"	"0"	"0%"	"3,074"	"0"	"0%"
+"20231219"	"20221220"	"火"	"曇り"	"‐"	"0"	"57,758"	"0%"	"0%"	"0"	"57,758"	"0"	"14"	"0"	"0%"	"4,126"	"0"	"0%"
+"20231220"	"20221221"	"水"	"曇り"	"‐"	"0"	"66,184"	"0%"	"0%"	"0"	"66,184"	"0"	"27"	"0"	"0%"	"2,451"	"0"	"0%"
+"20231221"	"20221222"	"木"	"快晴"	"‐"	"0"	"107,739"	"0%"	"0%"	"0"	"107,739"	"0"	"29"	"0"	"0%"	"3,715"	"0"	"0%"
+"20231222"	"20221223"	"金"	"晴れ"	"‐"	"0"	"32,171"	"0%"	"0%"	"0"	"32,171"	"0"	"11"	"0"	"0%"	"2,925"	"0"	"0%"
+"20231223"	"20221224"	"土"	"晴れ"	"‐"	"0"	"116,485"	"0%"	"0%"	"0"	"116,485"	"0"	"30"	"0"	"0%"	"3,883"	"0"	"0%"
+"MD51週"	""	""	"‐"	"‐"	"0"	"486,094"	"0%"	"0%"	"0"	"486,094"	"0"	"140"	"0"	"0%"	"3,472"	"0"	"0%"
+"20231224"	"20221225"	"日"	"曇り"	"‐"	"0"	"96,778"	"0%"	"0%"	"0"	"96,778"	"0"	"21"	"0"	"0%"	"4,608"	"0"	"0%"
+"20231225"	"20221226"	"月"	"快晴"	"‐"	"0"	"67,788"	"0%"	"0%"	"0"	"67,788"	"0"	"22"	"0"	"0%"	"3,081"	"0"	"0%"
+"20231226"	"20221227"	"火"	"快晴"	"‐"	"0"	"62,776"	"0%"	"0%"	"0"	"62,776"	"0"	"21"	"0"	"0%"	"2,989"	"0"	"0%"
+"20231227"	"20221228"	"水"	"曇り"	"‐"	"0"	"91,917"	"0%"	"0%"	"0"	"91,917"	"0"	"29"	"0"	"0%"	"3,170"	"0"	"0%"
+"20231228"	"20221229"	"木"	"曇り"	"‐"	"0"	"95,428"	"0%"	"0%"	"0"	"95,428"	"0"	"19"	"0"	"0%"	"5,023"	"0"	"0%"
+"20231229"	"20221230"	"金"	"快晴"	"‐"	"0"	"130,719"	"0%"	"0%"	"0"	"130,719"	"0"	"30"	"0"	"0%"	"4,357"	"0"	"0%"
+"20231230"	"20221231"	"土"	"曇り"	"‐"	"0"	"122,370"	"0%"	"0%"	"0"	"122,370"	"0"	"32"	"0"	"0%"	"3,824"	"0"	"0%"
+"MD52週"	""	""	"‐"	"‐"	"0"	"667,776"	"0%"	"0%"	"0"	"667,776"	"0"	"174"	"0"	"0%"	"3,838"	"0"	"0%"
+"20231231"	"20230101"	"日"	"雨"	"‐"	"0"	"100,945"	"0%"	"0%"	"0"	"100,945"	"0"	"18"	"0"	"0%"	"5,608"	"0"	"0%"
+"MD53週"	""	""	"‐"	"‐"	"0"	"100,945"	"0%"	"0%"	"0"	"100,945"	"0"	"18"	"0"	"0%"	"5,608"	"0"	"0%"
+"20240101"	"20230102"	"月"	"晴れ"	"‐"	"0"	"138,088"	"0%"	"0%"	"0"	"138,088"	"0"	"15"	"0"	"0%"	"9,206"	"0"	"0%"
+"20240102"	"20230103"	"火"	"曇り"	"‐"	"0"	"107,502"	"0%"	"0%"	"0"	"107,502"	"0"	"17"	"0"	"0%"	"6,324"	"0"	"0%"
+"20240103"	"20230104"	"水"	"曇り"	"‐"	"0"	"111,646"	"0%"	"0%"	"0"	"111,646"	"0"	"28"	"0"	"0%"	"3,987"	"0"	"0%"
+"20240104"	"20230105"	"木"	"曇り"	"‐"	"0"	"25,608"	"0%"	"0%"	"0"	"25,608"	"0"	"10"	"0"	"0%"	"2,561"	"0"	"0%"
+"20240105"	""	"金"	"晴れ"	"‐"	"0"	"52,225"	"0%"	"0%"	"0"	"52,225"	"0"	"10"	"0"	"0%"	"5,223"	"0"	"0%"
+"MD53週"	""	""	"‐"	"‐"	"0"	"435,069"	"0%"	"0%"	"0"	"435,069"	"0"	"80"	"0"	"0%"	"5,438"	"0"	"0%"
+"20240106"	"20230107"	"土"	"快晴"	"‐"	"0"	"63,163"	"0%"	"0%"	"0"	"63,163"	"0"	"12"	"0"	"0%"	"5,264"	"0"	"0%"
+"MD1週"	""	""	"‐"	"‐"	"0"	"63,163"	"0%"	"0%"	"0"	"63,163"	"0"	"12"	"0"	"0%"	"5,264"	"0"	"0%"
+"20240107"	"20230108"	"日"	"曇り"	"‐"	"0"	"105,641"	"0%"	"0%"	"0"	"105,641"	"0"	"29"	"0"	"0%"	"3,643"	"0"	"0%"
+"20240108"	"20230109"	"月"	"晴れ"	"‐"	"0"	"35,324"	"0%"	"0%"	"0"	"35,324"	"0"	"16"	"0"	"0%"	"2,208"	"0"	"0%"
+"20240109"	"20230110"	"火"	"晴れ"	"‐"	"0"	"34,350"	"0%"	"0%"	"0"	"34,350"	"0"	"14"	"0"	"0%"	"2,454"	"0"	"0%"
+"20240110"	"20230111"	"水"	"快晴"	"‐"	"0"	"48,471"	"0%"	"0%"	"0"	"48,871"	"400"	"17"	"0"	"0%"	"2,851"	"0"	"0%"
+"20240111"	"20230112"	"木"	"曇り"	"‐"	"0"	"57,333"	"0%"	"0%"	"0"	"62,233"	"4,900"	"19"	"0"	"0%"	"3,018"	"0"	"0%"
+"20240112"	"20230113"	"金"	"晴れ"	"‐"	"0"	"34,237"	"0%"	"0%"	"0"	"34,737"	"500"	"16"	"0"	"0%"	"2,140"	"0"	"0%"
+"20240113"	"20230114"	"土"	"曇り"	"‐"	"0"	"76,988"	"0%"	"0%"	"0"	"82,088"	"5,100"	"23"	"0"	"0%"	"3,347"	"0"	"0%"
+"MD2週"	""	""	"‐"	"‐"	"0"	"392,344"	"0%"	"0%"	"0"	"403,244"	"10,900"	"134"	"0"	"0%"	"2,928"	"0"	"0%"
+"20240114"	"20230115"	"日"	"快晴"	"‐"	"0"	"84,876"	"0%"	"0%"	"0"	"89,876"	"5,000"	"21"	"0"	"0%"	"4,042"	"0"	"0%"
+"20240115"	"20230116"	"月"	"晴れ"	"‐"	"0"	"46,214"	"0%"	"0%"	"0"	"49,614"	"3,400"	"20"	"0"	"0%"	"2,311"	"0"	"0%"
+"20240116"	"20230117"	"火"	"快晴"	"‐"	"0"	"24,792"	"0%"	"0%"	"0"	"24,792"	"0"	"9"	"0"	"0%"	"2,755"	"0"	"0%"
+"20240117"	"20230118"	"水"	"快晴"	"‐"	"0"	"31,128"	"0%"	"0%"	"0"	"31,728"	"600"	"12"	"0"	"0%"	"2,594"	"0"	"0%"
+"20240118"	"20230119"	"木"	"晴れ"	"‐"	"0"	"49,345"	"0%"	"0%"	"0"	"50,545"	"1,200"	"15"	"0"	"0%"	"3,290"	"0"	"0%"
+"20240119"	"20230120"	"金"	"曇り"	"‐"	"0"	"35,943"	"0%"	"0%"	"0"	"37,443"	"1,500"	"13"	"0"	"0%"	"2,765"	"0"	"0%"
+"20240120"	"20230121"	"土"	"曇り"	"‐"	"0"	"56,356"	"0%"	"0%"	"0"	"58,656"	"2,300"	"17"	"0"	"0%"	"3,315"	"0"	"0%"
+"MD3週"	""	""	"‐"	"‐"	"0"	"328,654"	"0%"	"0%"	"0"	"342,654"	"14,000"	"107"	"0"	"0%"	"3,072"	"0"	"0%"
+"20240121"	"20230122"	"日"	"雨"	"‐"	"0"	"64,162"	"0%"	"0%"	"0"	"66,262"	"2,100"	"18"	"0"	"0%"	"3,565"	"0"	"0%"
+"20240122"	"20230123"	"月"	"曇り"	"‐"	"0"	"65,698"	"0%"	"0%"	"0"	"68,498"	"2,800"	"24"	"0"	"0%"	"2,737"	"0"	"0%"
+"20240123"	"20230124"	"火"	"曇り"	"‐"	"0"	"30,207"	"0%"	"0%"	"0"	"31,407"	"1,200"	"12"	"0"	"0%"	"2,517"	"0"	"0%"
+"20240124"	"20230125"	"水"	"曇り"	"‐"	"0"	"34,884"	"0%"	"0%"	"0"	"35,884"	"1,000"	"16"	"0"	"0%"	"2,180"	"0"	"0%"
+"20240125"	"20230126"	"木"	"快晴"	"‐"	"0"	"54,517"	"0%"	"0%"	"0"	"56,117"	"1,600"	"19"	"0"	"0%"	"2,869"	"0"	"0%"
+"20240126"	"20230127"	"金"	"快晴"	"‐"	"0"	"71,136"	"0%"	"0%"	"0"	"76,436"	"5,300"	"25"	"0"	"0%"	"2,845"	"0"	"0%"
+"20240127"	"20230128"	"土"	"晴れ"	"‐"	"0"	"99,280"	"0%"	"0%"	"0"	"105,180"	"5,900"	"28"	"0"	"0%"	"3,546"	"0"	"0%"
+"MD4週"	""	""	"‐"	"‐"	"0"	"419,884"	"0%"	"0%"	"0"	"439,784"	"19,900"	"142"	"0"	"0%"	"2,957"	"0"	"0%"
+"20240128"	"20230129"	"日"	"曇り"	"‐"	"0"	"72,577"	"0%"	"0%"	"0"	"75,977"	"3,400"	"26"	"0"	"0%"	"2,791"	"0"	"0%"
+"20240129"	"20230130"	"月"	"晴れ"	"‐"	"0"	"20,072"	"0%"	"0%"	"0"	"20,072"	"0"	"10"	"0"	"0%"	"2,007"	"0"	"0%"
+"20240130"	"20230131"	"火"	"晴れ"	"‐"	"0"	"28,745"	"0%"	"0%"	"0"	"30,345"	"1,600"	"11"	"0"	"0%"	"2,613"	"0"	"0%"
+"20240131"	"20230201"	"水"	"晴れ"	"‐"	"0"	"56,588"	"0%"	"0%"	"0"	"57,088"	"500"	"23"	"0"	"0%"	"2,460"	"0"	"0%"
+"20240201"	"20230202"	"木"	"曇り"	"‐"	"50,000"	"43,129"	"86.26%"	"0%"	"0"	"45,029"	"1,900"	"12"	"0"	"0%"	"3,594"	"0"	"0%"
+"20240202"	"20230203"	"金"	"曇り"	"‐"	"50,000"	"25,584"	"51.17%"	"0%"	"0"	"27,584"	"2,000"	"10"	"0"	"0%"	"2,558"	"0"	"0%"
+"20240203"	"20230204"	"土"	"快晴"	"‐"	"50,000"	"56,322"	"112.64%"	"0%"	"0"	"59,722"	"3,400"	"20"	"0"	"0%"	"2,816"	"0"	"0%"
+"MD5週"	""	""	"‐"	"‐"	"150,000"	"303,017"	"202.01%"	"0%"	"0"	"315,817"	"12,800"	"112"	"0"	"0%"	"2,706"	"0"	"0%"
+"20240204"	"20230205"	"日"	"曇り"	"‐"	"50,000"	"66,798"	"133.6%"	"0%"	"0"	"70,298"	"3,500"	"17"	"0"	"0%"	"3,929"	"0"	"0%"
+"20240205"	"20230206"	"月"	"雨"	"‐"	"50,000"	"13,073"	"26.15%"	"0%"	"0"	"13,073"	"0"	"7"	"0"	"0%"	"1,868"	"0"	"0%"
+"20240206"	"20230207"	"火"	"にわか雨"	"‐"	"50,000"	"30,725"	"61.45%"	"0%"	"0"	"34,225"	"3,500"	"10"	"0"	"0%"	"3,073"	"0"	"0%"
+"20240207"	"20230208"	"水"	"曇り"	"‐"	"50,000"	"28,563"	"57.13%"	"0%"	"0"	"28,763"	"200"	"12"	"0"	"0%"	"2,380"	"0"	"0%"
+"20240208"	"20230209"	"木"	"曇り"	"‐"	"50,000"	"26,929"	"53.86%"	"0%"	"0"	"27,229"	"300"	"8"	"0"	"0%"	"3,366"	"0"	"0%"
+"20240209"	"20230210"	"金"	"曇り"	"‐"	"50,000"	"25,457"	"50.91%"	"0%"	"0"	"26,257"	"800"	"12"	"0"	"0%"	"2,121"	"0"	"0%"
+"20240210"	"20230211"	"土"	"曇り"	"‐"	"50,000"	"77,710"	"155.42%"	"0%"	"0"	"78,810"	"1,100"	"17"	"0"	"0%"	"4,571"	"0"	"0%"
+"MD6週"	""	""	"‐"	"‐"	"350,000"	"269,255"	"76.93%"	"0%"	"0"	"278,655"	"9,400"	"83"	"0"	"0%"	"3,244"	"0"	"0%"
+"20240211"	"20230212"	"日"	"曇り"	"‐"	"50,000"	"98,685"	"197.37%"	"0%"	"0"	"103,985"	"5,300"	"31"	"0"	"0%"	"3,183"	"0"	"0%"
+"20240212"	"20230213"	"月"	"晴れ"	"‐"	"50,000"	"76,140"	"152.28%"	"0%"	"0"	"79,840"	"3,700"	"23"	"0"	"0%"	"3,310"	"0"	"0%"
+"20240213"	"20230214"	"火"	"快晴"	"‐"	"50,000"	"14,892"	"29.78%"	"0%"	"0"	"15,092"	"200"	"6"	"0"	"0%"	"2,482"	"0"	"0%"
+"20240214"	"20230215"	"水"	"快晴"	"‐"	"50,000"	"54,745"	"109.49%"	"0%"	"0"	"56,245"	"1,500"	"17"	"0"	"0%"	"3,220"	"0"	"0%"
+"20240215"	"20230216"	"木"	"曇り"	"‐"	"50,000"	"54,385"	"108.77%"	"0%"	"0"	"54,885"	"500"	"19"	"0"	"0%"	"2,862"	"0"	"0%"
+"20240216"	"20230217"	"金"	"曇り"	"‐"	"50,000"	"33,701"	"67.4%"	"0%"	"0"	"35,001"	"1,300"	"17"	"0"	"0%"	"1,982"	"0"	"0%"
+"20240217"	"20230218"	"土"	"曇り"	"‐"	"50,000"	"89,773"	"179.55%"	"0%"	"0"	"95,073"	"5,300"	"27"	"0"	"0%"	"3,325"	"0"	"0%"
+"MD7週"	""	""	"‐"	"‐"	"350,000"	"422,321"	"120.66%"	"0%"	"0"	"440,121"	"17,800"	"140"	"0"	"0%"	"3,017"	"0"	"0%"
+"20240218"	"20230219"	"日"	"曇り"	"‐"	"50,000"	"104,712"	"209.42%"	"0%"	"0"	"109,512"	"4,800"	"33"	"0"	"0%"	"3,173"	"0"	"0%"
+"20240219"	"20230220"	"月"	"曇り"	"‐"	"50,000"	"17,713"	"35.43%"	"0%"	"0"	"17,713"	"0"	"5"	"0"	"0%"	"3,543"	"0"	"0%"
+"20240220"	"20230221"	"火"	"曇り"	"‐"	"50,000"	"16,570"	"33.14%"	"0%"	"0"	"17,170"	"600"	"7"	"0"	"0%"	"2,367"	"0"	"0%"
+"20240221"	"20230222"	"水"	"霧"	"‐"	"50,000"	"24,164"	"48.33%"	"0%"	"0"	"26,964"	"2,800"	"12"	"0"	"0%"	"2,014"	"0"	"0%"
+"20240222"	"20230223"	"木"	"雨"	"‐"	"50,000"	"38,942"	"77.88%"	"0%"	"0"	"40,342"	"1,400"	"10"	"0"	"0%"	"3,894"	"0"	"0%"
+"20240223"	"20230224"	"金"	"曇り"	"‐"	"50,000"	"57,340"	"114.68%"	"0%"	"0"	"64,840"	"7,500"	"20"	"0"	"0%"	"2,867"	"0"	"0%"
+"20240224"	"20230225"	"土"	"曇り"	"‐"	"50,000"	"112,673"	"225.35%"	"0%"	"0"	"123,573"	"10,900"	"38"	"0"	"0%"	"2,965"	"0"	"0%"
+"MD8週"	""	""	"‐"	"‐"	"350,000"	"372,114"	"106.32%"	"0%"	"0"	"400,114"	"28,000"	"125"	"0"	"0%"	"2,977"	"0"	"0%"
+"20240225"	"20230226"	"日"	"雨"	"‐"	"50,000"	"51,710"	"103.42%"	"0%"	"0"	"56,510"	"4,800"	"19"	"0"	"0%"	"2,722"	"0"	"0%"
+"20240226"	"20230227"	"月"	"曇り"	"‐"	"50,000"	"24,542"	"49.08%"	"0%"	"0"	"27,942"	"3,400"	"10"	"0"	"0%"	"2,454"	"0"	"0%"
+"20240227"	"20230228"	"火"	"快晴"	"‐"	"50,000"	"50,450"	"100.9%"	"0%"	"0"	"55,450"	"5,000"	"20"	"0"	"0%"	"2,523"	"0"	"0%"
+"20240228"	"20230301"	"水"	"曇り"	"‐"	"50,000"	"73,558"	"147.12%"	"0%"	"0"	"81,958"	"8,400"	"24"	"0"	"0%"	"3,065"	"0"	"0%"
+"20240229"	"20230302"	"木"	"曇り"	"‐"	"50,000"	"72,898"	"145.8%"	"0%"	"0"	"83,498"	"10,600"	"31"	"0"	"0%"	"2,352"	"0"	"0%"
+"20240301"	"20230303"	"金"	"雨"	"‐"	"70,000"	"44,222"	"63.17%"	"0%"	"0"	"45,022"	"800"	"16"	"0"	"0%"	"2,764"	"0"	"0%"
+"20240302"	"20230304"	"土"	"曇り"	"‐"	"70,000"	"37,619"	"53.74%"	"0%"	"0"	"38,219"	"600"	"13"	"0"	"0%"	"2,894"	"0"	"0%"
+"MD9週"	""	""	"‐"	"‐"	"390,000"	"354,999"	"91.03%"	"0%"	"0"	"388,599"	"33,600"	"133"	"0"	"0%"	"2,669"	"0"	"0%"
+"20240303"	"20230305"	"日"	"快晴"	"‐"	"70,000"	"62,042"	"88.63%"	"0%"	"0"	"62,442"	"400"	"22"	"0"	"0%"	"2,820"	"0"	"0%"
+"20240304"	"20230306"	"月"	"快晴"	"‐"	"70,000"	"8,111"	"11.59%"	"0%"	"0"	"8,211"	"100"	"4"	"0"	"0%"	"2,028"	"0"	"0%"
+"20240305"	"20230307"	"火"	"雨"	"‐"	"70,000"	"11,481"	"16.4%"	"0%"	"0"	"11,681"	"200"	"5"	"0"	"0%"	"2,296"	"0"	"0%"
+"20240306"	"20230308"	"水"	"曇り"	"‐"	"70,000"	"32,266"	"46.09%"	"0%"	"0"	"32,466"	"200"	"10"	"0"	"0%"	"3,227"	"0"	"0%"
+"20240307"	"20230309"	"木"	"曇り"	"‐"	"70,000"	"40,925"	"58.46%"	"0%"	"0"	"41,025"	"100"	"13"	"0"	"0%"	"3,148"	"0"	"0%"
+"20240308"	"20230310"	"金"	"霧"	"‐"	"70,000"	"56,874"	"81.25%"	"0%"	"0"	"56,974"	"100"	"6"	"0"	"0%"	"9,479"	"0"	"0%"
+"20240309"	"20230311"	"土"	"晴れ"	"‐"	"70,000"	"101,685"	"145.26%"	"0%"	"0"	"101,985"	"300"	"32"	"0"	"0%"	"3,178"	"0"	"0%"
+"MD10週"	""	""	"‐"	"‐"	"490,000"	"313,384"	"63.96%"	"0%"	"0"	"314,784"	"1,400"	"92"	"0"	"0%"	"3,406"	"0"	"0%"
+"20240310"	"20230312"	"日"	"晴れ"	"‐"	"70,000"	"50,084"	"71.55%"	"0%"	"0"	"50,684"	"600"	"19"	"0"	"0%"	"2,636"	"0"	"0%"
+"20240311"	"20230313"	"月"	"曇り"	"‐"	"70,000"	"26,157"	"37.37%"	"0%"	"0"	"26,357"	"200"	"7"	"0"	"0%"	"3,737"	"0"	"0%"
+"20240312"	"20230314"	"火"	"にわか雨"	"‐"	"70,000"	"28,671"	"40.96%"	"0%"	"0"	"28,771"	"100"	"6"	"0"	"0%"	"4,779"	"0"	"0%"
+"20240313"	"20230315"	"水"	"晴れ"	"‐"	"70,000"	"55,849"	"79.78%"	"0%"	"0"	"56,749"	"900"	"25"	"0"	"0%"	"2,234"	"0"	"0%"
+"20240314"	"20230316"	"木"	"晴れ"	"‐"	"70,000"	"34,695"	"49.56%"	"0%"	"0"	"34,895"	"200"	"8"	"0"	"0%"	"4,337"	"0"	"0%"
+"20240315"	"20230317"	"金"	"快晴"	"‐"	"70,000"	"26,227"	"37.47%"	"0%"	"0"	"26,427"	"200"	"7"	"0"	"0%"	"3,747"	"0"	"0%"
+"20240316"	"20230318"	"土"	"快晴"	"‐"	"70,000"	"69,393"	"99.13%"	"0%"	"0"	"69,793"	"400"	"20"	"0"	"0%"	"3,470"	"0"	"0%"
+"MD11週"	""	""	"‐"	"‐"	"490,000"	"291,076"	"59.4%"	"0%"	"0"	"293,676"	"2,600"	"92"	"0"	"0%"	"3,164"	"0"	"0%"
+"20240317"	"20230319"	"日"	"曇り"	"‐"	"70,000"	"111,447"	"159.21%"	"0%"	"0"	"111,847"	"400"	"28"	"0"	"0%"	"3,980"	"0"	"0%"
+"20240318"	"20230320"	"月"	"晴れ"	"‐"	"70,000"	"8,963"	"12.8%"	"0%"	"0"	"8,963"	"0"	"4"	"0"	"0%"	"2,241"	"0"	"0%"
+"20240319"	"20230321"	"火"	"快晴"	"‐"	"70,000"	"28,049"	"40.07%"	"0%"	"0"	"28,149"	"100"	"10"	"0"	"0%"	"2,805"	"0"	"0%"
+"20240320"	"20230322"	"水"	"晴れ"	"‐"	"70,000"	"98,022"	"140.03%"	"0%"	"0"	"98,422"	"400"	"17"	"0"	"0%"	"5,766"	"0"	"0%"
+"20240321"	"20230323"	"木"	"晴れ"	"‐"	"70,000"	"43,831"	"62.62%"	"0%"	"0"	"44,031"	"200"	"10"	"0"	"0%"	"4,383"	"0"	"0%"
+"20240322"	"20230324"	"金"	"晴れ"	"‐"	"70,000"	"16,662"	"23.8%"	"0%"	"0"	"16,962"	"300"	"6"	"0"	"0%"	"2,777"	"0"	"0%"
+"20240323"	"20230325"	"土"	"雨"	"‐"	"70,000"	"66,114"	"94.45%"	"0%"	"0"	"67,614"	"1,500"	"10"	"0"	"0%"	"6,611"	"0"	"0%"
+"MD12週"	""	""	"‐"	"‐"	"490,000"	"373,088"	"76.14%"	"0%"	"0"	"375,988"	"2,900"	"85"	"0"	"0%"	"4,389"	"0"	"0%"
+"20240324"	"20230326"	"日"	"曇り"	"‐"	"70,000"	"34,213"	"48.88%"	"0%"	"0"	"34,513"	"300"	"7"	"0"	"0%"	"4,888"	"0"	"0%"
+"20240325"	"20230327"	"月"	"雨"	"‐"	"70,000"	"12,984"	"18.55%"	"0%"	"0"	"12,984"	"0"	"4"	"0"	"0%"	"3,246"	"0"	"0%"
+"20240326"	"20230328"	"火"	"にわか雨"	"‐"	"70,000"	"12,132"	"17.33%"	"0%"	"0"	"12,232"	"100"	"3"	"0"	"0%"	"4,044"	"0"	"0%"
+"20240327"	"20230329"	"水"	"晴れ"	"‐"	"70,000"	"61,907"	"88.44%"	"0%"	"0"	"62,907"	"1,000"	"28"	"0"	"0%"	"2,211"	"0"	"0%"
+"20240328"	"20230330"	"木"	"曇り"	"‐"	"70,000"	"33,140"	"47.34%"	"0%"	"0"	"33,340"	"200"	"14"	"0"	"0%"	"2,367"	"0"	"0%"
+"20240329"	"20230331"	"金"	"にわか雨"	"‐"	"70,000"	"48,348"	"69.07%"	"0%"	"0"	"48,348"	"0"	"7"	"0"	"0%"	"6,907"	"0"	"0%"
+"20240330"	"20230401"	"土"	"霧"	"‐"	"70,000"	"96,837"	"138.34%"	"0%"	"0"	"97,437"	"600"	"37"	"0"	"0%"	"2,617"	"0"	"0%"
+"MD13週"	""	""	"‐"	"‐"	"490,000"	"299,561"	"61.13%"	"0%"	"0"	"301,761"	"2,200"	"100"	"0"	"0%"	"2,996"	"0"	"0%"
+"20240331"	"20230402"	"日"	"快晴"	"‐"	"70,000"	"116,197"	"166%"	"0%"	"0"	"116,797"	"600"	"32"	"0"	"0%"	"3,631"	"0"	"0%"
+"MD14週"	""	""	"‐"	"‐"	"70,000"	"116,197"	"166%"	"0%"	"0"	"116,797"	"600"	"32"	"0"	"0%"	"3,631"	"0"	"0%"
+"20240401"	"20230403"	"月"	"曇り"	"‐"	"80,000"	"26,102"	"32.63%"	"0%"	"0"	"26,202"	"100"	"8"	"0"	"0%"	"3,263"	"0"	"0%"
+"20240402"	"20230404"	"火"	"快晴"	"‐"	"80,000"	"48,486"	"60.61%"	"0%"	"0"	"48,486"	"0"	"18"	"0"	"0%"	"2,694"	"0"	"0%"
+"20240403"	"20230405"	"水"	"雨"	"‐"	"80,000"	"31,008"	"38.76%"	"0%"	"0"	"31,008"	"0"	"13"	"0"	"0%"	"2,385"	"0"	"0%"
+"20240404"	"20230406"	"木"	"曇り"	"‐"	"80,000"	"37,350"	"46.69%"	"0%"	"0"	"37,350"	"0"	"13"	"0"	"0%"	"2,873"	"0"	"0%"
+"20240405"	"20230407"	"金"	"曇り"	"‐"	"80,000"	"19,360"	"24.2%"	"0%"	"0"	"19,360"	"0"	"6"	"0"	"0%"	"3,227"	"0"	"0%"
+"20240406"	"20230408"	"土"	"曇り"	"‐"	"80,000"	"45,171"	"56.46%"	"0%"	"0"	"45,171"	"0"	"17"	"0"	"0%"	"2,657"	"0"	"0%"
+"MD14週"	""	""	"‐"	"‐"	"480,000"	"207,477"	"43.22%"	"0%"	"0"	"207,577"	"100"	"75"	"0"	"0%"	"2,766"	"0"	"0%"
+"20240407"	"20230409"	"日"	"曇り"	"‐"	"80,000"	"32,390"	"40.49%"	"0%"	"0"	"32,390"	"0"	"13"	"0"	"0%"	"2,492"	"0"	"0%"
+"20240408"	"20230410"	"月"	"曇り"	"‐"	"80,000"	"26,880"	"33.6%"	"0%"	"0"	"26,880"	"0"	"15"	"0"	"0%"	"1,792"	"0"	"0%"
+"20240409"	"20230411"	"火"	"霧"	"‐"	"80,000"	"27,144"	"33.93%"	"0%"	"0"	"27,144"	"0"	"11"	"0"	"0%"	"2,468"	"0"	"0%"
+"20240410"	"20230412"	"水"	"晴れ"	"‐"	"80,000"	"36,959"	"46.2%"	"0%"	"0"	"36,959"	"0"	"14"	"0"	"0%"	"2,640"	"0"	"0%"
+"20240411"	"20230413"	"木"	"曇り"	"‐"	"80,000"	"27,759"	"34.7%"	"0%"	"0"	"27,759"	"0"	"13"	"0"	"0%"	"2,135"	"0"	"0%"
+"20240412"	"20230414"	"金"	"曇り"	"‐"	"80,000"	"43,738"	"54.67%"	"0%"	"0"	"43,738"	"0"	"17"	"0"	"0%"	"2,573"	"0"	"0%"
+"20240413"	"20230415"	"土"	"曇り"	"‐"	"80,000"	"74,475"	"93.09%"	"0%"	"0"	"74,475"	"0"	"19"	"0"	"0%"	"3,920"	"0"	"0%"
+"MD15週"	""	""	"‐"	"‐"	"560,000"	"269,345"	"48.1%"	"0%"	"0"	"269,345"	"0"	"102"	"0"	"0%"	"2,641"	"0"	"0%"
+"20240414"	"20230416"	"日"	"快晴"	"‐"	"80,000"	"42,679"	"53.35%"	"0%"	"0"	"42,679"	"0"	"12"	"0"	"0%"	"3,557"	"0"	"0%"
+"20240415"	"20230417"	"月"	"快晴"	"‐"	"80,000"	"53,543"	"66.93%"	"0%"	"0"	"53,543"	"0"	"19"	"0"	"0%"	"2,818"	"0"	"0%"
+"20240416"	"20230418"	"火"	"曇り"	"‐"	"80,000"	"38,217"	"47.77%"	"0%"	"0"	"38,217"	"0"	"18"	"0"	"0%"	"2,123"	"0"	"0%"
+"20240417"	"20230419"	"水"	"曇り"	"‐"	"80,000"	"47,203"	"59%"	"0%"	"0"	"47,203"	"0"	"15"	"0"	"0%"	"3,147"	"0"	"0%"
+"20240418"	"20230420"	"木"	"曇り"	"‐"	"80,000"	"17,528"	"21.91%"	"0%"	"0"	"17,528"	"0"	"7"	"0"	"0%"	"2,504"	"0"	"0%"
+"20240419"	"20230421"	"金"	"快晴"	"‐"	"80,000"	"31,112"	"38.89%"	"0%"	"0"	"31,112"	"0"	"16"	"0"	"0%"	"1,945"	"0"	"0%"
+"20240420"	"20230422"	"土"	"快晴"	"‐"	"80,000"	"36,629"	"45.79%"	"0%"	"0"	"36,629"	"0"	"11"	"0"	"0%"	"3,330"	"0"	"0%"
+"MD16週"	""	""	"‐"	"‐"	"560,000"	"266,911"	"47.66%"	"0%"	"0"	"266,911"	"0"	"98"	"0"	"0%"	"2,724"	"0"	"0%"
+"20240421"	"20230423"	"日"	"曇り"	"‐"	"80,000"	"94,106"	"117.63%"	"0%"	"0"	"94,206"	"100"	"32"	"0"	"0%"	"2,941"	"0"	"0%"
+"20240422"	"20230424"	"月"	"雨"	"‐"	"80,000"	"27,941"	"34.93%"	"0%"	"0"	"27,941"	"0"	"14"	"0"	"0%"	"1,996"	"0"	"0%"
+"20240423"	"20230425"	"火"	"曇り"	"‐"	"80,000"	"28,581"	"35.73%"	"0%"	"0"	"28,581"	"0"	"7"	"0"	"0%"	"4,083"	"0"	"0%"
+"20240424"	"20230426"	"水"	"曇り"	"‐"	"80,000"	"20,630"	"25.79%"	"0%"	"0"	"20,630"	"0"	"6"	"0"	"0%"	"3,438"	"0"	"0%"
+"20240425"	"20230427"	"木"	"曇り"	"‐"	"80,000"	"44,326"	"55.41%"	"0%"	"0"	"44,326"	"0"	"14"	"0"	"0%"	"3,166"	"0"	"0%"
+"20240426"	"20230428"	"金"	"曇り"	"‐"	"80,000"	"44,869"	"56.09%"	"0%"	"0"	"44,869"	"0"	"13"	"0"	"0%"	"3,451"	"0"	"0%"
+"20240427"	"20230429"	"土"	"雨"	"‐"	"80,000"	"63,766"	"79.71%"	"0%"	"0"	"63,766"	"0"	"14"	"0"	"0%"	"4,555"	"0"	"0%"
+"MD17週"	""	""	"‐"	"‐"	"560,000"	"324,219"	"57.9%"	"0%"	"0"	"324,319"	"100"	"100"	"0"	"0%"	"3,242"	"0"	"0%"
+"20240428"	"20230430"	"日"	"快晴"	"‐"	"80,000"	"92,599"	"115.75%"	"0%"	"0"	"92,599"	"0"	"22"	"0"	"0%"	"4,209"	"0"	"0%"
+"20240429"	"20230501"	"月"	"曇り"	"‐"	"80,000"	"119,417"	"149.27%"	"0%"	"0"	"119,417"	"0"	"34"	"0"	"0%"	"3,512"	"0"	"0%"
+"20240430"	"20230502"	"火"	"曇り"	"‐"	"80,000"	"66,154"	"82.69%"	"0%"	"0"	"66,154"	"0"	"24"	"0"	"0%"	"2,756"	"0"	"0%"
+"20240501"	"20230503"	"水"	"雨"	"‐"	"0"	"52,226"	"0%"	"0%"	"0"	"52,226"	"0"	"19"	"0"	"0%"	"2,749"	"0"	"0%"
+"20240502"	"20230504"	"木"	"晴れ"	"‐"	"0"	"53,716"	"0%"	"0%"	"0"	"53,716"	"0"	"20"	"0"	"0%"	"2,686"	"0"	"0%"
+"20240503"	"20230505"	"金"	"快晴"	"‐"	"0"	"78,831"	"0%"	"0%"	"0"	"78,831"	"0"	"25"	"0"	"0%"	"3,153"	"0"	"0%"
+"20240504"	"20230506"	"土"	"快晴"	"‐"	"0"	"79,321"	"0%"	"0%"	"0"	"79,321"	"0"	"22"	"0"	"0%"	"3,606"	"0"	"0%"
+"MD18週"	""	""	"‐"	"‐"	"240,000"	"542,264"	"225.94%"	"0%"	"0"	"542,264"	"0"	"166"	"0"	"0%"	"3,267"	"0"	"0%"
+"20240505"	"20230507"	"日"	"曇り"	"‐"	"0"	"118,955"	"0%"	"0%"	"0"	"119,055"	"100"	"21"	"0"	"0%"	"5,665"	"0"	"0%"
+"20240506"	"20230508"	"月"	"曇り"	"‐"	"0"	"128,821"	"0%"	"0%"	"0"	"128,821"	"0"	"37"	"0"	"0%"	"3,482"	"0"	"0%"
+"20240507"	"20230509"	"火"	"雨"	"‐"	"0"	"25,411"	"0%"	"0%"	"0"	"25,411"	"0"	"9"	"0"	"0%"	"2,823"	"0"	"0%"
+"20240508"	"20230510"	"水"	"曇り"	"‐"	"0"	"17,646"	"0%"	"0%"	"0"	"17,646"	"0"	"7"	"0"	"0%"	"2,521"	"0"	"0%"
+"20240509"	"20230511"	"木"	"曇り"	"‐"	"0"	"63,768"	"0%"	"0%"	"0"	"63,768"	"0"	"16"	"0"	"0%"	"3,986"	"0"	"0%"
+"20240510"	"20230512"	"金"	"快晴"	"‐"	"0"	"34,115"	"0%"	"0%"	"0"	"34,115"	"0"	"15"	"0"	"0%"	"2,274"	"0"	"0%"
+"20240511"	"20230513"	"土"	"晴れ"	"‐"	"0"	"134,191"	"0%"	"0%"	"0"	"134,191"	"0"	"13"	"0"	"0%"	"10,322"	"0"	"0%"
+"MD19週"	""	""	"‐"	"‐"	"0"	"522,907"	"0%"	"0%"	"0"	"523,007"	"100"	"118"	"0"	"0%"	"4,431"	"0"	"0%"
+"20240512"	"20230514"	"日"	"曇り"	"‐"	"0"	"244,986"	"0%"	"0%"	"0"	"244,986"	"0"	"46"	"0"	"0%"	"5,326"	"0"	"0%"
+"20240513"	"20230515"	"月"	"にわか雨"	"‐"	"0"	"51,029"	"0%"	"0%"	"0"	"51,029"	"0"	"17"	"0"	"0%"	"3,002"	"0"	"0%"
+"20240514"	"20230516"	"火"	"曇り"	"‐"	"0"	"73,787"	"0%"	"0%"	"0"	"73,787"	"0"	"21"	"0"	"0%"	"3,514"	"0"	"0%"
+"20240515"	"20230517"	"水"	"曇り"	"‐"	"0"	"42,232"	"0%"	"0%"	"0"	"42,232"	"0"	"18"	"0"	"0%"	"2,346"	"0"	"0%"
+"20240516"	"20230518"	"木"	"曇り"	"‐"	"0"	"32,481"	"0%"	"0%"	"0"	"32,481"	"0"	"11"	"0"	"0%"	"2,953"	"0"	"0%"
+"20240517"	"20230519"	"金"	"晴れ"	"‐"	"0"	"46,999"	"0%"	"0%"	"0"	"46,999"	"0"	"22"	"0"	"0%"	"2,136"	"0"	"0%"
+"20240518"	"20230520"	"土"	"曇り"	"‐"	"0"	"90,937"	"0%"	"0%"	"0"	"90,937"	"0"	"12"	"0"	"0%"	"7,578"	"0"	"0%"
+"MD20週"	""	""	"‐"	"‐"	"0"	"582,451"	"0%"	"0%"	"0"	"582,451"	"0"	"147"	"0"	"0%"	"3,962"	"0"	"0%"
+"20240519"	"20230521"	"日"	"雨"	"‐"	"0"	"63,830"	"0%"	"0%"	"0"	"63,830"	"0"	"13"	"0"	"0%"	"4,910"	"0"	"0%"
+"20240520"	"20230522"	"月"	"にわか雨"	"‐"	"0"	"59,841"	"0%"	"0%"	"0"	"59,841"	"0"	"11"	"0"	"0%"	"5,440"	"0"	"0%"
+"20240521"	"20230523"	"火"	"曇り"	"‐"	"0"	"60,015"	"0%"	"0%"	"0"	"60,015"	"0"	"26"	"0"	"0%"	"2,308"	"0"	"0%"
+"20240522"	"20230524"	"水"	"曇り"	"‐"	"0"	"60,812"	"0%"	"0%"	"0"	"60,812"	"0"	"30"	"0"	"0%"	"2,027"	"0"	"0%"
+"20240523"	"20230525"	"木"	"曇り"	"‐"	"0"	"44,654"	"0%"	"0%"	"0"	"44,654"	"0"	"13"	"0"	"0%"	"3,435"	"0"	"0%"
+"20240524"	"20230526"	"金"	"曇り"	"‐"	"0"	"42,516"	"0%"	"0%"	"0"	"42,516"	"0"	"13"	"0"	"0%"	"3,270"	"0"	"0%"
+"20240525"	"20230527"	"土"	"曇り"	"‐"	"0"	"167,931"	"0%"	"0%"	"0"	"167,931"	"0"	"21"	"0"	"0%"	"7,997"	"0"	"0%"
+"MD21週"	""	""	"‐"	"‐"	"0"	"499,599"	"0%"	"0%"	"0"	"499,599"	"0"	"127"	"0"	"0%"	"3,934"	"0"	"0%"
+"20240526"	"20230528"	"日"	"曇り"	"‐"	"0"	"142,097"	"0%"	"0%"	"0"	"142,097"	"0"	"30"	"0"	"0%"	"4,737"	"0"	"0%"
+"20240527"	"20230529"	"月"	"雨"	"‐"	"0"	"98,064"	"0%"	"0%"	"0"	"98,064"	"0"	"24"	"0"	"0%"	"4,086"	"0"	"0%"
+"20240528"	"20230530"	"火"	"霧"	"‐"	"0"	"17,056"	"0%"	"0%"	"0"	"17,056"	"0"	"7"	"0"	"0%"	"2,437"	"0"	"0%"
+"20240529"	"20230531"	"水"	"曇り"	"‐"	"0"	"43,354"	"0%"	"0%"	"0"	"43,354"	"0"	"13"	"0"	"0%"	"3,335"	"0"	"0%"
+"20240530"	"20230601"	"木"	"晴れ"	"‐"	"0"	"37,069"	"0%"	"0%"	"0"	"37,069"	"0"	"12"	"0"	"0%"	"3,089"	"0"	"0%"
+"20240531"	"20230602"	"金"	"にわか雨"	"‐"	"0"	"42,745"	"0%"	"0%"	"0"	"42,745"	"0"	"15"	"0"	"0%"	"2,850"	"0"	"0%"
+"20240601"	"20230603"	"土"	"曇り"	"‐"	"0"	"93,848"	"0%"	"0%"	"0"	"93,848"	"0"	"25"	"0"	"0%"	"3,754"	"0"	"0%"
+"MD22週"	""	""	"‐"	"‐"	"0"	"474,233"	"0%"	"0%"	"0"	"474,233"	"0"	"126"	"0"	"0%"	"3,764"	"0"	"0%"
+"20240602"	"20230604"	"日"	"曇り"	"‐"	"0"	"81,810"	"0%"	"0%"	"0"	"81,810"	"0"	"20"	"0"	"0%"	"4,091"	"0"	"0%"
+"20240603"	"20230605"	"月"	"曇り"	"‐"	"0"	"35,233"	"0%"	"0%"	"0"	"35,233"	"0"	"13"	"0"	"0%"	"2,710"	"0"	"0%"
+"20240604"	"20230606"	"火"	"曇り"	"‐"	"0"	"46,620"	"0%"	"0%"	"0"	"46,620"	"0"	"16"	"0"	"0%"	"2,914"	"0"	"0%"
+"20240605"	"20230607"	"水"	"晴れ"	"‐"	"0"	"34,431"	"0%"	"0%"	"0"	"34,431"	"0"	"17"	"0"	"0%"	"2,025"	"0"	"0%"
+"20240606"	"20230608"	"木"	"雨"	"‐"	"0"	"68,824"	"0%"	"0%"	"0"	"68,824"	"0"	"7"	"0"	"0%"	"9,832"	"0"	"0%"
+"20240607"	"20230609"	"金"	"曇り"	"‐"	"0"	"130,737"	"0%"	"0%"	"0"	"130,837"	"100"	"23"	"0"	"0%"	"5,684"	"0"	"0%"
+"20240608"	"20230610"	"土"	"曇り"	"‐"	"0"	"183,374"	"0%"	"0%"	"0"	"183,374"	"0"	"36"	"0"	"0%"	"5,094"	"0"	"0%"
+"MD23週"	""	""	"‐"	"‐"	"0"	"581,029"	"0%"	"0%"	"0"	"581,129"	"100"	"132"	"0"	"0%"	"4,402"	"0"	"0%"
+"20240609"	"20230611"	"日"	"曇り"	"‐"	"0"	"118,545"	"0%"	"0%"	"0"	"118,545"	"0"	"20"	"0"	"0%"	"5,927"	"0"	"0%"
+"20240610"	"20230612"	"月"	"曇り"	"‐"	"0"	"54,114"	"0%"	"0%"	"0"	"54,114"	"0"	"21"	"0"	"0%"	"2,577"	"0"	"0%"
+"20240611"	"20230613"	"火"	"快晴"	"‐"	"0"	"77,865"	"0%"	"0%"	"0"	"77,865"	"0"	"33"	"0"	"0%"	"2,360"	"0"	"0%"
+"20240612"	"20230614"	"水"	"曇り"	"‐"	"0"	"47,521"	"0%"	"0%"	"0"	"47,521"	"0"	"16"	"0"	"0%"	"2,970"	"0"	"0%"
+"20240613"	"20230615"	"木"	"雨"	"‐"	"0"	"56,878"	"0%"	"0%"	"0"	"56,878"	"0"	"13"	"0"	"0%"	"4,375"	"0"	"0%"
+"20240614"	"20230616"	"金"	"快晴"	"‐"	"0"	"80,440"	"0%"	"0%"	"0"	"80,440"	"0"	"30"	"0"	"0%"	"2,681"	"0"	"0%"
+"20240615"	"20230617"	"土"	"曇り"	"‐"	"0"	"152,820"	"0%"	"0%"	"0"	"152,820"	"0"	"9"	"0"	"0%"	"16,980"	"0"	"0%"
+"MD24週"	""	""	"‐"	"‐"	"0"	"588,183"	"0%"	"0%"	"0"	"588,183"	"0"	"142"	"0"	"0%"	"4,142"	"0"	"0%"
+"20240616"	"20230618"	"日"	"曇り"	"‐"	"0"	"338,966"	"0%"	"0%"	"0"	"338,966"	"0"	"44"	"0"	"0%"	"7,704"	"0"	"0%"
+"20240617"	"20230619"	"月"	"曇り"	"‐"	"0"	"41,558"	"0%"	"0%"	"0"	"41,558"	"0"	"15"	"0"	"0%"	"2,771"	"0"	"0%"
+"20240618"	"20230620"	"火"	"雨"	"‐"	"0"	"69,195"	"0%"	"0%"	"0"	"69,195"	"0"	"19"	"0"	"0%"	"3,642"	"0"	"0%"
+"20240619"	"20230621"	"水"	"晴れ"	"‐"	"0"	"35,619"	"0%"	"0%"	"0"	"35,619"	"0"	"17"	"0"	"0%"	"2,095"	"0"	"0%"
+"20240620"	"20230622"	"木"	"曇り"	"‐"	"0"	"79,819"	"0%"	"0%"	"0"	"79,819"	"0"	"16"	"0"	"0%"	"4,989"	"0"	"0%"
+"20240621"	"20230623"	"金"	"にわか雨"	"‐"	"0"	"42,450"	"0%"	"0%"	"0"	"42,450"	"0"	"8"	"0"	"0%"	"5,306"	"0"	"0%"
+"20240622"	"20230624"	"土"	"曇り"	"‐"	"0"	"121,247"	"0%"	"0%"	"0"	"121,247"	"0"	"12"	"0"	"0%"	"10,104"	"0"	"0%"
+"MD25週"	""	""	"‐"	"‐"	"0"	"728,854"	"0%"	"0%"	"0"	"728,854"	"0"	"131"	"0"	"0%"	"5,564"	"0"	"0%"
+"20240623"	"20230625"	"日"	"雨"	"‐"	"0"	"145,786"	"0%"	"0%"	"0"	"145,786"	"0"	"0"	"0"	"0%"	"0"	"0"	"0%"
+"20240624"	"20230626"	"月"	"快晴"	"‐"	"0"	"49,418"	"0%"	"0%"	"0"	"49,418"	"0"	"16"	"0"	"0%"	"3,089"	"0"	"0%"
+"20240625"	"20230627"	"火"	"曇り"	"‐"	"0"	"74,163"	"0%"	"0%"	"0"	"74,163"	"0"	"21"	"0"	"0%"	"3,532"	"0"	"0%"
+"20240626"	"20230628"	"水"	"曇り"	"‐"	"0"	"35,205"	"0%"	"0%"	"0"	"35,205"	"0"	"13"	"0"	"0%"	"2,708"	"0"	"0%"
+"20240627"	"20230629"	"木"	"曇り"	"‐"	"0"	"52,842"	"0%"	"0%"	"0"	"52,842"	"0"	"21"	"0"	"0%"	"2,516"	"0"	"0%"
+"20240628"	"20230630"	"金"	"にわか雨"	"‐"	"0"	"30,672"	"0%"	"0%"	"0"	"30,672"	"0"	"10"	"0"	"0%"	"3,067"	"0"	"0%"
+"20240629"	"20230701"	"土"	"曇り"	"‐"	"0"	"111,984"	"0%"	"0%"	"0"	"111,984"	"0"	"28"	"0"	"0%"	"3,999"	"0"	"0%"
+"MD26週"	""	""	"‐"	"‐"	"0"	"500,070"	"0%"	"0%"	"0"	"500,070"	"0"	"109"	"0"	"0%"	"4,588"	"0"	"0%"
+"20240630"	"20230702"	"日"	"曇り"	"‐"	"0"	"194,338"	"0%"	"0%"	"0"	"194,338"	"0"	"27"	"0"	"0%"	"7,198"	"0"	"0%"
+"MD27週"	""	""	"‐"	"‐"	"0"	"194,338"	"0%"	"0%"	"0"	"194,338"	"0"	"27"	"0"	"0%"	"7,198"	"0"	"0%"
+"20240701"	"20230703"	"月"	"雨"	"‐"	"90,909"	"79,038"	"86.94%"	"0%"	"0"	"79,038"	"0"	"34"	"0"	"0%"	"2,325"	"0"	"0%"
+"20240702"	"20230704"	"火"	"曇り"	"‐"	"90,909"	"55,133"	"60.65%"	"0%"	"0"	"55,133"	"0"	"19"	"0"	"0%"	"2,902"	"0"	"0%"
+"20240703"	"20230705"	"水"	"曇り"	"‐"	"90,909"	"59,075"	"64.98%"	"0%"	"0"	"59,075"	"0"	"26"	"0"	"0%"	"2,272"	"0"	"0%"
+"20240704"	"20230706"	"木"	"快晴"	"‐"	"90,909"	"119,339"	"131.27%"	"0%"	"0"	"119,339"	"0"	"19"	"0"	"0%"	"6,281"	"0"	"0%"
+"20240705"	"20230707"	"金"	"晴れ"	"‐"	"90,909"	"112,662"	"123.93%"	"0%"	"0"	"112,662"	"0"	"13"	"0"	"0%"	"8,666"	"0"	"0%"
+"20240706"	"20230708"	"土"	"曇り"	"‐"	"181,818"	"177,305"	"97.52%"	"0%"	"0"	"177,305"	"0"	"55"	"0"	"0%"	"3,224"	"0"	"0%"
+"MD27週"	""	""	"‐"	"‐"	"636,363"	"602,552"	"94.69%"	"0%"	"0"	"602,552"	"0"	"166"	"0"	"0%"	"3,630"	"0"	"0%"
+"20240707"	"20230709"	"日"	"曇り"	"‐"	"181,818"	"207,925"	"114.36%"	"0%"	"0"	"207,925"	"0"	"37"	"0"	"0%"	"5,620"	"0"	"0%"
+"20240708"	"20230710"	"月"	"曇り"	"‐"	"90,909"	"91,715"	"100.89%"	"0%"	"0"	"91,715"	"0"	"20"	"0"	"0%"	"4,586"	"0"	"0%"
+"20240709"	"20230711"	"火"	"雨"	"‐"	"90,909"	"115,365"	"126.9%"	"0%"	"0"	"115,365"	"0"	"45"	"0"	"0%"	"2,564"	"0"	"0%"
+"20240710"	"20230712"	"水"	"曇り"	"‐"	"90,909"	"66,750"	"73.43%"	"0%"	"0"	"66,750"	"0"	"19"	"0"	"0%"	"3,513"	"0"	"0%"
+"20240711"	"20230713"	"木"	"にわか雨"	"‐"	"90,909"	"49,840"	"54.82%"	"0%"	"0"	"49,840"	"0"	"15"	"0"	"0%"	"3,323"	"0"	"0%"
+"20240712"	"20230714"	"金"	"雨"	"‐"	"90,909"	"43,433"	"47.78%"	"0%"	"0"	"43,433"	"0"	"12"	"0"	"0%"	"3,619"	"0"	"0%"
+"20240713"	"20230715"	"土"	"曇り"	"‐"	"181,818"	"165,332"	"90.93%"	"0%"	"0"	"165,332"	"0"	"16"	"0"	"0%"	"10,333"	"0"	"0%"
+"MD28週"	""	""	"‐"	"‐"	"818,181"	"740,360"	"90.49%"	"0%"	"0"	"740,360"	"0"	"164"	"0"	"0%"	"4,514"	"0"	"0%"
+"20240714"	"20230716"	"日"	"曇り"	"‐"	"181,818"	"161,940"	"89.07%"	"0%"	"0"	"161,940"	"0"	"32"	"0"	"0%"	"5,061"	"0"	"0%"
+"20240715"	"20230717"	"月"	"霧"	"‐"	"90,909"	"206,799"	"227.48%"	"0%"	"0"	"206,799"	"0"	"49"	"0"	"0%"	"4,220"	"0"	"0%"
+"20240716"	"20230718"	"火"	"にわか雨"	"‐"	"90,909"	"43,134"	"47.45%"	"0%"	"0"	"43,134"	"0"	"12"	"0"	"0%"	"3,595"	"0"	"0%"
+"20240717"	"20230719"	"水"	"曇り"	"‐"	"90,909"	"89,763"	"98.74%"	"0%"	"0"	"89,763"	"0"	"27"	"0"	"0%"	"3,325"	"0"	"0%"
+"20240718"	"20230720"	"木"	"曇り"	"‐"	"90,909"	"223,286"	"245.61%"	"0%"	"0"	"223,286"	"0"	"22"	"0"	"0%"	"10,149"	"0"	"0%"
+"20240719"	"20230721"	"金"	"曇り"	"‐"	"90,909"	"107,970"	"118.77%"	"0%"	"0"	"107,970"	"0"	"29"	"0"	"0%"	"3,723"	"0"	"0%"
+"20240720"	"20230722"	"土"	"曇り"	"‐"	"181,818"	"188,675"	"103.77%"	"0%"	"0"	"189,075"	"400"	"56"	"0"	"0%"	"3,369"	"0"	"0%"
+"MD29週"	""	""	"‐"	"‐"	"818,181"	"1,021,567"	"124.86%"	"0%"	"0"	"1,021,967"	"400"	"227"	"0"	"0%"	"4,500"	"0"	"0%"
+"20240721"	"20230723"	"日"	"曇り"	"‐"	"181,818"	"255,169"	"140.34%"	"0%"	"0"	"256,069"	"900"	"31"	"0"	"0%"	"8,231"	"0"	"0%"
+"20240722"	"20230724"	"月"	"晴れ"	"‐"	"90,909"	"108,031"	"118.83%"	"0%"	"0"	"108,331"	"300"	"31"	"0"	"0%"	"3,485"	"0"	"0%"
+"20240723"	"20230725"	"火"	"曇り"	"‐"	"90,909"	"231,087"	"254.2%"	"0%"	"0"	"231,287"	"200"	"66"	"0"	"0%"	"3,501"	"0"	"0%"
+"20240724"	"20230726"	"水"	"曇り"	"‐"	"272,727"	"606,905"	"222.53%"	"0%"	"0"	"607,805"	"900"	"88"	"0"	"0%"	"6,897"	"0"	"0%"
+"20240725"	"20230727"	"木"	"曇り"	"‐"	"90,909"	"313,911"	"345.3%"	"0%"	"0"	"314,511"	"600"	"62"	"0"	"0%"	"5,063"	"0"	"0%"
+"20240726"	"20230728"	"金"	"曇り"	"‐"	"90,909"	"181,446"	"199.59%"	"0%"	"0"	"182,046"	"600"	"36"	"0"	"0%"	"5,040"	"0"	"0%"
+"20240727"	"20230729"	"土"	"曇り"	"‐"	"272,727"	"320,573"	"117.54%"	"0%"	"0"	"320,873"	"300"	"83"	"0"	"0%"	"3,862"	"0"	"0%"
+"MD30週"	""	""	"‐"	"‐"	"1,090,908"	"2,017,122"	"184.9%"	"0%"	"0"	"2,020,922"	"3,800"	"397"	"0"	"0%"	"5,081"	"0"	"0%"
+"20240728"	"20230730"	"日"	"雨"	"‐"	"272,727"	"256,137"	"93.92%"	"0%"	"0"	"256,537"	"400"	"25"	"0"	"0%"	"10,245"	"0"	"0%"
+"20240729"	"20230731"	"月"	"快晴"	"‐"	"90,909"	"75,964"	"83.56%"	"0%"	"0"	"76,164"	"200"	"27"	"0"	"0%"	"2,813"	"0"	"0%"
+"20240730"	"20230801"	"火"	"曇り"	"‐"	"90,909"	"71,632"	"78.8%"	"0%"	"0"	"72,032"	"400"	"23"	"0"	"0%"	"3,114"	"0"	"0%"
+"20240731"	"20230802"	"水"	"曇り"	"‐"	"90,909"	"98,502"	"108.35%"	"0%"	"0"	"98,802"	"300"	"35"	"0"	"0%"	"2,814"	"0"	"0%"
+"20240801"	"20230803"	"木"	"曇り"	"‐"	"100,000"	"89,147"	"89.15%"	"0%"	"0"	"89,547"	"400"	"27"	"0"	"0%"	"3,302"	"0"	"0%"
+"20240802"	"20230804"	"金"	"晴れ"	"‐"	"100,000"	"96,174"	"96.17%"	"0%"	"0"	"96,674"	"500"	"25"	"0"	"0%"	"3,847"	"0"	"0%"
+"20240803"	"20230805"	"土"	"曇り"	"‐"	"200,000"	"247,503"	"123.75%"	"0%"	"0"	"247,903"	"400"	"64"	"0"	"0%"	"3,867"	"0"	"0%"
+"MD31週"	""	""	"‐"	"‐"	"945,454"	"935,059"	"98.9%"	"0%"	"0"	"937,659"	"2,600"	"226"	"0"	"0%"	"4,137"	"0"	"0%"
+"20240804"	"20230806"	"日"	"曇り"	"‐"	"200,000"	"193,088"	"96.54%"	"0%"	"0"	"194,088"	"1,000"	"24"	"0"	"0%"	"8,045"	"0"	"0%"
+"20240805"	"20230807"	"月"	"快晴"	"‐"	"300,000"	"302,449"	"100.82%"	"0%"	"0"	"302,849"	"400"	"66"	"0"	"0%"	"4,583"	"0"	"0%"
+"20240806"	"20230808"	"火"	"曇り"	"‐"	"100,000"	"134,978"	"134.98%"	"0%"	"0"	"135,178"	"200"	"19"	"0"	"0%"	"7,104"	"0"	"0%"
+"20240807"	"20230809"	"水"	"曇り"	"‐"	"100,000"	"66,072"	"66.07%"	"0%"	"0"	"66,272"	"200"	"13"	"0"	"0%"	"5,082"	"0"	"0%"
+"20240808"	"20230810"	"木"	"曇り"	"‐"	"100,000"	"87,224"	"87.22%"	"0%"	"0"	"87,524"	"300"	"30"	"0"	"0%"	"2,907"	"0"	"0%"
+"20240809"	"20230811"	"金"	"曇り"	"‐"	"100,000"	"80,213"	"80.21%"	"0%"	"0"	"80,513"	"300"	"29"	"0"	"0%"	"2,766"	"0"	"0%"
+"20240810"	"20230812"	"土"	"曇り"	"‐"	"200,000"	"211,722"	"105.86%"	"0%"	"0"	"211,822"	"100"	"40"	"0"	"0%"	"5,293"	"0"	"0%"
+"MD32週"	""	""	"‐"	"‐"	"1,100,000"	"1,075,746"	"97.8%"	"0%"	"0"	"1,078,246"	"2,500"	"221"	"0"	"0%"	"4,868"	"0"	"0%"
+"20240811"	"20230813"	"日"	"曇り"	"‐"	"200,000"	"188,185"	"94.09%"	"0%"	"0"	"188,185"	"0"	"46"	"0"	"0%"	"4,091"	"0"	"0%"
+"20240812"	"20230814"	"月"	"曇り"	"‐"	"100,000"	"126,137"	"126.14%"	"0%"	"0"	"126,137"	"0"	"24"	"0"	"0%"	"5,256"	"0"	"0%"
+"20240813"	"20230815"	"火"	"曇り"	"‐"	"100,000"	"102,084"	"102.08%"	"0%"	"0"	"102,084"	"0"	"26"	"0"	"0%"	"3,926"	"0"	"0%"
+"20240814"	"20230816"	"水"	"曇り"	"‐"	"100,000"	"166,273"	"166.27%"	"0%"	"0"	"166,573"	"300"	"34"	"0"	"0%"	"4,890"	"0"	"0%"
+"20240815"	"20230817"	"木"	"快晴"	"‐"	"100,000"	"96,957"	"96.96%"	"0%"	"0"	"97,357"	"400"	"21"	"0"	"0%"	"4,617"	"0"	"0%"
+"20240816"	"20230818"	"金"	"雨"	"‐"	"100,000"	"39,771"	"39.77%"	"0%"	"0"	"39,771"	"0"	"1"	"0"	"0%"	"39,771"	"0"	"0%"
+"20240817"	"20230819"	"土"	"晴れ"	"‐"	"200,000"	"162,644"	"81.32%"	"0%"	"0"	"163,244"	"600"	"50"	"0"	"0%"	"3,253"	"0"	"0%"
+"MD33週"	""	""	"‐"	"‐"	"900,000"	"882,051"	"98.01%"	"0%"	"0"	"883,351"	"1,300"	"202"	"0"	"0%"	"4,367"	"0"	"0%"
+"20240818"	"20230820"	"日"	"曇り"	"‐"	"200,000"	"163,266"	"81.63%"	"0%"	"0"	"163,566"	"300"	"18"	"0"	"0%"	"9,070"	"0"	"0%"
+"20240819"	"20230821"	"月"	"曇り"	"‐"	"100,000"	"105,629"	"105.63%"	"0%"	"0"	"105,629"	"0"	"35"	"0"	"0%"	"3,018"	"0"	"0%"
+"20240820"	"20230822"	"火"	"曇り"	"‐"	"100,000"	"45,749"	"45.75%"	"0%"	"0"	"45,949"	"200"	"19"	"0"	"0%"	"2,408"	"0"	"0%"
+"20240821"	"20230823"	"水"	"曇り"	"‐"	"100,000"	"86,136"	"86.14%"	"0%"	"0"	"86,136"	"0"	"19"	"0"	"0%"	"4,533"	"0"	"0%"
+"20240822"	"20230824"	"木"	"雨"	"‐"	"100,000"	"33,438"	"33.44%"	"0%"	"0"	"33,438"	"0"	"12"	"0"	"0%"	"2,787"	"0"	"0%"
+"20240823"	"20230825"	"金"	"曇り"	"‐"	"100,000"	"86,367"	"86.37%"	"0%"	"0"	"86,367"	"0"	"25"	"0"	"0%"	"3,455"	"0"	"0%"
+"20240824"	"20230826"	"土"	"晴れ"	"‐"	"200,000"	"161,735"	"80.87%"	"0%"	"0"	"161,735"	"0"	"38"	"0"	"0%"	"4,256"	"0"	"0%"
+"MD34週"	""	""	"‐"	"‐"	"900,000"	"682,320"	"75.81%"	"0%"	"0"	"682,820"	"500"	"166"	"0"	"0%"	"4,110"	"0"	"0%"
+"20240825"	"20230827"	"日"	"曇り"	"‐"	"200,000"	"101,714"	"50.86%"	"0%"	"0"	"101,714"	"0"	"26"	"0"	"0%"	"3,912"	"0"	"0%"
+"20240826"	"20230828"	"月"	"曇り"	"‐"	"100,000"	"74,714"	"74.71%"	"0%"	"0"	"74,714"	"0"	"13"	"0"	"0%"	"5,747"	"0"	"0%"
+"20240827"	"20230829"	"火"	"曇り"	"‐"	"100,000"	"42,138"	"42.14%"	"0%"	"0"	"42,138"	"0"	"7"	"0"	"0%"	"6,020"	"0"	"0%"
+"20240828"	"20230830"	"水"	"雨"	"‐"	"100,000"	"84,968"	"84.97%"	"0%"	"0"	"84,968"	"0"	"31"	"0"	"0%"	"2,741"	"0"	"0%"
+"20240829"	"20230831"	"木"	"雨"	"‐"	"100,000"	"69,920"	"69.92%"	"0%"	"0"	"69,920"	"0"	"13"	"0"	"0%"	"5,378"	"0"	"0%"
+"20240830"	"20230901"	"金"	"にわか雨"	"‐"	"100,000"	"56,679"	"56.68%"	"0%"	"0"	"56,679"	"0"	"9"	"0"	"0%"	"6,298"	"0"	"0%"
+"20240831"	"20230902"	"土"	"曇り"	"‐"	"200,000"	"89,937"	"44.97%"	"0%"	"0"	"89,937"	"0"	"24"	"0"	"0%"	"3,747"	"0"	"0%"
+"MD35週"	""	""	"‐"	"‐"	"900,000"	"520,070"	"57.79%"	"0%"	"0"	"520,070"	"0"	"123"	"0"	"0%"	"4,228"	"0"	"0%"
+"20240901"	"20230903"	"日"	"曇り"	"‐"	"100,000"	"100,581"	"100.58%"	"0%"	"0"	"100,581"	"0"	"30"	"0"	"0%"	"3,353"	"0"	"0%"
+"20240902"	"20230904"	"月"	"曇り"	"‐"	"100,000"	"37,497"	"37.5%"	"0%"	"0"	"37,497"	"0"	"12"	"0"	"0%"	"3,125"	"0"	"0%"
+"20240903"	"20230905"	"火"	"曇り"	"‐"	"100,000"	"42,945"	"42.95%"	"0%"	"0"	"42,945"	"0"	"8"	"0"	"0%"	"5,368"	"0"	"0%"
+"20240904"	"20230906"	"水"	"曇り"	"‐"	"100,000"	"29,776"	"29.78%"	"0%"	"0"	"29,776"	"0"	"11"	"0"	"0%"	"2,707"	"0"	"0%"
+"20240905"	"20230907"	"木"	"曇り"	"‐"	"100,000"	"94,900"	"94.9%"	"0%"	"0"	"94,900"	"0"	"29"	"0"	"0%"	"3,272"	"0"	"0%"
+"20240906"	"20230908"	"金"	"曇り"	"‐"	"100,000"	"50,768"	"50.77%"	"0%"	"0"	"50,768"	"0"	"15"	"0"	"0%"	"3,385"	"0"	"0%"
+"20240907"	"20230909"	"土"	"曇り"	"‐"	"200,000"	"142,163"	"71.08%"	"0%"	"0"	"142,163"	"0"	"36"	"0"	"0%"	"3,949"	"0"	"0%"
+"MD36週"	""	""	"‐"	"‐"	"800,000"	"498,630"	"62.33%"	"0%"	"0"	"498,630"	"0"	"141"	"0"	"0%"	"3,536"	"0"	"0%"
+"20240908"	"20230910"	"日"	"晴れ"	"‐"	"200,000"	"113,903"	"56.95%"	"0%"	"0"	"113,903"	"0"	"16"	"0"	"0%"	"7,119"	"0"	"0%"
+"20240909"	"20230911"	"月"	"晴れ"	"‐"	"100,000"	"42,168"	"42.17%"	"0%"	"0"	"42,168"	"0"	"12"	"0"	"0%"	"3,514"	"0"	"0%"
+"20240910"	"20230912"	"火"	"曇り"	"‐"	"100,000"	"52,321"	"52.32%"	"0%"	"0"	"52,321"	"0"	"8"	"0"	"0%"	"6,540"	"0"	"0%"
+"20240911"	"20230913"	"水"	"快晴"	"‐"	"100,000"	"36,796"	"36.8%"	"0%"	"0"	"36,796"	"0"	"12"	"0"	"0%"	"3,066"	"0"	"0%"
+"20240912"	"20230914"	"木"	"曇り"	"‐"	"100,000"	"50,457"	"50.46%"	"0%"	"0"	"50,457"	"0"	"18"	"0"	"0%"	"2,803"	"0"	"0%"
+"20240913"	"20230915"	"金"	"晴れ"	"‐"	"100,000"	"82,456"	"82.46%"	"0%"	"0"	"82,456"	"0"	"16"	"0"	"0%"	"5,154"	"0"	"0%"
+"20240914"	"20230916"	"土"	"晴れ"	"‐"	"200,000"	"118,312"	"59.16%"	"0%"	"0"	"118,312"	"0"	"29"	"0"	"0%"	"4,080"	"0"	"0%"
+"MD37週"	""	""	"‐"	"‐"	"900,000"	"496,413"	"55.16%"	"0%"	"0"	"496,413"	"0"	"111"	"0"	"0%"	"4,472"	"0"	"0%"
+"20240915"	"20230917"	"日"	"晴れ"	"‐"	"200,000"	"107,675"	"53.84%"	"0%"	"0"	"107,675"	"0"	"7"	"0"	"0%"	"15,382"	"0"	"0%"
+"20240916"	"20230918"	"月"	"曇り"	"‐"	"100,000"	"224,160"	"224.16%"	"0%"	"0"	"224,160"	"0"	"43"	"0"	"0%"	"5,213"	"0"	"0%"
+"20240917"	"20230919"	"火"	"晴れ"	"‐"	"100,000"	"48,377"	"48.38%"	"0%"	"0"	"48,377"	"0"	"14"	"0"	"0%"	"3,456"	"0"	"0%"
+"20240918"	"20230920"	"水"	"晴れ"	"‐"	"100,000"	"103,181"	"103.18%"	"0%"	"0"	"103,181"	"0"	"27"	"0"	"0%"	"3,822"	"0"	"0%"
+"20240919"	"20230921"	"木"	"雨"	"‐"	"100,000"	"32,375"	"32.38%"	"0%"	"0"	"32,375"	"0"	"11"	"0"	"0%"	"2,943"	"0"	"0%"
+"20240920"	"20230922"	"金"	"晴れ"	"‐"	"100,000"	"40,311"	"40.31%"	"0%"	"0"	"40,311"	"0"	"8"	"0"	"0%"	"5,039"	"0"	"0%"
+"20240921"	"20230923"	"土"	"曇り"	"‐"	"200,000"	"86,131"	"43.07%"	"0%"	"0"	"86,131"	"0"	"21"	"0"	"0%"	"4,101"	"0"	"0%"
+"MD38週"	""	""	"‐"	"‐"	"900,000"	"642,210"	"71.36%"	"0%"	"0"	"642,210"	"0"	"131"	"0"	"0%"	"4,902"	"0"	"0%"
+"20240922"	"20230924"	"日"	"にわか雨"	"‐"	"200,000"	"65,413"	"32.71%"	"0%"	"0"	"65,413"	"0"	"20"	"0"	"0%"	"3,271"	"0"	"0%"
+"20240923"	"20230925"	"月"	"曇り"	"‐"	"100,000"	"131,849"	"131.85%"	"0%"	"0"	"131,849"	"0"	"32"	"0"	"0%"	"4,120"	"0"	"0%"
+"20240924"	"20230926"	"火"	"曇り"	"‐"	"100,000"	"49,833"	"49.83%"	"0%"	"0"	"49,833"	"0"	"11"	"0"	"0%"	"4,530"	"0"	"0%"
+"20240925"	"20230927"	"水"	"雨"	"‐"	"100,000"	"47,695"	"47.7%"	"0%"	"0"	"47,695"	"0"	"17"	"0"	"0%"	"2,806"	"0"	"0%"
+"20240926"	"20230928"	"木"	"曇り"	"‐"	"100,000"	"45,658"	"45.66%"	"0%"	"0"	"45,658"	"0"	"18"	"0"	"0%"	"2,537"	"0"	"0%"
+"20240927"	"20230929"	"金"	"にわか雨"	"‐"	"100,000"	"56,840"	"56.84%"	"0%"	"0"	"56,840"	"0"	"15"	"0"	"0%"	"3,789"	"0"	"0%"
+"20240928"	"20230930"	"土"	"曇り"	"‐"	"200,000"	"72,535"	"36.27%"	"0%"	"0"	"72,535"	"0"	"18"	"0"	"0%"	"4,030"	"0"	"0%"
+"MD39週"	""	""	"‐"	"‐"	"900,000"	"469,823"	"52.2%"	"0%"	"0"	"469,823"	"0"	"131"	"0"	"0%"	"3,586"	"0"	"0%"
+"20240929"	"20231001"	"日"	"曇り"	"‐"	"200,000"	"102,276"	"51.14%"	"0%"	"0"	"102,276"	"0"	"3"	"0"	"0%"	"34,092"	"0"	"0%"
+"20240930"	"20231002"	"月"	"雨"	"‐"	"100,000"	"47,857"	"47.86%"	"0%"	"0"	"47,857"	"0"	"18"	"0"	"0%"	"2,659"	"0"	"0%"
+"MD40週"	""	""	"‐"	"‐"	"300,000"	"150,133"	"50.04%"	"0%"	"0"	"150,133"	"0"	"21"	"0"	"0%"	"7,149"	"0"	"0%"
+"20241001"	"20231003"	"火"	"雨"	"‐"	"0"	"27,426"	"0%"	"0%"	"0"	"27,426"	"0"	"9"	"0"	"0%"	"3,047"	"0"	"0%"
+"20241002"	"20231004"	"水"	"曇り"	"‐"	"0"	"66,488"	"0%"	"0%"	"0"	"66,488"	"0"	"23"	"0"	"0%"	"2,891"	"0"	"0%"
+"20241003"	"20231005"	"木"	"曇り"	"‐"	"0"	"64,847"	"0%"	"0%"	"0"	"64,847"	"0"	"15"	"0"	"0%"	"4,323"	"0"	"0%"
+"20241004"	"20231006"	"金"	"曇り"	"‐"	"0"	"69,911"	"0%"	"0%"	"0"	"69,911"	"0"	"19"	"0"	"0%"	"3,680"	"0"	"0%"
+"20241005"	"20231007"	"土"	"にわか雨"	"‐"	"0"	"93,961"	"0%"	"0%"	"0"	"93,961"	"0"	"14"	"0"	"0%"	"6,712"	"0"	"0%"
+"MD40週"	""	""	"‐"	"‐"	"0"	"322,633"	"0%"	"0%"	"0"	"322,633"	"0"	"80"	"0"	"0%"	"4,033"	"0"	"0%"
+"20241006"	"20231008"	"日"	"曇り"	"‐"	"0"	"137,333"	"0%"	"0%"	"0"	"137,333"	"0"	"30"	"0"	"0%"	"4,578"	"0"	"0%"
+"20241007"	"20231009"	"月"	"曇り"	"‐"	"0"	"45,066"	"0%"	"0%"	"0"	"45,066"	"0"	"11"	"0"	"0%"	"4,097"	"0"	"0%"
+"20241008"	"20231010"	"火"	"雨"	"‐"	"0"	"22,355"	"0%"	"0%"	"0"	"22,355"	"0"	"6"	"0"	"0%"	"3,726"	"0"	"0%"
+"20241009"	"20231011"	"水"	"雨"	"‐"	"0"	"20,004"	"0%"	"0%"	"0"	"20,004"	"0"	"4"	"0"	"0%"	"5,001"	"0"	"0%"
+"20241010"	"20231012"	"木"	"曇り"	"‐"	"0"	"24,741"	"0%"	"0%"	"0"	"24,741"	"0"	"9"	"0"	"0%"	"2,749"	"0"	"0%"
+"20241011"	"20231013"	"金"	"曇り"	"‐"	"0"	"45,425"	"0%"	"0%"	"0"	"45,425"	"0"	"12"	"0"	"0%"	"3,785"	"0"	"0%"
+"20241012"	"20231014"	"土"	"快晴"	"‐"	"0"	"59,088"	"0%"	"0%"	"0"	"59,188"	"100"	"18"	"0"	"0%"	"3,283"	"0"	"0%"
+"MD41週"	""	""	"‐"	"‐"	"0"	"354,012"	"0%"	"0%"	"0"	"354,112"	"100"	"90"	"0"	"0%"	"3,933"	"0"	"0%"
+"20241013"	"20231015"	"日"	"快晴"	"‐"	"0"	"123,082"	"0%"	"0%"	"0"	"123,182"	"100"	"14"	"0"	"0%"	"8,792"	"0"	"0%"
+"20241014"	"20231016"	"月"	"晴れ"	"‐"	"0"	"107,753"	"0%"	"0%"	"0"	"107,753"	"0"	"25"	"0"	"0%"	"4,310"	"0"	"0%"
+"20241015"	"20231017"	"火"	"晴れ"	"‐"	"0"	"50,092"	"0%"	"0%"	"0"	"50,092"	"0"	"18"	"0"	"0%"	"2,783"	"0"	"0%"
+"20241016"	"20231018"	"水"	"曇り"	"‐"	"0"	"71,340"	"0%"	"0%"	"0"	"71,540"	"200"	"19"	"0"	"0%"	"3,755"	"0"	"0%"
+"20241017"	"20231019"	"木"	"曇り"	"‐"	"0"	"57,810"	"0%"	"0%"	"0"	"58,010"	"200"	"19"	"0"	"0%"	"3,043"	"0"	"0%"
+"20241018"	"20231020"	"金"	"雨"	"‐"	"0"	"67,809"	"0%"	"0%"	"0"	"68,009"	"200"	"21"	"0"	"0%"	"3,229"	"0"	"0%"
+"20241019"	"20231021"	"土"	"曇り"	"‐"	"0"	"100,700"	"0%"	"0%"	"0"	"100,700"	"0"	"11"	"0"	"0%"	"9,155"	"0"	"0%"
+"MD42週"	""	""	"‐"	"‐"	"0"	"578,586"	"0%"	"0%"	"0"	"579,286"	"700"	"127"	"0"	"0%"	"4,556"	"0"	"0%"
+"20241020"	"20231022"	"日"	"曇り"	"‐"	"0"	"109,500"	"0%"	"0%"	"0"	"109,600"	"100"	"33"	"0"	"0%"	"3,318"	"0"	"0%"
+"20241021"	"20231023"	"月"	"曇り"	"‐"	"0"	"43,548"	"0%"	"0%"	"0"	"43,648"	"100"	"13"	"0"	"0%"	"3,350"	"0"	"0%"
+"20241022"	"20231024"	"火"	"曇り"	"‐"	"0"	"37,036"	"0%"	"0%"	"0"	"37,336"	"300"	"14"	"0"	"0%"	"2,645"	"0"	"0%"
+"20241023"	"20231025"	"水"	"曇り"	"‐"	"0"	"35,869"	"0%"	"0%"	"0"	"36,069"	"200"	"4"	"0"	"0%"	"8,967"	"0"	"0%"
+"20241024"	"20231026"	"木"	"晴れ"	"晴れ"	"0"	"34,416"	"0%"	"0%"	"0"	"34,516"	"100"	"12"	"0"	"0%"	"2,868"	"0"	"0%"
+"20241025"	"20231027"	"金"	"曇り"	"快晴"	"0"	"36,307"	"0%"	"0%"	"0"	"36,407"	"100"	"5"	"0"	"0%"	"7,261"	"0"	"0%"
+"20241026"	"20231028"	"土"	"曇り"	"曇り"	"0"	"110,371"	"0%"	"45.87%"	"240,592"	"110,371"	"0"	"18"	"95"	"18.95%"	"6,132"	"2,533"	"242.12%"
+"MD43週"	""	""	"‐"	"‐"	"0"	"407,047"	"0%"	"169.19%"	"240,592"	"407,947"	"900"	"99"	"95"	"104.21%"	"4,112"	"2,533"	"162.35%"
+"20241027"	"20231029"	"日"	"曇り"	"にわか雨"	"0"	"65,504"	"0%"	"40.08%"	"163,433"	"65,604"	"100"	"21"	"55"	"38.18%"	"3,119"	"2,972"	"104.97%"
+"20241028"	"20231030"	"月"	"雨"	"晴れ"	"0"	"26,850"	"0%"	"28.61%"	"93,849"	"27,350"	"500"	"10"	"34"	"29.41%"	"2,685"	"2,760"	"97.27%"
+"20241029"	"20231031"	"火"	"曇り"	"曇り"	"0"	"13,390"	"0%"	"17.15%"	"78,061"	"13,390"	"0"	"6"	"23"	"26.09%"	"2,232"	"3,394"	"65.75%"
+"20241030"	"20231101"	"水"	"雨"	"快晴"	"0"	"40,601"	"0%"	"49.5%"	"82,019"	"41,001"	"400"	"6"	"30"	"20%"	"6,767"	"2,734"	"247.51%"
+"20241031"	"20231102"	"木"	"快晴"	"快晴"	"0"	"60,191"	"0%"	"100.62%"	"59,823"	"60,291"	"100"	"17"	"23"	"73.91%"	"3,541"	"2,601"	"136.13%"
+"20241101"	"20231103"	"金"	"曇り"	"晴れ"	"0"	"93,647"	"0%"	"96.58%"	"96,967"	"93,647"	"0"	"18"	"34"	"52.94%"	"5,203"	"2,852"	"182.42%"
+"20241102"	"20231104"	"土"	"雨"	"晴れ"	"0"	"60,088"	"0%"	"53.96%"	"111,364"	"60,188"	"100"	"11"	"35"	"31.43%"	"5,463"	"3,182"	"171.68%"
+"MD44週"	""	""	"‐"	"‐"	"0"	"360,271"	"0%"	"52.55%"	"685,516"	"361,471"	"1,200"	"89"	"234"	"38.03%"	"4,048"	"2,930"	"138.18%"
+"20241103"	"20231105"	"日"	"快晴"	"曇り"	"0"	"69,726"	"0%"	"43.38%"	"160,746"	"69,726"	"0"	"4"	"62"	"6.45%"	"17,432"	"2,593"	"672.34%"
+"20241104"	"20231106"	"月"	"曇り"	"雨"	"0"	"111,474"	"0%"	"116.94%"	"95,322"	"111,474"	"0"	"21"	"35"	"60%"	"5,308"	"2,723"	"194.91%"
+"20241105"	"20231107"	"火"	"快晴"	"にわか雨"	"0"	"53,587"	"0%"	"50.22%"	"106,715"	"53,587"	"0"	"21"	"42"	"50%"	"2,552"	"2,541"	"100.43%"
+"20241106"	"20231108"	"水"	"雨"	"快晴"	"0"	"23,765"	"0%"	"26.78%"	"88,748"	"23,765"	"0"	"10"	"28"	"35.71%"	"2,377"	"3,170"	"74.98%"
+"20241107"	"20231109"	"木"	"晴れ"	"曇り"	"0"	"41,103"	"0%"	"46.16%"	"89,052"	"41,103"	"0"	"13"	"27"	"48.15%"	"3,162"	"3,298"	"95.86%"
+"20241108"	"20231110"	"金"	"曇り"	"曇り"	"0"	"51,630"	"0%"	"103.77%"	"49,755"	"51,630"	"0"	"15"	"17"	"88.24%"	"3,442"	"2,927"	"117.6%"
+"20241109"	"20231111"	"土"	"快晴"	"曇り"	"0"	"114,541"	"0%"	"90.83%"	"126,104"	"119,941"	"5,400"	"36"	"32"	"112.5%"	"3,182"	"3,941"	"80.74%"
+"MD45週"	""	""	"‐"	"‐"	"0"	"465,826"	"0%"	"65.02%"	"716,442"	"471,226"	"5,400"	"120"	"243"	"49.38%"	"3,882"	"2,948"	"131.66%"
+"20241110"	"20231112"	"日"	"雨"	"雨"	"0"	"114,335"	"0%"	"97.36%"	"117,431"	"121,935"	"7,600"	"22"	"29"	"75.86%"	"5,197"	"4,049"	"128.34%"
+"20241111"	"20231113"	"月"	"曇り"	"曇り"	"0"	"33,759"	"0%"	"74.19%"	"45,502"	"34,359"	"600"	"10"	"19"	"52.63%"	"3,376"	"2,395"	"140.97%"
+"20241112"	"20231114"	"火"	"曇り"	"快晴"	"0"	"43,320"	"0%"	"73.95%"	"58,579"	"44,720"	"1,400"	"11"	"22"	"50%"	"3,938"	"2,663"	"147.9%"
+"20241113"	"20231115"	"水"	"快晴"	"曇り"	"0"	"50,383"	"0%"	"69.35%"	"72,654"	"53,583"	"3,200"	"7"	"27"	"25.93%"	"7,198"	"2,691"	"267.48%"
+"20241114"	"20231116"	"木"	"快晴"	"晴れ"	"0"	"37,887"	"0%"	"67.34%"	"56,259"	"40,487"	"2,600"	"9"	"21"	"42.86%"	"4,210"	"2,679"	"157.14%"
+"20241115"	"20231117"	"金"	"雨"	"にわか雨"	"0"	"62,709"	"0%"	"152.52%"	"41,116"	"66,309"	"3,600"	"13"	"12"	"108.33%"	"4,824"	"3,426"	"140.79%"
+"20241116"	"20231118"	"土"	"曇り"	"快晴"	"0"	"54,329"	"0%"	"47.86%"	"113,507"	"56,729"	"2,400"	"11"	"40"	"27.5%"	"4,939"	"2,838"	"174.05%"
+"MD46週"	""	""	"‐"	"‐"	"0"	"396,722"	"0%"	"78.55%"	"505,048"	"418,122"	"21,400"	"83"	"170"	"48.82%"	"4,780"	"2,971"	"160.89%"
+"20241117"	"20231119"	"日"	"曇り"	"晴れ"	"0"	"109,406"	"0%"	"130.6%"	"83,774"	"112,606"	"3,200"	"7"	"28"	"25%"	"15,629"	"2,992"	"522.39%"
+"20241118"	"20231120"	"月"	"雨"	"快晴"	"0"	"28,179"	"0%"	"80.09%"	"35,185"	"28,179"	"0"	"10"	"13"	"76.92%"	"2,818"	"2,707"	"104.11%"
+"20241119"	"20231121"	"火"	"曇り"	"快晴"	"0"	"41,075"	"0%"	"90.23%"	"45,523"	"41,075"	"0"	"9"	"17"	"52.94%"	"4,564"	"2,678"	"170.43%"
+"20241120"	"20231122"	"水"	"雨"	"快晴"	"0"	"33,499"	"0%"	"59.47%"	"56,331"	"33,499"	"0"	"11"	"27"	"40.74%"	"3,045"	"2,086"	"145.97%"
+"20241121"	"20231123"	"木"	"雨"	"曇り"	"0"	"39,729"	"0%"	"31.77%"	"125,039"	"39,729"	"0"	"1"	"32"	"3.13%"	"39,729"	"3,907"	"1016.75%"
+"20241122"	"20231124"	"金"	"曇り"	"快晴"	"0"	"32,348"	"0%"	"87.39%"	"37,017"	"32,348"	"0"	"6"	"13"	"46.15%"	"5,391"	"2,847"	"189.34%"
+"20241123"	"20231125"	"土"	"曇り"	"曇り"	"0"	"79,822"	"0%"	"141.4%"	"56,450"	"79,822"	"0"	"3"	"12"	"25%"	"26,607"	"4,704"	"565.61%"
+"MD47週"	""	""	"‐"	"‐"	"0"	"364,058"	"0%"	"82.87%"	"439,319"	"367,258"	"3,200"	"47"	"142"	"33.1%"	"7,746"	"3,094"	"250.37%"
+"20241124"	"20231126"	"日"	"晴れ"	"霧"	"0"	"96,540"	"0%"	"141.77%"	"68,096"	"96,540"	"0"	"14"	"23"	"60.87%"	"6,896"	"2,961"	"232.91%"
+"20241125"	"20231127"	"月"	"晴れ"	"晴れ"	"0"	"46,134"	"0%"	"144.75%"	"31,871"	"46,134"	"0"	"3"	"13"	"23.08%"	"15,378"	"2,452"	"627.26%"
+"20241126"	"20231128"	"火"	"晴れ"	"晴れ"	"0"	"69,646"	"0%"	"179.49%"	"38,802"	"69,646"	"0"	"21"	"12"	"175%"	"3,316"	"3,234"	"102.57%"
+"20241127"	"20231129"	"水"	"雨"	"快晴"	"0"	"69,384"	"0%"	"112.01%"	"61,942"	"69,384"	"0"	"16"	"22"	"72.73%"	"4,337"	"2,816"	"154.02%"
+"20241128"	"20231130"	"木"	"快晴"	"曇り"	"0"	"71,379"	"0%"	"143.44%"	"49,761"	"71,379"	"0"	"17"	"15"	"113.33%"	"4,199"	"3,317"	"126.57%"
+"20241129"	"20231201"	"金"	"曇り"	"曇り"	"0"	"16,409"	"0%"	"29.85%"	"54,974"	"16,409"	"0"	"4"	"21"	"19.05%"	"4,102"	"2,618"	"156.71%"
+"20241130"	"20231202"	"土"	"晴れ"	"晴れ"	"0"	"54,224"	"0%"	"101.38%"	"53,487"	"54,224"	"0"	"11"	"15"	"73.33%"	"4,929"	"3,566"	"138.24%"
+"MD48週"	""	""	"‐"	"‐"	"0"	"423,716"	"0%"	"118.05%"	"358,933"	"423,716"	"0"	"86"	"121"	"71.07%"	"4,927"	"2,966"	"166.09%"
+"20241201"	"20231203"	"日"	"晴れ"	"晴れ"	"150,000"	"77,738"	"51.83%"	"106.16%"	"73,230"	"77,738"	"0"	"4"	"24"	"16.67%"	"19,435"	"3,051"	"636.94%"
+"20241202"	"20231204"	"月"	"曇り"	"晴れ"	"150,000"	"25,185"	"16.79%"	"55.86%"	"45,083"	"25,185"	"0"	"11"	"20"	"55%"	"2,290"	"2,254"	"101.57%"
+"20241203"	"20231205"	"火"	"快晴"	"曇り"	"150,000"	"56,367"	"37.58%"	"81.08%"	"69,516"	"56,367"	"0"	"10"	"21"	"47.62%"	"5,637"	"3,310"	"170.28%"
+"20241204"	"20231206"	"水"	"快晴"	"晴れ"	"150,000"	"79,509"	"53.01%"	"174.8%"	"45,486"	"79,509"	"0"	"9"	"12"	"75%"	"8,834"	"3,791"	"233.07%"
+"20241205"	"20231207"	"木"	"曇り"	"快晴"	"150,000"	"18,444"	"12.3%"	"30.62%"	"60,244"	"18,444"	"0"	"4"	"18"	"22.22%"	"4,611"	"3,347"	"137.77%"
+"20241206"	"20231208"	"金"	"快晴"	"快晴"	"150,000"	"31,954"	"21.3%"	"88.59%"	"36,070"	"31,954"	"0"	"8"	"18"	"44.44%"	"3,994"	"2,004"	"199.32%"
+"20241207"	"20231209"	"土"	"晴れ"	"快晴"	"150,000"	"49,206"	"32.8%"	"33.73%"	"145,879"	"49,206"	"0"	"12"	"39"	"30.77%"	"4,101"	"3,740"	"109.62%"
+"MD49週"	""	""	"‐"	"‐"	"1,050,000"	"338,403"	"32.23%"	"71.17%"	"475,508"	"338,403"	"0"	"58"	"152"	"38.16%"	"5,835"	"3,128"	"186.51%"
+"20241208"	"20231210"	"日"	"快晴"	"快晴"	"150,000"	"98,668"	"65.78%"	"157.25%"	"62,745"	"98,668"	"0"	"13"	"20"	"65%"	"7,590"	"3,137"	"241.93%"
+"20241209"	"20231211"	"月"	"晴れ"	"曇り"	"150,000"	"62,056"	"41.37%"	"90.77%"	"68,368"	"62,056"	"0"	"25"	"22"	"113.64%"	"2,482"	"3,108"	"79.88%"
+"20241210"	"20231212"	"火"	"晴れ"	"霧"	"150,000"	"38,172"	"25.45%"	"55.93%"	"68,247"	"38,172"	"0"	"8"	"19"	"42.11%"	"4,772"	"3,592"	"132.84%"
+"20241211"	"20231213"	"水"	"曇り"	"晴れ"	"150,000"	"30,008"	"20.01%"	"70.49%"	"42,573"	"30,008"	"0"	"5"	"17"	"29.41%"	"6,002"	"2,504"	"239.65%"
+"20241212"	"20231214"	"木"	"晴れ"	"曇り"	"150,000"	"54,887"	"36.59%"	"188.91%"	"29,055"	"54,887"	"0"	"9"	"9"	"100%"	"6,099"	"3,228"	"188.91%"
+"20241213"	"20231215"	"金"	"曇り"	"曇り"	"150,000"	"67,860"	"45.24%"	"126.14%"	"53,799"	"67,860"	"0"	"17"	"16"	"106.25%"	"3,992"	"3,362"	"118.72%"
+"20241214"	"20231216"	"土"	"快晴"	"曇り"	"150,000"	"94,480"	"62.99%"	"118.41%"	"79,791"	"94,480"	"0"	"28"	"28"	"100%"	"3,374"	"2,850"	"118.41%"
+"MD50週"	""	""	"‐"	"‐"	"1,050,000"	"446,131"	"42.49%"	"110.27%"	"404,578"	"446,131"	"0"	"105"	"131"	"80.15%"	"4,249"	"3,088"	"137.58%"
+"20241215"	"20231217"	"日"	"快晴"	"晴れ"	"150,000"	"112,471"	"74.98%"	"156.33%"	"71,945"	"112,471"	"0"	"20"	"18"	"111.11%"	"5,624"	"3,997"	"140.7%"
+"20241216"	"20231218"	"月"	"晴れ"	"曇り"	"150,000"	"38,816"	"25.88%"	"114.8%"	"33,812"	"38,816"	"0"	"15"	"11"	"136.36%"	"2,588"	"3,074"	"84.19%"
+"20241217"	"20231219"	"火"	"晴れ"	"曇り"	"150,000"	"44,966"	"29.98%"	"77.85%"	"57,758"	"44,966"	"0"	"16"	"14"	"114.29%"	"2,810"	"4,126"	"68.12%"
+"20241218"	"20231220"	"水"	"晴れ"	"曇り"	"150,000"	"86,135"	"57.42%"	"130.14%"	"66,184"	"86,135"	"0"	"7"	"27"	"25.93%"	"12,305"	"2,451"	"501.99%"
+"20241219"	"20231221"	"木"	"曇り"	"快晴"	"150,000"	"34,840"	"23.23%"	"32.34%"	"107,739"	"34,840"	"0"	"2"	"29"	"6.9%"	"17,420"	"3,715"	"468.89%"
+"20241220"	"20231222"	"金"	"快晴"	"晴れ"	"150,000"	"61,609"	"41.07%"	"191.5%"	"32,171"	"61,609"	"0"	"18"	"11"	"163.64%"	"3,423"	"2,925"	"117.03%"
+"20241221"	"20231223"	"土"	"晴れ"	"晴れ"	"150,000"	"111,858"	"74.57%"	"96.03%"	"116,485"	"111,858"	"0"	"11"	"30"	"36.67%"	"10,169"	"3,883"	"261.89%"
+"MD51週"	""	""	"‐"	"‐"	"1,050,000"	"490,695"	"46.73%"	"100.95%"	"486,094"	"490,695"	"0"	"89"	"140"	"63.57%"	"5,513"	"3,472"	"158.79%"
+"20241222"	"20231224"	"日"	"快晴"	"曇り"	"150,000"	"73,269"	"48.85%"	"75.71%"	"96,778"	"73,269"	"0"	"13"	"21"	"61.9%"	"5,636"	"4,608"	"122.3%"
+"20241223"	"20231225"	"月"	"晴れ"	"快晴"	"150,000"	"57,584"	"38.39%"	"84.95%"	"67,788"	"57,584"	"0"	"13"	"22"	"59.09%"	"4,430"	"3,081"	"143.76%"
+"20241224"	"20231226"	"火"	"快晴"	"快晴"	"150,000"	"61,612"	"41.07%"	"98.15%"	"62,776"	"61,612"	"0"	"13"	"21"	"61.9%"	"4,739"	"2,989"	"158.54%"
+"20241225"	"20231227"	"水"	"快晴"	"曇り"	"150,000"	"219,193"	"146.13%"	"238.47%"	"91,917"	"219,193"	"0"	"11"	"29"	"37.93%"	"19,927"	"3,170"	"628.69%"
+"20241226"	"20231228"	"木"	"曇り"	"曇り"	"150,000"	"70,107"	"46.74%"	"73.47%"	"95,428"	"70,507"	"400"	"16"	"19"	"84.21%"	"4,382"	"5,023"	"87.24%"
+"20241227"	"20231229"	"金"	"晴れ"	"快晴"	"150,000"	"148,749"	"99.17%"	"113.79%"	"130,719"	"149,149"	"400"	"21"	"30"	"70%"	"7,083"	"4,357"	"162.56%"
+"20241228"	"20231230"	"土"	"曇り"	"曇り"	"150,000"	"157,971"	"105.31%"	"129.09%"	"122,370"	"157,971"	"0"	"20"	"32"	"62.5%"	"7,899"	"3,824"	"206.55%"
+"MD52週"	""	""	"‐"	"‐"	"1,050,000"	"788,485"	"75.09%"	"118.08%"	"667,776"	"789,285"	"800"	"107"	"174"	"61.49%"	"7,369"	"3,838"	"192.01%"
+"20241229"	"20231231"	"日"	"快晴"	"雨"	"150,000"	"163,762"	"109.17%"	"162.23%"	"100,945"	"163,762"	"0"	"26"	"18"	"144.44%"	"6,299"	"5,608"	"112.31%"
+"20241230"	"20240101"	"月"	"曇り"	"晴れ"	"150,000"	"171,453"	"114.3%"	"124.16%"	"138,088"	"171,753"	"300"	"30"	"15"	"200%"	"5,715"	"9,206"	"62.08%"
+"20241231"	"20240102"	"火"	"曇り"	"曇り"	"150,000"	"162,458"	"108.31%"	"151.12%"	"107,502"	"162,458"	"0"	"11"	"17"	"64.71%"	"14,769"	"6,324"	"233.55%"
+"20250101"	"20240103"	"水"	"快晴"	"曇り"	"0"	"148,097"	"0%"	"132.65%"	"111,646"	"148,097"	"0"	"10"	"28"	"35.71%"	"14,810"	"3,987"	"371.42%"
+"20250102"	"20240104"	"木"	"快晴"	"曇り"	"0"	"168,818"	"0%"	"659.24%"	"25,608"	"168,818"	"0"	"23"	"10"	"230%"	"7,340"	"2,561"	"286.63%"
+"20250103"	"20240105"	"金"	"曇り"	"晴れ"	"0"	"242,292"	"0%"	"463.94%"	"52,225"	"242,292"	"0"	"1"	"10"	"10%"	"242,292"	"5,223"	"4639.39%"
+"20250104"	""	"土"	"曇り"	"‐"	"0"	"115,168"	"0%"	"0%"	"0"	"115,168"	"0"	"6"	"0"	"0%"	"19,195"	"0"	"0%"
+"MD53週"	""	""	"‐"	"‐"	"0"	"674,375"	"0%"	"355.91%"	"189,479"	"674,375"	"0"	"40"	"48"	"83.33%"	"16,859"	"3,947"	"427.09%"
+"20250105"	""	"日"	"晴れ"	"‐"	"0"	"130,437"	"0%"	"0%"	"0"	"130,437"	"0"	"7"	"0"	"0%"	"18,634"	"0"	"0%"
+"MD54週"	""	""	"‐"	"‐"	"0"	"130,437"	"0%"	"0%"	"0"	"130,437"	"0"	"7"	"0"	"0%"	"18,634"	"0"	"0%"
+"20250106"	""	"月"	"曇り"	"‐"	"0"	"57,089"	"0%"	"0%"	"0"	"57,089"	"0"	"4"	"0"	"0%"	"14,272"	"0"	"0%"
+"20250107"	""	"火"	"にわか雨"	"‐"	"0"	"41,276"	"0%"	"0%"	"0"	"41,576"	"300"	"9"	"0"	"0%"	"4,586"	"0"	"0%"
+"20250108"	""	"水"	"晴れ"	"‐"	"0"	"39,119"	"0%"	"0%"	"0"	"39,119"	"0"	"9"	"0"	"0%"	"4,347"	"0"	"0%"
+"20250109"	""	"木"	"晴れ"	"‐"	"0"	"69,877"	"0%"	"0%"	"0"	"69,877"	"0"	"10"	"0"	"0%"	"6,988"	"0"	"0%"
+"20250110"	""	"金"	"快晴"	"‐"	"0"	"31,059"	"0%"	"0%"	"0"	"31,659"	"600"	"2"	"0"	"0%"	"15,530"	"0"	"0%"
+"20250111"	"20240106"	"土"	"曇り"	"快晴"	"0"	"66,048"	"0%"	"104.57%"	"63,163"	"66,048"	"0"	"18"	"12"	"150%"	"3,669"	"5,264"	"69.71%"
+"MD1週"	""	""	"‐"	"‐"	"0"	"304,468"	"0%"	"482.04%"	"63,163"	"305,368"	"900"	"52"	"12"	"433.33%"	"5,855"	"5,264"	"111.24%"
+"20250112"	"20240107"	"日"	"雨"	"曇り"	"0"	"94,204"	"0%"	"89.17%"	"105,641"	"96,304"	"2,100"	"17"	"29"	"58.62%"	"5,541"	"3,643"	"152.12%"
+"20250113"	"20240108"	"月"	"晴れ"	"晴れ"	"0"	"114,585"	"0%"	"324.38%"	"35,324"	"114,885"	"300"	"4"	"16"	"25%"	"28,646"	"2,208"	"1297.53%"
+"20250114"	"20240109"	"火"	"晴れ"	"晴れ"	"0"	"53,453"	"0%"	"155.61%"	"34,350"	"53,453"	"0"	"12"	"14"	"85.71%"	"4,454"	"2,454"	"181.55%"
+"20250115"	"20240110"	"水"	"快晴"	"快晴"	"0"	"28,327"	"0%"	"58.44%"	"48,471"	"28,627"	"300"	"12"	"17"	"70.59%"	"2,361"	"2,851"	"82.79%"
+"20250116"	"20240111"	"木"	"曇り"	"曇り"	"0"	"53,708"	"0%"	"93.68%"	"57,333"	"53,708"	"0"	"14"	"19"	"73.68%"	"3,836"	"3,018"	"127.13%"
+"20250117"	"20240112"	"金"	"晴れ"	"晴れ"	"0"	"50,221"	"0%"	"146.69%"	"34,237"	"52,021"	"1,800"	"10"	"16"	"62.5%"	"5,022"	"2,140"	"234.7%"
+"20250118"	"20240113"	"土"	"快晴"	"曇り"	"0"	"109,765"	"0%"	"142.57%"	"76,988"	"109,765"	"0"	"20"	"23"	"86.96%"	"5,488"	"3,347"	"163.96%"
+"MD2週"	""	""	"‐"	"‐"	"0"	"504,263"	"0%"	"128.53%"	"392,344"	"508,763"	"4,500"	"89"	"134"	"66.42%"	"5,666"	"2,928"	"193.51%"
+"20250119"	"20240114"	"日"	"曇り"	"快晴"	"0"	"141,567"	"0%"	"166.79%"	"84,876"	"144,267"	"2,700"	"20"	"21"	"95.24%"	"7,078"	"4,042"	"175.13%"
+"20250120"	"20240115"	"月"	"曇り"	"晴れ"	"0"	"48,491"	"0%"	"104.93%"	"46,214"	"48,491"	"0"	"14"	"20"	"70%"	"3,464"	"2,311"	"149.9%"
+"20250121"	"20240116"	"火"	"曇り"	"快晴"	"0"	"24,566"	"0%"	"99.09%"	"24,792"	"24,866"	"300"	"9"	"9"	"100%"	"2,730"	"2,755"	"99.09%"
+"20250122"	"20240117"	"水"	"晴れ"	"快晴"	"0"	"70,464"	"0%"	"226.37%"	"31,128"	"74,664"	"4,200"	"14"	"12"	"116.67%"	"5,033"	"2,594"	"194.03%"
+"20250123"	"20240118"	"木"	"曇り"	"晴れ"	"0"	"4,454"	"0%"	"9.03%"	"49,345"	"4,454"	"0"	"1"	"15"	"6.67%"	"4,454"	"3,290"	"135.39%"
+"20250124"	"20240119"	"金"	"曇り"	"曇り"	"0"	"105,404"	"0%"	"293.25%"	"35,943"	"115,304"	"9,900"	"7"	"13"	"53.85%"	"15,058"	"2,765"	"544.61%"
+"20250125"	"20240120"	"土"	"曇り"	"曇り"	"0"	"66,814"	"0%"	"118.56%"	"56,356"	"67,114"	"300"	"14"	"17"	"82.35%"	"4,772"	"3,315"	"143.96%"
+"MD3週"	""	""	"‐"	"‐"	"0"	"461,760"	"0%"	"140.5%"	"328,654"	"479,160"	"17,400"	"79"	"107"	"73.83%"	"5,845"	"3,072"	"190.3%"
+"20250126"	"20240121"	"日"	"晴れ"	"雨"	"0"	"61,355"	"0%"	"95.63%"	"64,162"	"61,355"	"0"	"5"	"18"	"27.78%"	"12,271"	"3,565"	"344.25%"
+"20250127"	"20240122"	"月"	"曇り"	"曇り"	"0"	"34,202"	"0%"	"52.06%"	"65,698"	"34,202"	"0"	"9"	"24"	"37.5%"	"3,800"	"2,737"	"138.83%"
+"20250128"	"20240123"	"火"	"快晴"	"曇り"	"0"	"28,805"	"0%"	"95.36%"	"30,207"	"29,705"	"900"	"9"	"12"	"75%"	"3,201"	"2,517"	"127.14%"
+"20250129"	"20240124"	"水"	"晴れ"	"曇り"	"0"	"33,380"	"0%"	"95.69%"	"34,884"	"33,380"	"0"	"10"	"16"	"62.5%"	"3,338"	"2,180"	"153.1%"
+"20250130"	"20240125"	"木"	"晴れ"	"快晴"	"0"	"38,795"	"0%"	"71.16%"	"54,517"	"38,795"	"0"	"2"	"19"	"10.53%"	"19,398"	"2,869"	"676.03%"
+"20250131"	"20240126"	"金"	"快晴"	"快晴"	"0"	"39,168"	"0%"	"55.06%"	"71,136"	"40,068"	"900"	"2"	"25"	"8%"	"19,584"	"2,845"	"688.26%"
+"MD4週"	""	""	"‐"	"‐"	"0"	"235,705"	"0%"	"73.52%"	"320,604"	"237,505"	"1,800"	"37"	"114"	"32.46%"	"6,370"	"2,812"	"226.52%"
+"20250201"	"20240127"	"土"	"曇り"	"晴れ"	"0"	"119,880"	"0%"	"120.75%"	"99,280"	"119,880"	"0"	"18"	"28"	"64.29%"	"6,660"	"3,546"	"187.83%"
+"MD4週"	""	""	"‐"	"‐"	"0"	"119,880"	"0%"	"120.75%"	"99,280"	"119,880"	"0"	"18"	"28"	"64.29%"	"6,660"	"3,546"	"187.83%"
+"20250202"	"20240128"	"日"	"雨"	"曇り"	"0"	"90,922"	"0%"	"125.28%"	"72,577"	"92,122"	"1,200"	"17"	"26"	"65.38%"	"5,348"	"2,791"	"191.6%"
+"20250203"	"20240129"	"月"	"曇り"	"晴れ"	"0"	"27,235"	"0%"	"135.69%"	"20,072"	"27,235"	"0"	"7"	"10"	"70%"	"3,891"	"2,007"	"193.84%"
+"20250204"	"20240130"	"火"	"晴れ"	"晴れ"	"0"	"8,946"	"0%"	"31.12%"	"28,745"	"8,946"	"0"	"3"	"11"	"27.27%"	"2,982"	"2,613"	"114.11%"
+"20250205"	"20240131"	"水"	"晴れ"	"晴れ"	"0"	"35,312"	"0%"	"62.4%"	"56,588"	"35,312"	"0"	"6"	"23"	"26.09%"	"5,885"	"2,460"	"239.21%"
+"20250206"	"20240201"	"木"	"快晴"	"曇り"	"0"	"37,056"	"0%"	"85.92%"	"43,129"	"37,056"	"0"	"0"	"12"	"0%"	"0"	"3,594"	"0%"
+"20250207"	"20240202"	"金"	"快晴"	"曇り"	"0"	"55,367"	"0%"	"216.41%"	"25,584"	"55,367"	"0"	"7"	"10"	"70%"	"7,910"	"2,558"	"309.16%"
+"20250208"	"20240203"	"土"	"快晴"	"快晴"	"0"	"36,498"	"0%"	"64.8%"	"56,322"	"36,498"	"0"	"13"	"20"	"65%"	"2,808"	"2,816"	"99.7%"
+"MD5週"	""	""	"‐"	"‐"	"0"	"291,336"	"0%"	"96.15%"	"303,017"	"292,536"	"1,200"	"53"	"112"	"47.32%"	"5,497"	"2,706"	"203.17%"
+"20250209"	"20240204"	"日"	"晴れ"	"曇り"	"0"	"65,748"	"0%"	"98.43%"	"66,798"	"66,348"	"600"	"6"	"17"	"35.29%"	"10,958"	"3,929"	"278.88%"
+"20250210"	"20240205"	"月"	"曇り"	"雨"	"0"	"96,098"	"0%"	"735.09%"	"13,073"	"96,398"	"300"	"28"	"7"	"400%"	"3,432"	"1,868"	"183.77%"
+"20250211"	"20240206"	"火"	"快晴"	"にわか雨"	"0"	"151,507"	"0%"	"493.11%"	"30,725"	"152,707"	"1,200"	"20"	"10"	"200%"	"7,575"	"3,073"	"246.55%"
+"20250212"	"20240207"	"水"	"曇り"	"曇り"	"0"	"64,783"	"0%"	"226.81%"	"28,563"	"65,383"	"600"	"7"	"12"	"58.33%"	"9,255"	"2,380"	"388.81%"
+"20250213"	"20240208"	"木"	"晴れ"	"曇り"	"0"	"22,777"	"0%"	"84.58%"	"26,929"	"22,777"	"0"	"2"	"8"	"25%"	"11,389"	"3,366"	"338.33%"
+"20250214"	"20240209"	"金"	"曇り"	"曇り"	"0"	"72,463"	"0%"	"284.65%"	"25,457"	"72,463"	"0"	"9"	"12"	"75%"	"8,051"	"2,121"	"379.53%"
+"20250215"	"20240210"	"土"	"快晴"	"曇り"	"0"	"93,514"	"0%"	"120.34%"	"77,710"	"93,514"	"0"	"16"	"17"	"94.12%"	"5,845"	"4,571"	"127.86%"
+"MD6週"	""	""	"‐"	"‐"	"0"	"566,890"	"0%"	"210.54%"	"269,255"	"569,590"	"2,700"	"88"	"83"	"106.02%"	"6,442"	"3,244"	"198.58%"
+"20250216"	"20240211"	"日"	"曇り"	"曇り"	"0"	"125,361"	"0%"	"127.03%"	"98,685"	"125,361"	"0"	"17"	"31"	"54.84%"	"7,374"	"3,183"	"231.65%"
+"20250217"	"20240212"	"月"	"曇り"	"晴れ"	"0"	"32,987"	"0%"	"43.32%"	"76,140"	"32,987"	"0"	"6"	"23"	"26.09%"	"5,498"	"3,310"	"166.08%"
+"20250218"	"20240213"	"火"	"曇り"	"快晴"	"0"	"34,978"	"0%"	"234.88%"	"14,892"	"34,978"	"0"	"10"	"6"	"166.67%"	"3,498"	"2,482"	"140.93%"
+"20250219"	"20240214"	"水"	"快晴"	"快晴"	"0"	"26,992"	"0%"	"49.3%"	"54,745"	"26,992"	"0"	"6"	"17"	"35.29%"	"4,499"	"3,220"	"139.7%"
+"20250220"	"20240215"	"木"	"晴れ"	"曇り"	"0"	"41,419"	"0%"	"76.16%"	"54,385"	"41,419"	"0"	"0"	"19"	"0%"	"0"	"2,862"	"0%"
+"20250221"	"20240216"	"金"	"晴れ"	"曇り"	"0"	"79,725"	"0%"	"236.57%"	"33,701"	"80,625"	"900"	"17"	"17"	"100%"	"4,690"	"1,982"	"236.57%"
+"20250222"	"20240217"	"土"	"晴れ"	"曇り"	"0"	"57,193"	"0%"	"63.71%"	"89,773"	"57,893"	"700"	"15"	"27"	"55.56%"	"3,813"	"3,325"	"114.68%"
+"MD7週"	""	""	"‐"	"‐"	"0"	"398,655"	"0%"	"94.4%"	"422,321"	"400,255"	"1,600"	"71"	"140"	"50.71%"	"5,615"	"3,017"	"186.13%"
+"20250223"	"20240218"	"日"	"快晴"	"曇り"	"0"	"144,504"	"0%"	"138%"	"104,712"	"145,304"	"800"	"29"	"33"	"87.88%"	"4,983"	"3,173"	"157.04%"
+"20250224"	"20240219"	"月"	"曇り"	"曇り"	"0"	"119,830"	"0%"	"676.51%"	"17,713"	"120,030"	"200"	"4"	"5"	"80%"	"29,958"	"3,543"	"845.64%"
+"20250225"	"20240220"	"火"	"快晴"	"曇り"	"0"	"41,087"	"0%"	"247.96%"	"16,570"	"41,087"	"0"	"13"	"7"	"185.71%"	"3,161"	"2,367"	"133.52%"
+"20250226"	"20240221"	"水"	"快晴"	"霧"	"0"	"77,437"	"0%"	"320.46%"	"24,164"	"77,737"	"300"	"6"	"12"	"50%"	"12,906"	"2,014"	"640.93%"
+"20250227"	"20240222"	"木"	"晴れ"	"雨"	"0"	"26,967"	"0%"	"69.25%"	"38,942"	"26,967"	"0"	"2"	"10"	"20%"	"13,484"	"3,894"	"346.25%"
+"20250228"	"20240223"	"金"	"曇り"	"曇り"	"0"	"55,192"	"0%"	"96.25%"	"57,340"	"56,692"	"1,500"	"21"	"20"	"105%"	"2,628"	"2,867"	"91.67%"
+"20250301"	"20240224"	"土"	"快晴"	"曇り"	"0"	"113,967"	"0%"	"101.15%"	"112,673"	"113,967"	"0"	"14"	"38"	"36.84%"	"8,141"	"2,965"	"274.55%"
+"MD8週"	""	""	"‐"	"‐"	"0"	"578,984"	"0%"	"155.59%"	"372,114"	"581,784"	"2,800"	"89"	"125"	"71.2%"	"6,505"	"2,977"	"218.53%"
+"20250302"	"20240225"	"日"	"曇り"	"雨"	"0"	"112,221"	"0%"	"217.02%"	"51,710"	"112,421"	"200"	"23"	"19"	"121.05%"	"4,879"	"2,722"	"179.28%"
+"20250303"	"20240226"	"月"	"雨"	"曇り"	"0"	"53,158"	"0%"	"216.6%"	"24,542"	"53,258"	"100"	"8"	"10"	"80%"	"6,645"	"2,454"	"270.75%"
+"20250304"	"20240227"	"火"	"曇り"	"快晴"	"0"	"18,890"	"0%"	"37.44%"	"50,450"	"18,890"	"0"	"6"	"20"	"30%"	"3,148"	"2,523"	"124.81%"
+"20250305"	"20240228"	"水"	"雨"	"曇り"	"0"	"49,328"	"0%"	"67.06%"	"73,558"	"49,328"	"0"	"14"	"24"	"58.33%"	"3,523"	"3,065"	"114.96%"
+"20250306"	"20240229"	"木"	"曇り"	"曇り"	"0"	"30,952"	"0%"	"42.46%"	"72,898"	"30,952"	"0"	"0"	"31"	"0%"	"0"	"2,352"	"0%"
+"20250307"	"20240301"	"金"	"晴れ"	"雨"	"0"	"34,562"	"0%"	"78.16%"	"44,222"	"34,562"	"0"	"15"	"16"	"93.75%"	"2,304"	"2,764"	"83.37%"
+"20250308"	"20240302"	"土"	"曇り"	"曇り"	"0"	"54,116"	"0%"	"143.85%"	"37,619"	"54,116"	"0"	"0"	"13"	"0%"	"0"	"2,894"	"0%"
+"MD9週"	""	""	"‐"	"‐"	"0"	"353,227"	"0%"	"99.5%"	"354,999"	"353,527"	"300"	"66"	"133"	"49.62%"	"5,352"	"2,669"	"200.51%"
+"20250309"	"20240303"	"日"	"晴れ"	"快晴"	"0"	"121,332"	"0%"	"195.56%"	"62,042"	"121,532"	"200"	"11"	"22"	"50%"	"11,030"	"2,820"	"391.13%"
+"20250310"	"20240304"	"月"	"快晴"	"快晴"	"0"	"94,542"	"0%"	"1165.6%"	"8,111"	"94,542"	"0"	"2"	"4"	"50%"	"47,271"	"2,028"	"2331.2%"
+"20250311"	"20240305"	"火"	"雨"	"雨"	"0"	"54,118"	"0%"	"471.37%"	"11,481"	"54,118"	"0"	"9"	"5"	"180%"	"6,013"	"2,296"	"261.87%"
+"20250312"	"20240306"	"水"	"霧"	"曇り"	"0"	"30,998"	"0%"	"96.07%"	"32,266"	"30,998"	"0"	"3"	"10"	"30%"	"10,333"	"3,227"	"320.23%"
+"20250313"	"20240307"	"木"	"曇り"	"曇り"	"0"	"62,973"	"0%"	"153.87%"	"40,925"	"62,973"	"0"	"24"	"13"	"184.62%"	"2,624"	"3,148"	"83.35%"
+"20250314"	"20240308"	"金"	"曇り"	"霧"	"0"	"134,861"	"0%"	"237.12%"	"56,874"	"134,861"	"0"	"29"	"6"	"483.33%"	"4,650"	"9,479"	"49.06%"
+"20250315"	"20240309"	"土"	"曇り"	"晴れ"	"0"	"136,840"	"0%"	"134.57%"	"101,685"	"137,040"	"200"	"6"	"32"	"18.75%"	"22,807"	"3,178"	"717.72%"
+"MD10週"	""	""	"‐"	"‐"	"0"	"635,664"	"0%"	"202.84%"	"313,384"	"636,064"	"400"	"84"	"92"	"91.3%"	"7,567"	"3,406"	"222.16%"
+"20250316"	"20240310"	"日"	"雨"	"晴れ"	"0"	"58,723"	"0%"	"117.25%"	"50,084"	"58,723"	"0"	"6"	"19"	"31.58%"	"9,787"	"2,636"	"371.29%"
+"20250317"	"20240311"	"月"	"晴れ"	"曇り"	"0"	"52,330"	"0%"	"200.06%"	"26,157"	"52,330"	"0"	"14"	"7"	"200%"	"3,738"	"3,737"	"100.03%"
+"20250318"	"20240312"	"火"	"曇り"	"にわか雨"	"0"	"33,719"	"0%"	"117.61%"	"28,671"	"33,719"	"0"	"10"	"6"	"166.67%"	"3,372"	"4,779"	"70.56%"
+"20250319"	"20240313"	"水"	"雪"	"晴れ"	"0"	"33,916"	"0%"	"60.73%"	"55,849"	"33,916"	"0"	"5"	"25"	"20%"	"6,783"	"2,234"	"303.64%"
+"20250320"	"20240314"	"木"	"晴れ"	"晴れ"	"0"	"106,303"	"0%"	"306.39%"	"34,695"	"106,303"	"0"	"14"	"8"	"175%"	"7,593"	"4,337"	"175.08%"
+"20250321"	"20240315"	"金"	"快晴"	"快晴"	"0"	"72,945"	"0%"	"278.13%"	"26,227"	"72,945"	"0"	"22"	"7"	"314.29%"	"3,316"	"3,747"	"88.5%"
+"20250322"	"20240316"	"土"	"快晴"	"快晴"	"0"	"125,784"	"0%"	"181.26%"	"69,393"	"125,784"	"0"	"3"	"20"	"15%"	"41,928"	"3,470"	"1208.42%"
+"MD11週"	""	""	"‐"	"‐"	"0"	"483,720"	"0%"	"166.18%"	"291,076"	"483,720"	"0"	"74"	"92"	"80.43%"	"6,537"	"3,164"	"206.61%"
+"20250323"	"20240317"	"日"	"快晴"	"曇り"	"0"	"119,679"	"0%"	"107.39%"	"111,447"	"119,679"	"0"	"3"	"28"	"10.71%"	"39,893"	"3,980"	"1002.27%"
+"20250324"	"20240318"	"月"	"曇り"	"晴れ"	"0"	"37,230"	"0%"	"415.37%"	"8,963"	"37,230"	"0"	"0"	"4"	"0%"	"0"	"2,241"	"0%"
+"20250325"	"20240319"	"火"	"快晴"	"快晴"	"0"	"53,980"	"0%"	"192.45%"	"28,049"	"53,980"	"0"	"11"	"10"	"110%"	"4,907"	"2,805"	"174.95%"
+"20250326"	"20240320"	"水"	"快晴"	"晴れ"	"0"	"88,419"	"0%"	"90.2%"	"98,022"	"88,419"	"0"	"26"	"17"	"152.94%"	"3,401"	"5,766"	"58.98%"
+"20250327"	"20240321"	"木"	"晴れ"	"晴れ"	"0"	"30,937"	"0%"	"70.58%"	"43,831"	"30,937"	"0"	"0"	"10"	"0%"	"0"	"4,383"	"0%"
+"20250328"	"20240322"	"金"	"にわか雨"	"晴れ"	"0"	"85,741"	"0%"	"514.59%"	"16,662"	"85,741"	"0"	"22"	"6"	"366.67%"	"3,897"	"2,777"	"140.34%"
+"20250329"	"20240323"	"土"	"雨"	"雨"	"0"	"46,857"	"0%"	"70.87%"	"66,114"	"46,857"	"0"	"3"	"10"	"30%"	"15,619"	"6,611"	"236.24%"
+"MD12週"	""	""	"‐"	"‐"	"0"	"462,843"	"0%"	"124.06%"	"373,088"	"462,843"	"0"	"65"	"85"	"76.47%"	"7,121"	"4,389"	"162.23%"
+"20250330"	"20240324"	"日"	"曇り"	"曇り"	"0"	"80,310"	"0%"	"234.74%"	"34,213"	"80,310"	"0"	"19"	"7"	"271.43%"	"4,227"	"4,888"	"86.48%"
+"20250331"	"20240325"	"月"	"曇り"	"雨"	"0"	"21,591"	"0%"	"166.29%"	"12,984"	"21,591"	"0"	"2"	"4"	"50%"	"10,796"	"3,246"	"332.58%"
+"20250401"	"20240326"	"火"	"雨"	"にわか雨"	"0"	"14,165"	"0%"	"116.76%"	"12,132"	"14,165"	"0"	"2"	"3"	"66.67%"	"7,083"	"4,044"	"175.14%"
+"20250402"	"20240327"	"水"	"雨"	"晴れ"	"0"	"21,479"	"0%"	"34.7%"	"61,907"	"21,479"	"0"	"4"	"28"	"14.29%"	"5,370"	"2,211"	"242.87%"
+"20250403"	"20240328"	"木"	"雨"	"曇り"	"0"	"73,323"	"0%"	"221.25%"	"33,140"	"73,323"	"0"	"13"	"14"	"92.86%"	"5,640"	"2,367"	"238.27%"
+"20250404"	"20240329"	"金"	"曇り"	"にわか雨"	"0"	"43,354"	"0%"	"89.67%"	"48,348"	"43,354"	"0"	"13"	"7"	"185.71%"	"3,335"	"6,907"	"48.28%"
+"20250405"	"20240330"	"土"	"曇り"	"霧"	"0"	"67,330"	"0%"	"69.53%"	"96,837"	"67,330"	"0"	"17"	"37"	"45.95%"	"3,961"	"2,617"	"151.33%"
+"MD13週"	""	""	"‐"	"‐"	"0"	"321,552"	"0%"	"107.34%"	"299,561"	"321,552"	"0"	"70"	"100"	"70%"	"4,594"	"2,996"	"153.34%"
+"20250406"	"20240331"	"日"	"曇り"	"快晴"	"0"	"78,394"	"0%"	"67.47%"	"116,197"	"78,394"	"0"	"17"	"32"	"53.13%"	"4,611"	"3,631"	"127%"
+"20250407"	"20240401"	"月"	"曇り"	"曇り"	"0"	"30,252"	"0%"	"115.9%"	"26,102"	"30,252"	"0"	"8"	"8"	"100%"	"3,782"	"3,263"	"115.9%"
+"20250408"	"20240402"	"火"	"曇り"	"快晴"	"0"	"42,457"	"0%"	"87.57%"	"48,486"	"42,457"	"0"	"13"	"18"	"72.22%"	"3,266"	"2,694"	"121.24%"
+"20250409"	"20240403"	"水"	"晴れ"	"雨"	"0"	"48,398"	"0%"	"156.08%"	"31,008"	"48,398"	"0"	"15"	"13"	"115.38%"	"3,227"	"2,385"	"135.27%"
+"20250410"	"20240404"	"木"	"曇り"	"曇り"	"0"	"62,777"	"0%"	"168.08%"	"37,350"	"62,777"	"0"	"12"	"13"	"92.31%"	"5,231"	"2,873"	"182.08%"
+"20250411"	"20240405"	"金"	"曇り"	"曇り"	"0"	"54,610"	"0%"	"282.08%"	"19,360"	"54,610"	"0"	"15"	"6"	"250%"	"3,641"	"3,227"	"112.83%"
+"20250412"	"20240406"	"土"	"晴れ"	"曇り"	"0"	"66,622"	"0%"	"147.49%"	"45,171"	"66,622"	"0"	"6"	"17"	"35.29%"	"11,104"	"2,657"	"417.88%"
+"MD14週"	""	""	"‐"	"‐"	"0"	"383,510"	"0%"	"118.49%"	"323,674"	"383,510"	"0"	"86"	"107"	"80.37%"	"4,459"	"3,025"	"147.42%"
+"20250413"	"20240407"	"日"	"雨"	"曇り"	"0"	"52,617"	"0%"	"162.45%"	"32,390"	"52,617"	"0"	"15"	"13"	"115.38%"	"3,508"	"2,492"	"140.79%"
+"20250414"	"20240408"	"月"	"曇り"	"曇り"	"0"	"38,865"	"0%"	"144.59%"	"26,880"	"38,865"	"0"	"11"	"15"	"73.33%"	"3,533"	"1,792"	"197.16%"
+"20250415"	"20240409"	"火"	"晴れ"	"霧"	"0"	"42,634"	"0%"	"157.07%"	"27,144"	"42,634"	"0"	"14"	"11"	"127.27%"	"3,045"	"2,468"	"123.41%"
+"20250416"	"20240410"	"水"	"快晴"	"晴れ"	"0"	"62,573"	"0%"	"169.3%"	"36,959"	"62,573"	"0"	"14"	"14"	"100%"	"4,470"	"2,640"	"169.3%"
+"20250417"	"20240411"	"木"	"快晴"	"曇り"	"0"	"64,160"	"0%"	"231.13%"	"27,759"	"64,160"	"0"	"18"	"13"	"138.46%"	"3,564"	"2,135"	"166.93%"
+"20250418"	"20240412"	"金"	"曇り"	"曇り"	"0"	"22,157"	"0%"	"50.66%"	"43,738"	"22,257"	"100"	"7"	"17"	"41.18%"	"3,165"	"2,573"	"123.03%"
+"20250419"	"20240413"	"土"	"快晴"	"曇り"	"0"	"81,509"	"0%"	"109.44%"	"74,475"	"81,509"	"0"	"15"	"19"	"78.95%"	"5,434"	"3,920"	"138.63%"
+"MD15週"	""	""	"‐"	"‐"	"0"	"364,515"	"0%"	"135.33%"	"269,345"	"364,615"	"100"	"94"	"102"	"92.16%"	"3,878"	"2,641"	"146.85%"
+"20250420"	"20240414"	"日"	"快晴"	"快晴"	"0"	"101,140"	"0%"	"236.98%"	"42,679"	"101,140"	"0"	"7"	"12"	"58.33%"	"14,449"	"3,557"	"406.25%"
+"20250421"	"20240415"	"月"	"快晴"	"快晴"	"0"	"49,841"	"0%"	"93.09%"	"53,543"	"49,841"	"0"	"13"	"19"	"68.42%"	"3,834"	"2,818"	"136.05%"
+"20250422"	"20240416"	"火"	"曇り"	"曇り"	"0"	"18,725"	"0%"	"49%"	"38,217"	"18,725"	"0"	"5"	"18"	"27.78%"	"3,745"	"2,123"	"176.39%"
+"20250423"	"20240417"	"水"	"雨"	"曇り"	"0"	"8,083"	"0%"	"17.12%"	"47,203"	"8,083"	"0"	"3"	"15"	"20%"	"2,694"	"3,147"	"85.62%"
+"20250424"	"20240418"	"木"	"霧"	"曇り"	"0"	"48,202"	"0%"	"275%"	"17,528"	"48,202"	"0"	"10"	"7"	"142.86%"	"4,820"	"2,504"	"192.5%"
+"20250425"	"20240419"	"金"	"雨"	"快晴"	"0"	"56,919"	"0%"	"182.95%"	"31,112"	"56,919"	"0"	"17"	"16"	"106.25%"	"3,348"	"1,945"	"172.19%"
+"20250426"	"20240420"	"土"	"曇り"	"快晴"	"0"	"115,601"	"0%"	"315.6%"	"36,629"	"115,601"	"0"	"24"	"11"	"218.18%"	"4,817"	"3,330"	"144.65%"
+"MD16週"	""	""	"‐"	"‐"	"0"	"398,511"	"0%"	"149.3%"	"266,911"	"398,511"	"0"	"79"	"98"	"80.61%"	"5,044"	"2,724"	"185.21%"
+"20250427"	"20240421"	"日"	"晴れ"	"曇り"	"0"	"140,974"	"0%"	"149.8%"	"94,106"	"140,974"	"0"	"34"	"32"	"106.25%"	"4,146"	"2,941"	"140.99%"
+"20250428"	"20240422"	"月"	"雨"	"雨"	"0"	"40,599"	"0%"	"145.3%"	"27,941"	"40,599"	"0"	"13"	"14"	"92.86%"	"3,123"	"1,996"	"156.48%"
+"20250429"	"20240423"	"火"	"雨"	"曇り"	"0"	"109,831"	"0%"	"384.28%"	"28,581"	"109,831"	"0"	"15"	"7"	"214.29%"	"7,322"	"4,083"	"179.33%"
+"20250430"	"20240424"	"水"	"快晴"	"曇り"	"0"	"50,299"	"0%"	"243.81%"	"20,630"	"50,299"	"0"	"12"	"6"	"200%"	"4,192"	"3,438"	"121.91%"
+"MD17週"	""	""	"‐"	"‐"	"0"	"341,703"	"0%"	"199.53%"	"171,258"	"341,703"	"0"	"74"	"59"	"125.42%"	"4,618"	"2,903"	"159.08%"
+"20250501"	"20240425"	"木"	"晴れ"	"曇り"	"0"	"90,328"	"0%"	"203.78%"	"44,326"	"90,328"	"0"	"26"	"14"	"185.71%"	"3,474"	"3,166"	"109.73%"
+"20250502"	"20240426"	"金"	"にわか雨"	"曇り"	"0"	"52,856"	"0%"	"117.8%"	"44,869"	"52,856"	"0"	"20"	"13"	"153.85%"	"2,643"	"3,451"	"76.57%"
+"20250503"	"20240427"	"土"	"曇り"	"雨"	"0"	"176,675"	"0%"	"277.07%"	"63,766"	"176,675"	"0"	"13"	"14"	"92.86%"	"13,590"	"4,555"	"298.38%"
+"MD17週"	""	""	"‐"	"‐"	"0"	"319,859"	"0%"	"209.11%"	"152,961"	"319,859"	"0"	"59"	"41"	"143.9%"	"5,421"	"3,731"	"145.31%"
+"20250504"	"20240428"	"日"	"曇り"	"快晴"	"0"	"209,731"	"0%"	"226.49%"	"92,599"	"209,731"	"0"	"61"	"22"	"277.27%"	"3,438"	"4,209"	"81.69%"
+"20250505"	"20240429"	"月"	"曇り"	"曇り"	"0"	"143,322"	"0%"	"120.02%"	"119,417"	"143,322"	"0"	"37"	"34"	"108.82%"	"3,874"	"3,512"	"110.29%"
+"20250506"	"20240430"	"火"	"雨"	"曇り"	"0"	"91,621"	"0%"	"138.5%"	"66,154"	"91,621"	"0"	"24"	"24"	"100%"	"3,818"	"2,756"	"138.5%"
+"20250507"	"20240501"	"水"	"快晴"	"雨"	"0"	"50,938"	"0%"	"97.53%"	"52,226"	"51,138"	"200"	"11"	"19"	"57.89%"	"4,631"	"2,749"	"168.47%"
+"20250508"	"20240502"	"木"	"曇り"	"晴れ"	"0"	"21,157"	"0%"	"39.39%"	"53,716"	"21,157"	"0"	"7"	"20"	"35%"	"3,022"	"2,686"	"112.53%"
+"20250509"	"20240503"	"金"	"曇り"	"快晴"	"0"	"35,416"	"0%"	"44.93%"	"78,831"	"35,816"	"400"	"12"	"25"	"48%"	"2,951"	"3,153"	"93.6%"
+"20250510"	"20240504"	"土"	"霧"	"快晴"	"0"	"65,916"	"0%"	"83.1%"	"79,321"	"65,916"	"0"	"14"	"22"	"63.64%"	"4,708"	"3,606"	"130.59%"
+"MD18週"	""	""	"‐"	"‐"	"0"	"618,101"	"0%"	"113.99%"	"542,264"	"618,701"	"600"	"166"	"166"	"100%"	"3,724"	"3,267"	"113.99%"
+"20250511"	"20240505"	"日"	"曇り"	"曇り"	"0"	"207,696"	"0%"	"174.6%"	"118,955"	"208,096"	"400"	"42"	"21"	"200%"	"4,945"	"5,665"	"87.3%"
+"20250512"	"20240506"	"月"	"雨"	"曇り"	"0"	"4,117"	"0%"	"3.2%"	"128,821"	"4,117"	"0"	"2"	"37"	"5.41%"	"2,059"	"3,482"	"59.12%"
+"20250513"	"20240507"	"火"	"曇り"	"雨"	"0"	"67,090"	"0%"	"264.02%"	"25,411"	"67,090"	"0"	"12"	"9"	"133.33%"	"5,591"	"2,823"	"198.01%"
+"20250514"	"20240508"	"水"	"曇り"	"曇り"	"0"	"78,530"	"0%"	"445.03%"	"17,646"	"78,530"	"0"	"18"	"7"	"257.14%"	"4,363"	"2,521"	"173.07%"
+"20250515"	"20240509"	"木"	"曇り"	"曇り"	"0"	"42,502"	"0%"	"66.65%"	"63,768"	"42,502"	"0"	"14"	"16"	"87.5%"	"3,036"	"3,986"	"76.17%"
+"20250516"	"20240510"	"金"	"曇り"	"快晴"	"0"	"28,082"	"0%"	"82.32%"	"34,115"	"28,082"	"0"	"11"	"15"	"73.33%"	"2,553"	"2,274"	"112.25%"
+"20250517"	"20240511"	"土"	"雨"	"晴れ"	"0"	"49,626"	"0%"	"36.98%"	"134,191"	"49,926"	"300"	"11"	"13"	"84.62%"	"4,511"	"10,322"	"43.71%"
+"MD19週"	""	""	"‐"	"‐"	"0"	"477,643"	"0%"	"91.34%"	"522,907"	"478,343"	"700"	"110"	"118"	"93.22%"	"4,342"	"4,431"	"97.99%"
+"20250518"	"20240512"	"日"	"曇り"	"曇り"	"0"	"85,127"	"0%"	"34.75%"	"244,986"	"85,127"	"0"	"15"	"46"	"32.61%"	"5,675"	"5,326"	"106.56%"
+"20250519"	"20240513"	"月"	"雨"	"にわか雨"	"0"	"33,170"	"0%"	"65%"	"51,029"	"33,970"	"800"	"9"	"17"	"52.94%"	"3,686"	"3,002"	"122.78%"
+"20250520"	"20240514"	"火"	"快晴"	"曇り"	"0"	"58,784"	"0%"	"79.67%"	"73,787"	"58,784"	"0"	"21"	"21"	"100%"	"2,799"	"3,514"	"79.67%"
+"20250521"	"20240515"	"水"	"曇り"	"曇り"	"0"	"83,019"	"0%"	"196.58%"	"42,232"	"83,519"	"500"	"19"	"18"	"105.56%"	"4,369"	"2,346"	"186.23%"
+"20250522"	"20240516"	"木"	"曇り"	"曇り"	"0"	"24,858"	"0%"	"76.53%"	"32,481"	"24,858"	"0"	"7"	"11"	"63.64%"	"3,551"	"2,953"	"120.26%"
+"20250523"	"20240517"	"金"	"曇り"	"晴れ"	"0"	"17,684"	"0%"	"37.63%"	"46,999"	"17,684"	"0"	"7"	"22"	"31.82%"	"2,526"	"2,136"	"118.25%"
+"20250524"	"20240518"	"土"	"曇り"	"曇り"	"0"	"65,778"	"0%"	"72.33%"	"90,937"	"65,878"	"100"	"21"	"12"	"175%"	"3,132"	"7,578"	"41.33%"
+"MD20週"	""	""	"‐"	"‐"	"0"	"368,420"	"0%"	"63.25%"	"582,451"	"369,820"	"1,400"	"99"	"147"	"67.35%"	"3,721"	"3,962"	"93.92%"
+"20250525"	"20240519"	"日"	"曇り"	"雨"	"0"	"102,763"	"0%"	"160.99%"	"63,830"	"103,563"	"800"	"24"	"13"	"184.62%"	"4,282"	"4,910"	"87.21%"
+"20250526"	"20240520"	"月"	"曇り"	"にわか雨"	"0"	"45,161"	"0%"	"75.47%"	"59,841"	"45,161"	"0"	"14"	"11"	"127.27%"	"3,226"	"5,440"	"59.3%"
+"20250527"	"20240521"	"火"	"曇り"	"曇り"	"0"	"41,254"	"0%"	"68.74%"	"60,015"	"41,554"	"300"	"17"	"26"	"65.38%"	"2,427"	"2,308"	"105.13%"
+"20250528"	"20240522"	"水"	"曇り"	"曇り"	"0"	"55,072"	"0%"	"90.56%"	"60,812"	"55,072"	"0"	"15"	"30"	"50%"	"3,671"	"2,027"	"181.12%"
+"20250529"	"20240523"	"木"	"曇り"	"曇り"	"0"	"66,657"	"0%"	"149.27%"	"44,654"	"66,657"	"0"	"15"	"13"	"115.38%"	"4,444"	"3,435"	"129.37%"
+"20250530"	"20240524"	"金"	"曇り"	"曇り"	"0"	"33,150"	"0%"	"77.97%"	"42,516"	"33,150"	"0"	"9"	"13"	"69.23%"	"3,683"	"3,270"	"112.62%"
+"20250531"	"20240525"	"土"	"曇り"	"曇り"	"0"	"106,589"	"0%"	"63.47%"	"167,931"	"107,489"	"900"	"27"	"21"	"128.57%"	"3,948"	"7,997"	"49.37%"
+"MD21週"	""	""	"‐"	"‐"	"0"	"450,646"	"0%"	"90.2%"	"499,599"	"452,646"	"2,000"	"121"	"127"	"95.28%"	"3,724"	"3,934"	"94.67%"
+"20250601"	"20240526"	"日"	"曇り"	"曇り"	"0"	"39,613"	"0%"	"27.88%"	"142,097"	"39,613"	"0"	"14"	"30"	"46.67%"	"2,830"	"4,737"	"59.74%"
+"20250602"	"20240527"	"月"	"曇り"	"雨"	"0"	"37,375"	"0%"	"38.11%"	"98,064"	"37,375"	"0"	"9"	"24"	"37.5%"	"4,153"	"4,086"	"101.63%"
+"20250603"	"20240528"	"火"	"雨"	"霧"	"0"	"15,739"	"0%"	"92.28%"	"17,056"	"15,739"	"0"	"2"	"7"	"28.57%"	"7,870"	"2,437"	"322.97%"
+"20250604"	"20240529"	"水"	"曇り"	"曇り"	"0"	"48,248"	"0%"	"111.29%"	"43,354"	"48,248"	"0"	"13"	"13"	"100%"	"3,711"	"3,335"	"111.29%"
+"20250605"	"20240530"	"木"	"快晴"	"晴れ"	"0"	"54,522"	"0%"	"147.08%"	"37,069"	"54,522"	"0"	"11"	"12"	"91.67%"	"4,957"	"3,089"	"160.45%"
+"20250606"	"20240531"	"金"	"曇り"	"にわか雨"	"0"	"60,110"	"0%"	"140.62%"	"42,745"	"60,110"	"0"	"15"	"15"	"100%"	"4,007"	"2,850"	"140.62%"
+"20250607"	"20240601"	"土"	"曇り"	"曇り"	"0"	"79,541"	"0%"	"84.76%"	"93,848"	"79,541"	"0"	"22"	"25"	"88%"	"3,616"	"3,754"	"96.31%"
+"MD22週"	""	""	"‐"	"‐"	"0"	"335,148"	"0%"	"70.67%"	"474,233"	"335,148"	"0"	"86"	"126"	"68.25%"	"3,897"	"3,764"	"103.54%"
+"20250608"	"20240602"	"日"	"雨"	"曇り"	"0"	"132,260"	"0%"	"161.67%"	"81,810"	"133,260"	"1,000"	"38"	"20"	"190%"	"3,481"	"4,091"	"85.09%"
+"20250609"	"20240603"	"月"	"快晴"	"曇り"	"0"	"50,164"	"0%"	"142.38%"	"35,233"	"50,164"	"0"	"15"	"13"	"115.38%"	"3,344"	"2,710"	"123.39%"
+"20250610"	"20240604"	"火"	"雨"	"曇り"	"0"	"15,586"	"0%"	"33.43%"	"46,620"	"15,586"	"0"	"2"	"16"	"12.5%"	"7,793"	"2,914"	"267.46%"
+"20250611"	"20240605"	"水"	"霧"	"晴れ"	"0"	"63,688"	"0%"	"184.97%"	"34,431"	"63,988"	"300"	"11"	"17"	"64.71%"	"5,790"	"2,025"	"285.87%"
+"20250612"	"20240606"	"木"	"曇り"	"雨"	"0"	"32,498"	"0%"	"47.22%"	"68,824"	"32,698"	"200"	"10"	"7"	"142.86%"	"3,250"	"9,832"	"33.05%"
+"20250613"	"20240607"	"金"	"曇り"	"曇り"	"0"	"47,876"	"0%"	"36.62%"	"130,737"	"48,076"	"200"	"8"	"23"	"34.78%"	"5,985"	"5,684"	"105.28%"
+"20250614"	"20240608"	"土"	"曇り"	"曇り"	"0"	"122,554"	"0%"	"66.83%"	"183,374"	"122,554"	"0"	"22"	"36"	"61.11%"	"5,571"	"5,094"	"109.36%"
+"MD23週"	""	""	"‐"	"‐"	"0"	"464,626"	"0%"	"79.97%"	"581,029"	"466,326"	"1,700"	"106"	"132"	"80.3%"	"4,383"	"4,402"	"99.58%"
+"20250615"	"20240609"	"日"	"曇り"	"曇り"	"0"	"194,811"	"0%"	"164.34%"	"118,545"	"194,811"	"0"	"25"	"20"	"125%"	"7,792"	"5,927"	"131.47%"
+"20250616"	"20240610"	"月"	"曇り"	"曇り"	"0"	"49,120"	"0%"	"90.77%"	"54,114"	"49,120"	"0"	"9"	"21"	"42.86%"	"5,458"	"2,577"	"211.8%"
+"20250617"	"20240611"	"火"	"晴れ"	"快晴"	"0"	"45,298"	"0%"	"58.18%"	"77,865"	"45,598"	"300"	"7"	"33"	"21.21%"	"6,471"	"2,360"	"274.25%"
+"20250618"	"20240612"	"水"	"晴れ"	"曇り"	"0"	"109,919"	"0%"	"231.31%"	"47,521"	"109,919"	"0"	"14"	"16"	"87.5%"	"7,851"	"2,970"	"264.35%"
+"20250619"	"20240613"	"木"	"快晴"	"雨"	"0"	"24,216"	"0%"	"42.58%"	"56,878"	"24,216"	"0"	"9"	"13"	"69.23%"	"2,691"	"4,375"	"61.5%"
+"20250620"	"20240614"	"金"	"曇り"	"快晴"	"0"	"100,099"	"0%"	"124.44%"	"80,440"	"100,099"	"0"	"26"	"30"	"86.67%"	"3,850"	"2,681"	"143.58%"
+"20250621"	"20240615"	"土"	"曇り"	"曇り"	"0"	"169,703"	"0%"	"111.05%"	"152,820"	"169,703"	"0"	"38"	"9"	"422.22%"	"4,466"	"16,980"	"26.3%"
+"MD24週"	""	""	"‐"	"‐"	"0"	"693,166"	"0%"	"117.85%"	"588,183"	"693,466"	"300"	"128"	"142"	"90.14%"	"5,415"	"4,142"	"130.74%"
+"20250622"	"20240616"	"日"	"曇り"	"曇り"	"0"	"160,252"	"0%"	"47.28%"	"338,966"	"160,652"	"400"	"57"	"44"	"129.55%"	"2,811"	"7,704"	"36.49%"
+"20250623"	"20240617"	"月"	"曇り"	"曇り"	"0"	"69,660"	"0%"	"167.62%"	"41,558"	"69,860"	"200"	"24"	"15"	"160%"	"2,903"	"2,771"	"104.76%"
+"20250624"	"20240618"	"火"	"雨"	"雨"	"0"	"33,344"	"0%"	"48.19%"	"69,195"	"33,344"	"0"	"7"	"19"	"36.84%"	"4,763"	"3,642"	"130.8%"
+"20250625"	"20240619"	"水"	"雨"	"晴れ"	"0"	"42,308"	"0%"	"118.78%"	"35,619"	"42,608"	"300"	"9"	"17"	"52.94%"	"4,701"	"2,095"	"224.36%"
+"20250626"	"20240620"	"木"	"曇り"	"曇り"	"0"	"54,650"	"0%"	"68.47%"	"79,819"	"54,650"	"0"	"20"	"16"	"125%"	"2,733"	"4,989"	"54.77%"
+"20250627"	"20240621"	"金"	"曇り"	"にわか雨"	"0"	"92,851"	"0%"	"218.73%"	"42,450"	"92,851"	"0"	"29"	"8"	"362.5%"	"3,202"	"5,306"	"60.34%"
+"20250628"	"20240622"	"土"	"曇り"	"曇り"	"0"	"160,101"	"0%"	"132.05%"	"121,247"	"160,301"	"200"	"29"	"12"	"241.67%"	"5,521"	"10,104"	"54.64%"
+"MD25週"	""	""	"‐"	"‐"	"0"	"613,166"	"0%"	"84.13%"	"728,854"	"614,266"	"1,100"	"175"	"131"	"133.59%"	"3,504"	"5,564"	"62.98%"
+"20250629"	"20240623"	"日"	"快晴"	"雨"	"0"	"154,523"	"0%"	"105.99%"	"145,786"	"154,723"	"200"	"25"	"0"	"0%"	"6,181"	"0"	"0%"
+"20250630"	"20240624"	"月"	"曇り"	"快晴"	"0"	"85,502"	"0%"	"173.02%"	"49,418"	"85,502"	"0"	"21"	"16"	"131.25%"	"4,072"	"3,089"	"131.82%"
+"20250701"	"20240625"	"火"	"曇り"	"曇り"	"90,909"	"115,478"	"127.03%"	"155.71%"	"74,163"	"115,478"	"0"	"27"	"21"	"128.57%"	"4,277"	"3,532"	"121.11%"
+"20250702"	"20240626"	"水"	"曇り"	"曇り"	"90,909"	"68,994"	"75.89%"	"195.98%"	"35,205"	"69,394"	"400"	"21"	"13"	"161.54%"	"3,285"	"2,708"	"121.32%"
+"20250703"	"20240627"	"木"	"曇り"	"曇り"	"90,909"	"74,495"	"81.94%"	"140.98%"	"52,842"	"74,495"	"0"	"17"	"21"	"80.95%"	"4,382"	"2,516"	"174.15%"
+"20250704"	"20240628"	"金"	"曇り"	"にわか雨"	"90,909"	"68,917"	"75.81%"	"224.69%"	"30,672"	"69,717"	"800"	"16"	"10"	"160%"	"4,307"	"3,067"	"140.43%"
+"20250705"	"20240629"	"土"	"曇り"	"曇り"	"136,363"	"174,971"	"128.31%"	"156.25%"	"111,984"	"174,971"	"0"	"37"	"28"	"132.14%"	"4,729"	"3,999"	"118.24%"
+"MD26週"	""	""	"‐"	"‐"	"499,999"	"742,880"	"148.58%"	"148.56%"	"500,070"	"744,280"	"1,400"	"164"	"109"	"150.46%"	"4,530"	"4,588"	"98.73%"
+"20250706"	"20240630"	"日"	"曇り"	"曇り"	"136,363"	"218,459"	"160.2%"	"112.41%"	"194,338"	"218,459"	"0"	"50"	"27"	"185.19%"	"4,369"	"7,198"	"60.7%"
+"20250707"	"20240701"	"月"	"曇り"	"雨"	"90,909"	"24,493"	"26.94%"	"30.99%"	"79,038"	"24,593"	"100"	"9"	"34"	"26.47%"	"2,721"	"2,325"	"117.07%"
+"20250708"	"20240702"	"火"	"曇り"	"曇り"	"90,909"	"48,838"	"53.72%"	"88.58%"	"55,133"	"48,838"	"0"	"16"	"19"	"84.21%"	"3,052"	"2,902"	"105.19%"
+"20250709"	"20240703"	"水"	"晴れ"	"曇り"	"90,909"	"91,142"	"100.26%"	"154.28%"	"59,075"	"91,342"	"200"	"23"	"26"	"88.46%"	"3,963"	"2,272"	"174.41%"
+"20250710"	"20240704"	"木"	"快晴"	"快晴"	"90,909"	"51,118"	"56.23%"	"42.83%"	"119,339"	"51,118"	"0"	"8"	"19"	"42.11%"	"6,390"	"6,281"	"101.73%"
+"20250711"	"20240705"	"金"	"曇り"	"晴れ"	"90,909"	"110,449"	"121.49%"	"98.04%"	"112,662"	"110,849"	"400"	"32"	"13"	"246.15%"	"3,452"	"8,666"	"39.83%"
+"20250712"	"20240706"	"土"	"曇り"	"曇り"	"136,363"	"218,194"	"160.01%"	"123.06%"	"177,305"	"218,294"	"100"	"49"	"55"	"89.09%"	"4,453"	"3,224"	"138.13%"
+"MD27週"	""	""	"‐"	"‐"	"727,271"	"762,693"	"104.87%"	"95.71%"	"796,890"	"763,493"	"800"	"187"	"193"	"96.89%"	"4,079"	"4,129"	"98.78%"
+"20250713"	"20240707"	"日"	"曇り"	"曇り"	"136,363"	"205,577"	"150.76%"	"98.87%"	"207,925"	"205,877"	"300"	"52"	"37"	"140.54%"	"3,953"	"5,620"	"70.35%"
+"20250714"	"20240708"	"月"	"雨"	"曇り"	"90,909"	"68,931"	"75.82%"	"75.16%"	"91,715"	"68,931"	"0"	"21"	"20"	"105%"	"3,282"	"4,586"	"71.58%"
+"20250715"	"20240709"	"火"	"曇り"	"雨"	"90,909"	"52,625"	"57.89%"	"45.62%"	"115,365"	"52,625"	"0"	"10"	"45"	"22.22%"	"5,263"	"2,564"	"205.27%"
+"20250716"	"20240710"	"水"	"曇り"	"曇り"	"90,909"	"30,552"	"33.61%"	"45.77%"	"66,750"	"30,552"	"0"	"9"	"19"	"47.37%"	"3,395"	"3,513"	"96.63%"
+"20250717"	"20240711"	"木"	"曇り"	"にわか雨"	"90,909"	"100,322"	"110.35%"	"201.29%"	"49,840"	"100,622"	"300"	"25"	"15"	"166.67%"	"4,013"	"3,323"	"120.77%"
+"20250718"	"20240712"	"金"	"曇り"	"雨"	"90,909"	"205,689"	"226.26%"	"473.58%"	"43,433"	"205,889"	"200"	"45"	"12"	"375%"	"4,571"	"3,619"	"126.29%"
+"20250719"	"20240713"	"土"	"曇り"	"曇り"	"272,727"	"745,045"	"273.18%"	"450.64%"	"165,332"	"745,045"	"0"	"97"	"16"	"606.25%"	"7,681"	"10,333"	"74.33%"
+"MD28週"	""	""	"‐"	"‐"	"863,635"	"1,408,741"	"163.12%"	"190.28%"	"740,360"	"1,409,541"	"800"	"259"	"164"	"157.93%"	"5,439"	"4,514"	"120.48%"
+"20250720"	"20240714"	"日"	"曇り"	"曇り"	"181,818"	"449,055"	"246.98%"	"277.3%"	"161,940"	"449,155"	"100"	"98"	"32"	"306.25%"	"4,582"	"5,061"	"90.55%"
+"20250721"	"20240715"	"月"	"晴れ"	"霧"	"90,909"	"246,180"	"270.8%"	"119.04%"	"206,799"	"247,480"	"1,300"	"62"	"49"	"126.53%"	"3,971"	"4,220"	"94.08%"
+"20250722"	"20240716"	"火"	"晴れ"	"にわか雨"	"90,909"	"133,090"	"146.4%"	"308.55%"	"43,134"	"133,090"	"0"	"33"	"12"	"275%"	"4,033"	"3,595"	"112.2%"
+"20250723"	"20240717"	"水"	"晴れ"	"曇り"	"90,909"	"113,361"	"124.7%"	"126.29%"	"89,763"	"113,361"	"0"	"26"	"27"	"96.3%"	"4,360"	"3,325"	"131.15%"
+"20250724"	"20240718"	"木"	"曇り"	"曇り"	"90,909"	"61,559"	"67.71%"	"27.57%"	"223,286"	"61,559"	"0"	"17"	"22"	"77.27%"	"3,621"	"10,149"	"35.68%"
+"20250725"	"20240719"	"金"	"快晴"	"曇り"	"90,909"	"73,707"	"81.08%"	"68.27%"	"107,970"	"73,707"	"0"	"19"	"29"	"65.52%"	"3,879"	"3,723"	"104.2%"
+"20250726"	"20240720"	"土"	"快晴"	"曇り"	"136,363"	"238,641"	"175%"	"126.48%"	"188,675"	"238,641"	"0"	"48"	"56"	"85.71%"	"4,972"	"3,369"	"147.56%"
+"MD29週"	""	""	"‐"	"‐"	"772,726"	"1,315,593"	"170.25%"	"128.78%"	"1,021,567"	"1,316,993"	"1,400"	"303"	"227"	"133.48%"	"4,342"	"4,500"	"96.48%"
+"20250727"	"20240721"	"日"	"曇り"	"曇り"	"136,363"	"134,482"	"98.62%"	"52.7%"	"255,169"	"134,882"	"400"	"25"	"31"	"80.65%"	"5,379"	"8,231"	"65.35%"
+"20250728"	"20240722"	"月"	"曇り"	"晴れ"	"90,909"	"108,288"	"119.12%"	"100.24%"	"108,031"	"108,288"	"0"	"21"	"31"	"67.74%"	"5,157"	"3,485"	"147.97%"
+"20250729"	"20240723"	"火"	"快晴"	"曇り"	"90,909"	"80,075"	"88.08%"	"34.65%"	"231,087"	"80,075"	"0"	"18"	"66"	"27.27%"	"4,449"	"3,501"	"127.06%"
+"20250730"	"20240724"	"水"	"快晴"	"曇り"	"90,909"	"111,704"	"122.87%"	"18.41%"	"606,905"	"111,704"	"0"	"31"	"88"	"35.23%"	"3,603"	"6,897"	"52.25%"
+"20250731"	"20240725"	"木"	"快晴"	"曇り"	"181,818"	"475,915"	"261.75%"	"151.61%"	"313,911"	"475,915"	"0"	"72"	"62"	"116.13%"	"6,610"	"5,063"	"130.55%"
+"20250801"	"20240726"	"金"	"曇り"	"曇り"	"150,000"	"98,808"	"65.87%"	"54.46%"	"181,446"	"98,808"	"0"	"23"	"36"	"63.89%"	"4,296"	"5,040"	"85.24%"
+"20250802"	"20240727"	"土"	"曇り"	"曇り"	"150,000"	"117,803"	"78.54%"	"36.75%"	"320,573"	"117,803"	"0"	"29"	"83"	"34.94%"	"4,062"	"3,862"	"105.17%"
+"MD30週"	""	""	"‐"	"‐"	"300,000"	"216,611"	"72.2%"	"43.15%"	"502,019"	"216,611"	"0"	"52"	"119"	"43.7%"	"4,166"	"4,219"	"98.74%"
+"20250803"	"20240728"	"日"	"快晴"	"雨"	"150,000"	"197,220"	"131.48%"	"77%"	"256,137"	"197,820"	"600"	"47"	"25"	"188%"	"4,196"	"10,245"	"40.96%"
+"20250804"	"20240729"	"月"	"曇り"	"快晴"	"100,000"	"52,251"	"52.25%"	"68.78%"	"75,964"	"52,251"	"0"	"6"	"27"	"22.22%"	"8,709"	"2,813"	"309.53%"
+"20250805"	"20240730"	"火"	"快晴"	"曇り"	"100,000"	"99,111"	"99.11%"	"138.36%"	"71,632"	"99,111"	"0"	"33"	"23"	"143.48%"	"3,003"	"3,114"	"96.43%"
+"20250806"	"20240731"	"水"	"晴れ"	"曇り"	"100,000"	"41,778"	"41.78%"	"42.41%"	"98,502"	"41,778"	"0"	"11"	"35"	"31.43%"	"3,798"	"2,814"	"134.95%"
+"20250807"	"20240801"	"木"	"曇り"	"曇り"	"100,000"	"32,375"	"32.38%"	"36.32%"	"89,147"	"32,775"	"400"	"6"	"27"	"22.22%"	"5,396"	"3,302"	"163.42%"
+"20250808"	"20240802"	"金"	"曇り"	"晴れ"	"100,000"	"59,379"	"59.38%"	"61.74%"	"96,174"	"59,379"	"0"	"18"	"25"	"72%"	"3,299"	"3,847"	"85.75%"
+"20250809"	"20240803"	"土"	"曇り"	"曇り"	"150,000"	"68,519"	"45.68%"	"27.68%"	"247,503"	"68,519"	"0"	"19"	"64"	"29.69%"	"3,606"	"3,867"	"93.25%"
+"MD31週"	""	""	"‐"	"‐"	"800,000"	"550,633"	"68.83%"	"58.89%"	"935,059"	"551,633"	"1,000"	"140"	"226"	"61.95%"	"3,933"	"4,137"	"95.06%"
+"20250810"	"20240804"	"日"	"雨"	"曇り"	"150,000"	"70,539"	"47.03%"	"36.53%"	"193,088"	"70,539"	"0"	"10"	"24"	"41.67%"	"7,054"	"8,045"	"87.68%"
+"20250811"	"20240805"	"月"	"雨"	"快晴"	"100,000"	"25,718"	"25.72%"	"8.5%"	"302,449"	"25,718"	"0"	"6"	"66"	"9.09%"	"4,286"	"4,583"	"93.54%"
+"20250812"	"20240806"	"火"	"曇り"	"曇り"	"100,000"	"67,285"	"67.29%"	"49.85%"	"134,978"	"67,685"	"400"	"21"	"19"	"110.53%"	"3,204"	"7,104"	"45.1%"
+"20250813"	"20240807"	"水"	"曇り"	"曇り"	"100,000"	"118,820"	"118.82%"	"179.83%"	"66,072"	"118,920"	"100"	"26"	"13"	"200%"	"4,570"	"5,082"	"89.92%"
+"20250814"	"20240808"	"木"	"曇り"	"曇り"	"100,000"	"81,670"	"81.67%"	"93.63%"	"87,224"	"81,670"	"0"	"12"	"30"	"40%"	"6,806"	"2,907"	"234.08%"
+"20250815"	"20240809"	"金"	"曇り"	"曇り"	"100,000"	"136,101"	"136.1%"	"169.67%"	"80,213"	"136,101"	"0"	"25"	"29"	"86.21%"	"5,444"	"2,766"	"196.82%"
+"20250816"	"20240810"	"土"	"晴れ"	"曇り"	"150,000"	"148,230"	"98.82%"	"70.01%"	"211,722"	"148,230"	"0"	"38"	"40"	"95%"	"3,901"	"5,293"	"73.7%"
+"MD32週"	""	""	"‐"	"‐"	"800,000"	"648,363"	"81.05%"	"60.27%"	"1,075,746"	"648,863"	"500"	"138"	"221"	"62.44%"	"4,698"	"4,868"	"96.52%"
+"20250817"	"20240811"	"日"	"曇り"	"曇り"	"150,000"	"122,082"	"81.39%"	"64.87%"	"188,185"	"122,082"	"0"	"34"	"46"	"73.91%"	"3,591"	"4,091"	"87.77%"
+"20250818"	"20240812"	"月"	"曇り"	"曇り"	"100,000"	"25,950"	"25.95%"	"20.57%"	"126,137"	"25,950"	"0"	"11"	"24"	"45.83%"	"2,359"	"5,256"	"44.89%"
+"20250819"	"20240813"	"火"	"晴れ"	"曇り"	"100,000"	"59,360"	"59.36%"	"58.15%"	"102,084"	"59,360"	"0"	"14"	"26"	"53.85%"	"4,240"	"3,926"	"107.99%"
+"20250820"	"20240814"	"水"	"曇り"	"曇り"	"100,000"	"35,134"	"35.13%"	"21.13%"	"166,273"	"35,134"	"0"	"11"	"34"	"32.35%"	"3,194"	"4,890"	"65.31%"
+"20250821"	"20240815"	"木"	"曇り"	"快晴"	"100,000"	"58,129"	"58.13%"	"59.95%"	"96,957"	"58,129"	"0"	"12"	"21"	"57.14%"	"4,844"	"4,617"	"104.92%"
+"20250822"	"20240816"	"金"	"曇り"	"雨"	"100,000"	"49,242"	"49.24%"	"123.81%"	"39,771"	"49,242"	"0"	"12"	"1"	"1200%"	"4,104"	"39,771"	"10.32%"
+"20250823"	"20240817"	"土"	"曇り"	"晴れ"	"150,000"	"78,089"	"52.06%"	"48.01%"	"162,644"	"78,089"	"0"	"27"	"50"	"54%"	"2,892"	"3,253"	"88.91%"
+"MD33週"	""	""	"‐"	"‐"	"800,000"	"427,986"	"53.5%"	"48.52%"	"882,051"	"427,986"	"0"	"121"	"202"	"59.9%"	"3,537"	"4,367"	"81%"
+"20250824"	"20240818"	"日"	"快晴"	"曇り"	"150,000"	"116,332"	"77.55%"	"71.25%"	"163,266"	"116,332"	"0"	"28"	"18"	"155.56%"	"4,155"	"9,070"	"45.81%"
+"20250825"	"20240819"	"月"	"快晴"	"曇り"	"100,000"	"44,925"	"44.93%"	"42.53%"	"105,629"	"44,925"	"0"	"15"	"35"	"42.86%"	"2,995"	"3,018"	"99.24%"
+"20250826"	"20240820"	"火"	"晴れ"	"曇り"	"100,000"	"75,876"	"75.88%"	"165.85%"	"45,749"	"75,876"	"0"	"21"	"19"	"110.53%"	"3,613"	"2,408"	"150.06%"
+"20250827"	"20240821"	"水"	"快晴"	"曇り"	"100,000"	"50,518"	"50.52%"	"58.65%"	"86,136"	"50,518"	"0"	"18"	"19"	"94.74%"	"2,807"	"4,533"	"61.91%"
+"20250828"	"20240822"	"木"	"曇り"	"雨"	"100,000"	"61,390"	"61.39%"	"183.59%"	"33,438"	"61,990"	"600"	"12"	"12"	"100%"	"5,116"	"2,787"	"183.59%"
+"20250829"	"20240823"	"金"	"曇り"	"曇り"	"100,000"	"69,039"	"69.04%"	"79.94%"	"86,367"	"69,039"	"0"	"19"	"25"	"76%"	"3,634"	"3,455"	"105.18%"
+"20250830"	"20240824"	"土"	"曇り"	"晴れ"	"150,000"	"88,038"	"58.69%"	"54.43%"	"161,735"	"88,038"	"0"	"25"	"38"	"65.79%"	"3,522"	"4,256"	"82.74%"
+"MD34週"	""	""	"‐"	"‐"	"800,000"	"506,118"	"63.26%"	"74.18%"	"682,320"	"506,718"	"600"	"138"	"166"	"83.13%"	"3,668"	"4,110"	"89.23%"
+"20250831"	"20240825"	"日"	"快晴"	"曇り"	"150,000"	"128,199"	"85.47%"	"126.04%"	"101,714"	"128,299"	"100"	"40"	"26"	"153.85%"	"3,205"	"3,912"	"81.93%"
+"MD35週"	""	""	"‐"	"‐"	"150,000"	"128,199"	"85.47%"	"126.04%"	"101,714"	"128,299"	"100"	"40"	"26"	"153.85%"	"3,205"	"3,912"	"81.93%"
+"20250901"	"20240826"	"月"	"曇り"	"曇り"	"80,000"	"25,940"	"32.43%"	"34.72%"	"74,714"	"25,940"	"0"	"10"	"13"	"76.92%"	"2,594"	"5,747"	"45.13%"
+"20250902"	"20240827"	"火"	"快晴"	"曇り"	"80,000"	"22,089"	"27.61%"	"52.42%"	"42,138"	"22,089"	"0"	"5"	"7"	"71.43%"	"4,418"	"6,020"	"73.39%"
+"20250903"	"20240828"	"水"	"曇り"	"雨"	"80,000"	"46,903"	"58.63%"	"55.2%"	"84,968"	"46,903"	"0"	"13"	"31"	"41.94%"	"3,608"	"2,741"	"131.63%"
+"20250904"	"20240829"	"木"	"雨"	"雨"	"80,000"	"26,709"	"33.39%"	"38.2%"	"69,920"	"26,709"	"0"	"9"	"13"	"69.23%"	"2,968"	"5,378"	"55.18%"
+"20250905"	"20240830"	"金"	"曇り"	"にわか雨"	"80,000"	"9,272"	"11.59%"	"16.36%"	"56,679"	"9,272"	"0"	"3"	"9"	"33.33%"	"3,091"	"6,298"	"49.08%"
+"20250906"	"20240831"	"土"	"曇り"	"曇り"	"120,000"	"70,653"	"58.88%"	"78.56%"	"89,937"	"70,653"	"0"	"15"	"24"	"62.5%"	"4,710"	"3,747"	"125.69%"
+"MD35週"	""	""	"‐"	"‐"	"520,000"	"201,566"	"38.76%"	"48.18%"	"418,356"	"201,566"	"0"	"55"	"97"	"56.7%"	"3,665"	"4,313"	"84.97%"
+"20250907"	"20240901"	"日"	"快晴"	"曇り"	"120,000"	"78,301"	"65.25%"	"77.85%"	"100,581"	"79,301"	"1,000"	"25"	"30"	"83.33%"	"3,132"	"3,353"	"93.42%"
+"20250908"	"20240902"	"月"	"快晴"	"曇り"	"80,000"	"34,055"	"42.57%"	"90.82%"	"37,497"	"34,055"	"0"	"7"	"12"	"58.33%"	"4,865"	"3,125"	"155.69%"
+"20250909"	"20240903"	"火"	"曇り"	"曇り"	"80,000"	"33,572"	"41.97%"	"78.17%"	"42,945"	"33,572"	"0"	"10"	"8"	"125%"	"3,357"	"5,368"	"62.54%"
+"20250910"	"20240904"	"水"	"雨"	"曇り"	"80,000"	"167,944"	"209.93%"	"564.02%"	"29,776"	"185,344"	"17,400"	"47"	"11"	"427.27%"	"3,573"	"2,707"	"132.01%"
+"20250911"	"20240905"	"木"	"曇り"	"曇り"	"80,000"	"33,975"	"42.47%"	"35.8%"	"94,900"	"33,975"	"0"	"10"	"29"	"34.48%"	"3,398"	"3,272"	"103.82%"
+"20250912"	"20240906"	"金"	"曇り"	"曇り"	"80,000"	"21,734"	"27.17%"	"42.81%"	"50,768"	"21,734"	"0"	"8"	"15"	"53.33%"	"2,717"	"3,385"	"80.27%"
+"20250913"	"20240907"	"土"	"曇り"	"曇り"	"120,000"	"105,538"	"87.95%"	"74.24%"	"142,163"	"105,538"	"0"	"25"	"36"	"69.44%"	"4,222"	"3,949"	"106.9%"
+"MD36週"	""	""	"‐"	"‐"	"640,000"	"475,119"	"74.24%"	"95.28%"	"498,630"	"493,519"	"18,400"	"132"	"141"	"93.62%"	"3,599"	"3,536"	"101.78%"
+"20250914"	"20240908"	"日"	"雨"	"晴れ"	"120,000"	"86,458"	"72.05%"	"75.9%"	"113,903"	"86,458"	"0"	"19"	"16"	"118.75%"	"4,550"	"7,119"	"63.92%"
+"20250915"	"20240909"	"月"	"曇り"	"晴れ"	"80,000"	"152,328"	"190.41%"	"361.24%"	"42,168"	"152,728"	"400"	"29"	"12"	"241.67%"	"5,253"	"3,514"	"149.48%"
+"20250916"	"20240910"	"火"	"曇り"	"曇り"	"80,000"	"22,490"	"28.11%"	"42.98%"	"52,321"	"22,490"	"0"	"9"	"8"	"112.5%"	"2,499"	"6,540"	"38.21%"
+"20250917"	"20240911"	"水"	"快晴"	"快晴"	"80,000"	"30,121"	"37.65%"	"81.86%"	"36,796"	"30,121"	"0"	"10"	"12"	"83.33%"	"3,012"	"3,066"	"98.23%"
+"20250918"	"20240912"	"木"	"曇り"	"曇り"	"80,000"	"15,525"	"19.41%"	"30.77%"	"50,457"	"15,525"	"0"	"6"	"18"	"33.33%"	"2,588"	"2,803"	"92.31%"
+"20250919"	"20240913"	"金"	"曇り"	"晴れ"	"80,000"	"32,489"	"40.61%"	"39.4%"	"82,456"	"32,489"	"0"	"11"	"16"	"68.75%"	"2,954"	"5,154"	"57.31%"
+"20250920"	"20240914"	"土"	"曇り"	"晴れ"	"120,000"	"76,375"	"63.65%"	"64.55%"	"118,312"	"76,375"	"0"	"10"	"29"	"34.48%"	"7,638"	"4,080"	"187.21%"
+"MD37週"	""	""	"‐"	"‐"	"640,000"	"415,786"	"64.97%"	"83.76%"	"496,413"	"416,186"	"400"	"94"	"111"	"84.68%"	"4,423"	"4,472"	"98.91%"
+"20250921"	"20240915"	"日"	"快晴"	"晴れ"	"120,000"	"84,441"	"70.37%"	"78.42%"	"107,675"	"84,441"	"0"	"17"	"7"	"242.86%"	"4,967"	"15,382"	"32.29%"
+"20250922"	"20240916"	"月"	"曇り"	"曇り"	"80,000"	"49,369"	"61.71%"	"22.02%"	"224,160"	"49,369"	"0"	"11"	"43"	"25.58%"	"4,488"	"5,213"	"86.09%"
+"20250923"	"20240917"	"火"	"快晴"	"晴れ"	"80,000"	"97,195"	"121.49%"	"200.91%"	"48,377"	"98,395"	"1,200"	"20"	"14"	"142.86%"	"4,860"	"3,456"	"140.64%"
+"20250924"	"20240918"	"水"	"曇り"	"晴れ"	"80,000"	"35,157"	"43.95%"	"34.07%"	"103,181"	"35,157"	"0"	"11"	"27"	"40.74%"	"3,196"	"3,822"	"83.63%"
+"20250925"	"20240919"	"木"	"快晴"	"雨"	"80,000"	"39,934"	"49.92%"	"123.35%"	"32,375"	"39,934"	"0"	"13"	"11"	"118.18%"	"3,072"	"2,943"	"104.37%"
+"20250926"	"20240920"	"金"	"快晴"	"晴れ"	"80,000"	"23,710"	"29.64%"	"58.82%"	"40,311"	"23,710"	"0"	"9"	"8"	"112.5%"	"2,634"	"5,039"	"52.28%"
+"20250927"	"20240921"	"土"	"曇り"	"曇り"	"120,000"	"100,052"	"83.38%"	"116.16%"	"86,131"	"100,052"	"0"	"19"	"21"	"90.48%"	"5,266"	"4,101"	"128.39%"
+"MD38週"	""	""	"‐"	"‐"	"640,000"	"429,858"	"67.17%"	"66.93%"	"642,210"	"431,058"	"1,200"	"100"	"131"	"76.34%"	"4,299"	"4,902"	"87.68%"
+"20250928"	"20240922"	"日"	"曇り"	"にわか雨"	"120,000"	"119,350"	"99.46%"	"182.46%"	"65,413"	"119,350"	"0"	"27"	"20"	"135%"	"4,420"	"3,271"	"135.15%"
+"20250929"	"20240923"	"月"	"曇り"	"曇り"	"80,000"	"72,977"	"91.22%"	"55.35%"	"131,849"	"72,977"	"0"	"14"	"32"	"43.75%"	"5,213"	"4,120"	"126.51%"
+"20250930"	"20240924"	"火"	"曇り"	"曇り"	"80,000"	"60,829"	"76.04%"	"122.07%"	"49,833"	"60,829"	"0"	"10"	"11"	"90.91%"	"6,083"	"4,530"	"134.27%"
+"20251001"	"20240925"	"水"	"曇り"	"雨"	"80,000"	"7,453"	"9.32%"	"15.63%"	"47,695"	"7,453"	"0"	"3"	"17"	"17.65%"	"2,484"	"2,806"	"88.55%"
+"20251002"	"20240926"	"木"	"曇り"	"曇り"	"80,000"	"23,514"	"29.39%"	"51.5%"	"45,658"	"23,514"	"0"	"6"	"18"	"33.33%"	"3,919"	"2,537"	"154.5%"
+"20251003"	"20240927"	"金"	"雨"	"にわか雨"	"80,000"	"57,793"	"72.24%"	"101.68%"	"56,840"	"57,793"	"0"	"15"	"15"	"100%"	"3,853"	"3,789"	"101.68%"
+"20251004"	"20240928"	"土"	"曇り"	"曇り"	"100,000"	"69,939"	"69.94%"	"96.42%"	"72,535"	"69,939"	"0"	"13"	"18"	"72.22%"	"5,380"	"4,030"	"133.51%"
+"MD39週"	""	""	"‐"	"‐"	"620,000"	"411,855"	"66.43%"	"87.66%"	"469,823"	"411,855"	"0"	"88"	"131"	"67.18%"	"4,680"	"3,586"	"130.5%"
+"20251005"	"20240929"	"日"	"快晴"	"曇り"	"100,000"	"74,375"	"74.38%"	"72.72%"	"102,276"	"74,375"	"0"	"11"	"3"	"366.67%"	"6,761"	"34,092"	"19.83%"
+"20251006"	"20240930"	"月"	"雨"	"雨"	"80,000"	"83,705"	"104.63%"	"174.91%"	"47,857"	"83,705"	"0"	"22"	"18"	"122.22%"	"3,805"	"2,659"	"143.11%"
+"20251007"	"20241001"	"火"	"雨"	"雨"	"80,000"	"31,467"	"39.33%"	"114.73%"	"27,426"	"31,467"	"0"	"11"	"9"	"122.22%"	"2,861"	"3,047"	"93.87%"
+"20251008"	"20241002"	"水"	"雨"	"曇り"	"80,000"	"32,002"	"40%"	"48.13%"	"66,488"	"32,002"	"0"	"8"	"23"	"34.78%"	"4,000"	"2,891"	"138.38%"
+"20251009"	"20241003"	"木"	"曇り"	"曇り"	"80,000"	"45,215"	"56.52%"	"69.73%"	"64,847"	"45,215"	"0"	"13"	"15"	"86.67%"	"3,478"	"4,323"	"80.45%"
+"20251010"	"20241004"	"金"	"雨"	"曇り"	"80,000"	"14,686"	"18.36%"	"21.01%"	"69,911"	"14,686"	"0"	"5"	"19"	"26.32%"	"2,937"	"3,680"	"79.83%"
+"20251011"	"20241005"	"土"	"雨"	"にわか雨"	"100,000"	"69,899"	"69.9%"	"74.39%"	"93,961"	"69,899"	"0"	"14"	"14"	"100%"	"4,993"	"6,712"	"74.39%"
+"MD40週"	""	""	"‐"	"‐"	"600,000"	"351,349"	"58.56%"	"74.32%"	"472,766"	"351,349"	"0"	"84"	"101"	"83.17%"	"4,183"	"4,681"	"89.36%"
+"20251012"	"20241006"	"日"	"にわか雨"	"曇り"	"100,000"	"89,126"	"89.13%"	"64.9%"	"137,333"	"89,726"	"600"	"22"	"30"	"73.33%"	"4,051"	"4,578"	"88.5%"
+"20251013"	"20241007"	"月"	"雨"	"曇り"	"80,000"	"42,954"	"53.69%"	"95.31%"	"45,066"	"42,954"	"0"	"13"	"11"	"118.18%"	"3,304"	"4,097"	"80.65%"
+"20251014"	"20241008"	"火"	"雨"	"雨"	"80,000"	"33,319"	"41.65%"	"149.04%"	"22,355"	"33,319"	"0"	"8"	"6"	"133.33%"	"4,165"	"3,726"	"111.78%"
+"20251015"	"20241009"	"水"	"曇り"	"雨"	"80,000"	"34,243"	"42.8%"	"171.18%"	"20,004"	"34,243"	"0"	"12"	"4"	"300%"	"2,854"	"5,001"	"57.06%"
+"20251016"	"20241010"	"木"	"雨"	"曇り"	"80,000"	"39,988"	"49.99%"	"161.63%"	"24,741"	"39,988"	"0"	"12"	"9"	"133.33%"	"3,332"	"2,749"	"121.22%"
+"20251017"	"20241011"	"金"	"快晴"	"曇り"	"80,000"	"32,292"	"40.37%"	"71.09%"	"45,425"	"32,292"	"0"	"9"	"12"	"75%"	"3,588"	"3,785"	"94.78%"
+"20251018"	"20241012"	"土"	"曇り"	"快晴"	"100,000"	"69,479"	"69.48%"	"117.59%"	"59,088"	"70,079"	"600"	"13"	"18"	"72.22%"	"5,345"	"3,283"	"162.81%"
+"MD41週"	""	""	"‐"	"‐"	"600,000"	"341,401"	"56.9%"	"96.44%"	"354,012"	"342,601"	"1,200"	"89"	"90"	"98.89%"	"3,836"	"3,933"	"97.52%"
+"20251019"	"20241013"	"日"	"雨"	"快晴"	"100,000"	"51,432"	"51.43%"	"41.79%"	"123,082"	"51,432"	"0"	"9"	"14"	"64.29%"	"5,715"	"8,792"	"65%"
+"20251020"	"20241014"	"月"	"雨"	"晴れ"	"80,000"	"28,557"	"35.7%"	"26.5%"	"107,753"	"28,557"	"0"	"7"	"25"	"28%"	"4,080"	"4,310"	"94.65%"
+"20251021"	"20241015"	"火"	"雨"	"晴れ"	"80,000"	"25,581"	"31.98%"	"51.07%"	"50,092"	"25,581"	"0"	"9"	"18"	"50%"	"2,842"	"2,783"	"102.14%"
+"20251022"	"20241016"	"水"	"雨"	"曇り"	"80,000"	"8,295"	"10.37%"	"11.63%"	"71,340"	"8,295"	"0"	"3"	"19"	"15.79%"	"2,765"	"3,755"	"73.64%"
+"20251023"	"20241017"	"木"	"曇り"	"曇り"	"80,000"	"41,239"	"51.55%"	"71.34%"	"57,810"	"41,239"	"0"	"10"	"19"	"52.63%"	"4,124"	"3,043"	"135.54%"
+"20251024"	"20241018"	"金"	"曇り"	"雨"	"80,000"	"20,177"	"25.22%"	"29.76%"	"67,809"	"20,177"	"0"	"7"	"21"	"33.33%"	"2,882"	"3,229"	"89.27%"
+"20251025"	"20241019"	"土"	"雨"	"曇り"	"100,000"	"47,734"	"47.73%"	"47.4%"	"100,700"	"47,734"	"0"	"14"	"11"	"127.27%"	"3,410"	"9,155"	"37.24%"
+"MD42週"	""	""	"‐"	"‐"	"600,000"	"223,015"	"37.17%"	"38.54%"	"578,586"	"223,015"	"0"	"59"	"127"	"46.46%"	"3,780"	"4,556"	"82.97%"
+"20251026"	"20241020"	"日"	"曇り"	"曇り"	"100,000"	"63,834"	"63.83%"	"58.3%"	"109,500"	"63,834"	"0"	"16"	"33"	"48.48%"	"3,990"	"3,318"	"120.24%"
+"20251027"	"20241021"	"月"	"雨"	"曇り"	"80,000"	"40,279"	"50.35%"	"92.49%"	"43,548"	"40,379"	"100"	"7"	"13"	"53.85%"	"5,754"	"3,350"	"171.77%"
+"20251028"	"20241022"	"火"	"雨"	"曇り"	"80,000"	"57,938"	"72.42%"	"156.44%"	"37,036"	"58,038"	"100"	"15"	"14"	"107.14%"	"3,863"	"2,645"	"146.01%"
+"20251029"	"20241023"	"水"	"曇り"	"曇り"	"80,000"	"26,066"	"32.58%"	"72.67%"	"35,869"	"26,066"	"0"	"9"	"4"	"225%"	"2,896"	"8,967"	"32.3%"
+"20251030"	"20241024"	"木"	"曇り"	"晴れ"	"80,000"	"43,994"	"54.99%"	"127.83%"	"34,416"	"43,994"	"0"	"7"	"12"	"58.33%"	"6,285"	"2,868"	"219.14%"
+"20251031"	"20241025"	"金"	"雨"	"曇り"	"80,000"	"23,195"	"28.99%"	"63.89%"	"36,307"	"23,195"	"0"	"8"	"5"	"160%"	"2,899"	"7,261"	"39.93%"
+"20251101"	"20241026"	"土"	"曇り"	"曇り"	"100,000"	"70,282"	"70.28%"	"63.68%"	"110,371"	"70,482"	"200"	"25"	"18"	"138.89%"	"2,811"	"6,132"	"45.85%"
+"MD43週"	""	""	"‐"	"‐"	"600,000"	"325,588"	"54.26%"	"79.99%"	"407,047"	"325,988"	"400"	"87"	"99"	"87.88%"	"3,742"	"4,112"	"91.02%"
+"20251102"	"20241027"	"日"	"曇り"	"曇り"	"100,000"	"78,437"	"78.44%"	"119.74%"	"65,504"	"78,737"	"300"	"20"	"21"	"95.24%"	"3,922"	"3,119"	"125.73%"
+"20251103"	"20241028"	"月"	"曇り"	"雨"	"80,000"	"73,836"	"92.3%"	"274.99%"	"26,850"	"74,036"	"200"	"18"	"10"	"180%"	"4,102"	"2,685"	"152.77%"
+"20251104"	"20241029"	"火"	"曇り"	"曇り"	"80,000"	"29,591"	"36.99%"	"220.99%"	"13,390"	"29,591"	"0"	"10"	"6"	"166.67%"	"2,959"	"2,232"	"132.6%"
+"20251105"	"20241030"	"水"	"曇り"	"雨"	"80,000"	"34,804"	"43.51%"	"85.72%"	"40,601"	"34,804"	"0"	"6"	"6"	"100%"	"5,801"	"6,767"	"85.72%"
+"20251106"	"20241031"	"木"	"曇り"	"快晴"	"80,000"	"34,029"	"42.54%"	"56.54%"	"60,191"	"34,029"	"0"	"7"	"17"	"41.18%"	"4,861"	"3,541"	"137.3%"
+"20251107"	"20241101"	"金"	"快晴"	"曇り"	"80,000"	"40,398"	"50.5%"	"43.14%"	"93,647"	"40,398"	"0"	"11"	"18"	"61.11%"	"3,673"	"5,203"	"70.59%"
+"20251108"	"20241102"	"土"	"曇り"	"雨"	"100,000"	"49,902"	"49.9%"	"83.05%"	"60,088"	"49,902"	"0"	"14"	"11"	"127.27%"	"3,564"	"5,463"	"65.25%"
+"MD44週"	""	""	"‐"	"‐"	"600,000"	"340,997"	"56.83%"	"94.65%"	"360,271"	"341,497"	"500"	"86"	"89"	"96.63%"	"3,965"	"4,048"	"97.95%"
+"20251109"	"20241103"	"日"	"にわか雨"	"快晴"	"100,000"	"27,166"	"27.17%"	"38.96%"	"69,726"	"27,166"	"0"	"6"	"4"	"150%"	"4,528"	"17,432"	"25.97%"
+"20251110"	"20241104"	"月"	"快晴"	"曇り"	"80,000"	"24,025"	"30.03%"	"21.55%"	"111,474"	"24,025"	"0"	"8"	"21"	"38.1%"	"3,003"	"5,308"	"56.57%"
+"20251111"	"20241105"	"火"	"曇り"	"快晴"	"80,000"	"20,010"	"25.01%"	"37.34%"	"53,587"	"20,010"	"0"	"4"	"21"	"19.05%"	"5,003"	"2,552"	"196.04%"
+"20251112"	"20241106"	"水"	"快晴"	"雨"	"80,000"	"48,720"	"60.9%"	"205.01%"	"23,765"	"53,320"	"4,600"	"16"	"10"	"160%"	"3,045"	"2,377"	"128.13%"
+"20251113"	"20241107"	"木"	"曇り"	"晴れ"	"80,000"	"93,897"	"117.37%"	"228.44%"	"41,103"	"100,297"	"6,400"	"14"	"13"	"107.69%"	"6,707"	"3,162"	"212.13%"
+"20251114"	"20241108"	"金"	"曇り"	"曇り"	"80,000"	"11,730"	"14.66%"	"22.72%"	"51,630"	"12,130"	"400"	"2"	"15"	"13.33%"	"5,865"	"3,442"	"170.4%"
+"20251115"	"20241109"	"土"	"晴れ"	"快晴"	"100,000"	"110,166"	"110.17%"	"96.18%"	"114,541"	"110,366"	"200"	"28"	"36"	"77.78%"	"3,935"	"3,182"	"123.66%"
+"MD45週"	""	""	"‐"	"‐"	"600,000"	"335,714"	"55.95%"	"72.07%"	"465,826"	"347,314"	"11,600"	"78"	"120"	"65%"	"4,304"	"3,882"	"110.87%"
+"20251116"	"20241110"	"日"	"曇り"	"雨"	"100,000"	"23,305"	"23.31%"	"20.38%"	"114,335"	"23,305"	"0"	"8"	"22"	"36.36%"	"2,913"	"5,197"	"56.05%"
+"20251117"	"20241111"	"月"	"快晴"	"曇り"	"80,000"	"23,155"	"28.94%"	"68.59%"	"33,759"	"23,155"	"0"	"7"	"10"	"70%"	"3,308"	"3,376"	"97.98%"
+"20251118"	"20241112"	"火"	"曇り"	"曇り"	"80,000"	"21,074"	"26.34%"	"48.65%"	"43,320"	"21,074"	"0"	"7"	"11"	"63.64%"	"3,011"	"3,938"	"76.45%"
+"20251119"	"20241113"	"水"	"曇り"	"快晴"	"80,000"	"18,773"	"23.47%"	"37.26%"	"50,383"	"18,773"	"0"	"8"	"7"	"114.29%"	"2,347"	"7,198"	"32.6%"
+"20251120"	"20241114"	"木"	"曇り"	"快晴"	"80,000"	"18,339"	"22.92%"	"48.4%"	"37,887"	"18,339"	"0"	"7"	"9"	"77.78%"	"2,620"	"4,210"	"62.23%"
+"20251121"	"20241115"	"金"	"快晴"	"雨"	"80,000"	"45,502"	"56.88%"	"72.56%"	"62,709"	"45,502"	"0"	"10"	"13"	"76.92%"	"4,550"	"4,824"	"94.33%"
+"20251122"	"20241116"	"土"	"快晴"	"曇り"	"100,000"	"32,712"	"32.71%"	"60.21%"	"54,329"	"32,712"	"0"	"10"	"11"	"90.91%"	"3,271"	"4,939"	"66.23%"
+"MD46週"	""	""	"‐"	"‐"	"600,000"	"182,860"	"30.48%"	"46.09%"	"396,722"	"182,860"	"0"	"57"	"83"	"68.67%"	"3,208"	"4,780"	"67.12%"
+"20251123"	"20241117"	"日"	"曇り"	"曇り"	"100,000"	"82,539"	"82.54%"	"75.44%"	"109,406"	"82,939"	"400"	"21"	"7"	"300%"	"3,930"	"15,629"	"25.15%"
+"20251124"	"20241118"	"月"	"快晴"	"雨"	"80,000"	"63,506"	"79.38%"	"225.37%"	"28,179"	"64,106"	"600"	"16"	"10"	"160%"	"3,969"	"2,818"	"140.85%"
+"20251125"	"20241119"	"火"	"雨"	"曇り"	"80,000"	"25,847"	"32.31%"	"62.93%"	"41,075"	"25,847"	"0"	"8"	"9"	"88.89%"	"3,231"	"4,564"	"70.79%"
+"20251126"	"20241120"	"水"	"晴れ"	"雨"	"80,000"	"42,011"	"52.51%"	"125.41%"	"33,499"	"42,211"	"200"	"15"	"11"	"136.36%"	"2,801"	"3,045"	"91.97%"
+"20251127"	"20241121"	"木"	"晴れ"	"雨"	"80,000"	"29,546"	"36.93%"	"74.37%"	"39,729"	"30,346"	"800"	"8"	"1"	"800%"	"3,693"	"39,729"	"9.3%"
+"20251128"	"20241122"	"金"	"快晴"	"曇り"	"80,000"	"19,871"	"24.84%"	"61.43%"	"32,348"	"19,971"	"100"	"6"	"6"	"100%"	"3,312"	"5,391"	"61.43%"
+"20251129"	"20241123"	"土"	"曇り"	"曇り"	"100,000"	"50,561"	"50.56%"	"63.34%"	"79,822"	"50,561"	"0"	"15"	"3"	"500%"	"3,371"	"26,607"	"12.67%"
+"MD47週"	""	""	"‐"	"‐"	"600,000"	"313,881"	"52.31%"	"86.22%"	"364,058"	"315,981"	"2,100"	"89"	"47"	"189.36%"	"3,527"	"7,746"	"45.53%"
+"20251130"	"20241124"	"日"	"快晴"	"晴れ"	"100,000"	"77,662"	"77.66%"	"80.45%"	"96,540"	"78,562"	"900"	"17"	"14"	"121.43%"	"4,568"	"6,896"	"66.25%"
+"MD48週"	""	""	"‐"	"‐"	"100,000"	"77,662"	"77.66%"	"80.45%"	"96,540"	"78,562"	"900"	"17"	"14"	"121.43%"	"4,568"	"6,896"	"66.25%"
+"20251201"	"20241125"	"月"	"快晴"	"晴れ"	"0"	"27,825"	"0%"	"60.31%"	"46,134"	"28,425"	"600"	"8"	"3"	"266.67%"	"3,478"	"15,378"	"22.62%"
+"20251202"	"20241126"	"火"	"曇り"	"晴れ"	"0"	"78,801"	"0%"	"113.15%"	"69,646"	"79,001"	"200"	"8"	"21"	"38.1%"	"9,850"	"3,316"	"297.01%"
+"20251203"	"20241127"	"水"	"にわか雨"	"雨"	"0"	"25,908"	"0%"	"37.34%"	"69,384"	"27,108"	"1,200"	"8"	"16"	"50%"	"3,239"	"4,337"	"74.68%"
+"20251204"	"20241128"	"木"	"晴れ"	"快晴"	"0"	"27,817"	"0%"	"38.97%"	"71,379"	"27,817"	"0"	"10"	"17"	"58.82%"	"2,782"	"4,199"	"66.25%"
+"20251205"	"20241129"	"金"	"快晴"	"曇り"	"0"	"31,877"	"0%"	"194.27%"	"16,409"	"32,277"	"400"	"8"	"4"	"200%"	"3,985"	"4,102"	"97.13%"
+"20251206"	"20241130"	"土"	"曇り"	"晴れ"	"0"	"28,037"	"0%"	"51.71%"	"54,224"	"28,037"	"0"	"8"	"11"	"72.73%"	"3,505"	"4,929"	"71.1%"
+"MD48週"	""	""	"‐"	"‐"	"0"	"220,265"	"0%"	"67.32%"	"327,176"	"222,665"	"2,400"	"50"	"72"	"69.44%"	"4,405"	"4,544"	"96.95%"
+"20251207"	"20241201"	"日"	"快晴"	"晴れ"	"0"	"64,005"	"0%"	"82.33%"	"77,738"	"64,705"	"700"	"15"	"4"	"375%"	"4,267"	"19,435"	"21.96%"
+"20251208"	"20241202"	"月"	"快晴"	"曇り"	"0"	"17,309"	"0%"	"68.73%"	"25,185"	"17,309"	"0"	"6"	"11"	"54.55%"	"2,885"	"2,290"	"126%"
+"20251209"	"20241203"	"火"	"曇り"	"快晴"	"0"	"27,091"	"0%"	"48.06%"	"56,367"	"27,091"	"0"	"9"	"10"	"90%"	"3,010"	"5,637"	"53.4%"
+"20251210"	"20241204"	"水"	"曇り"	"快晴"	"0"	"24,872"	"0%"	"31.28%"	"79,509"	"24,872"	"0"	"6"	"9"	"66.67%"	"4,145"	"8,834"	"46.92%"
+"20251211"	"20241205"	"木"	"曇り"	"曇り"	"0"	"87,276"	"0%"	"473.19%"	"18,444"	"87,276"	"0"	"11"	"4"	"275%"	"7,934"	"4,611"	"172.07%"
+"20251212"	"20241206"	"金"	"晴れ"	"快晴"	"0"	"36,016"	"0%"	"112.71%"	"31,954"	"36,016"	"0"	"6"	"8"	"75%"	"6,003"	"3,994"	"150.28%"
+"20251213"	"20241207"	"土"	"曇り"	"晴れ"	"0"	"45,320"	"0%"	"92.1%"	"49,206"	"45,320"	"0"	"10"	"12"	"83.33%"	"4,532"	"4,101"	"110.52%"
+"MD49週"	""	""	"‐"	"‐"	"0"	"301,889"	"0%"	"89.21%"	"338,403"	"302,589"	"700"	"63"	"58"	"108.62%"	"4,792"	"5,835"	"82.13%"
+"20251214"	"20241208"	"日"	"雨"	"快晴"	"0"	"98,933"	"0%"	"100.27%"	"98,668"	"99,533"	"600"	"22"	"13"	"169.23%"	"4,497"	"7,590"	"59.25%"
+"20251215"	"20241209"	"月"	"晴れ"	"晴れ"	"0"	"64,368"	"0%"	"103.73%"	"62,056"	"64,368"	"0"	"17"	"25"	"68%"	"3,786"	"2,482"	"152.54%"
+"20251216"	"20241210"	"火"	"晴れ"	"晴れ"	"0"	"31,564"	"0%"	"82.69%"	"38,172"	"31,564"	"0"	"8"	"8"	"100%"	"3,946"	"4,772"	"82.69%"
+"20251217"	"20241211"	"水"	"快晴"	"曇り"	"0"	"48,483"	"0%"	"161.57%"	"30,008"	"48,483"	"0"	"17"	"5"	"340%"	"2,852"	"6,002"	"47.52%"
+"20251218"	"20241212"	"木"	"晴れ"	"晴れ"	"0"	"25,437"	"0%"	"46.34%"	"54,887"	"25,437"	"0"	"10"	"9"	"111.11%"	"2,544"	"6,099"	"41.71%"
+"20251219"	"20241213"	"金"	"曇り"	"曇り"	"0"	"20,870"	"0%"	"30.75%"	"67,860"	"20,870"	"0"	"9"	"17"	"52.94%"	"2,319"	"3,992"	"58.09%"
+"20251220"	"20241214"	"土"	"曇り"	"快晴"	"0"	"76,529"	"0%"	"81%"	"94,480"	"76,529"	"0"	"16"	"28"	"57.14%"	"4,783"	"3,374"	"141.75%"
+"MD50週"	""	""	"‐"	"‐"	"0"	"366,184"	"0%"	"82.08%"	"446,131"	"366,784"	"600"	"99"	"105"	"94.29%"	"3,699"	"4,249"	"87.05%"
+"20251221"	"20241215"	"日"	"霧"	"快晴"	"0"	"98,488"	"0%"	"87.57%"	"112,471"	"98,488"	"0"	"29"	"20"	"145%"	"3,396"	"5,624"	"60.39%"
+"20251222"	"20241216"	"月"	"曇り"	"晴れ"	"0"	"50,173"	"0%"	"129.26%"	"38,816"	"50,173"	"0"	"11"	"15"	"73.33%"	"4,561"	"2,588"	"176.26%"
+"20251223"	"20241217"	"火"	"快晴"	"晴れ"	"0"	"78,164"	"0%"	"173.83%"	"44,966"	"78,164"	"0"	"20"	"16"	"125%"	"3,908"	"2,810"	"139.06%"
+"20251224"	"20241218"	"水"	"霧"	"晴れ"	"0"	"48,525"	"0%"	"56.34%"	"86,135"	"48,925"	"400"	"12"	"7"	"171.43%"	"4,044"	"12,305"	"32.86%"
+"20251225"	"20241219"	"木"	"曇り"	"曇り"	"0"	"95,957"	"0%"	"275.42%"	"34,840"	"95,957"	"0"	"30"	"2"	"1500%"	"3,199"	"17,420"	"18.36%"
+"20251226"	"20241220"	"金"	"晴れ"	"快晴"	"0"	"83,893"	"0%"	"136.17%"	"61,609"	"83,893"	"0"	"18"	"18"	"100%"	"4,661"	"3,423"	"136.17%"
+"20251227"	"20241221"	"土"	"曇り"	"晴れ"	"0"	"166,765"	"0%"	"149.09%"	"111,858"	"166,765"	"0"	"37"	"11"	"336.36%"	"4,507"	"10,169"	"44.32%"
+"MD51週"	""	""	"‐"	"‐"	"0"	"621,965"	"0%"	"126.75%"	"490,695"	"622,365"	"400"	"157"	"89"	"176.4%"	"3,962"	"5,513"	"71.85%"
+"20251228"	"20241222"	"日"	"晴れ"	"快晴"	"0"	"188,526"	"0%"	"257.31%"	"73,269"	"188,526"	"0"	"50"	"13"	"384.62%"	"3,771"	"5,636"	"66.9%"
+"20251229"	"20241223"	"月"	"曇り"	"晴れ"	"0"	"153,562"	"0%"	"266.67%"	"57,584"	"153,562"	"0"	"30"	"13"	"230.77%"	"5,119"	"4,430"	"115.56%"
+"20251230"	"20241224"	"火"	"曇り"	"快晴"	"0"	"94,261"	"0%"	"152.99%"	"61,612"	"94,261"	"0"	"26"	"13"	"200%"	"3,625"	"4,739"	"76.5%"
+"20251231"	"20241225"	"水"	"曇り"	"快晴"	"0"	"94,601"	"0%"	"43.16%"	"219,193"	"94,601"	"0"	"18"	"11"	"163.64%"	"5,256"	"19,927"	"26.37%"
+"MD52週"	""	""	"‐"	"‐"	"0"	"530,950"	"0%"	"128.98%"	"411,658"	"530,950"	"0"	"124"	"50"	"248%"	"4,282"	"8,233"	"52.01%"
+"20260101"	"20241226"	"木"	"曇り"	"曇り"	"0"	"55,911"	"0%"	"79.75%"	"70,107"	"55,911"	"0"	"6"	"16"	"37.5%"	"9,319"	"4,382"	"212.67%"
+"20260102"	"20241227"	"金"	"曇り"	"晴れ"	"0"	"105,281"	"0%"	"70.78%"	"148,749"	"105,281"	"0"	"17"	"21"	"80.95%"	"6,193"	"7,083"	"87.43%"
+"20260103"	"20241228"	"土"	"晴れ"	"曇り"	"0"	"96,294"	"0%"	"60.96%"	"157,971"	"97,094"	"800"	"21"	"20"	"105%"	"4,585"	"7,899"	"58.05%"
+"MD52週"	""	""	"‐"	"‐"	"0"	"257,486"	"0%"	"68.33%"	"376,827"	"258,286"	"800"	"44"	"57"	"77.19%"	"5,852"	"6,611"	"88.52%"
+"20260104"	"20241229"	"日"	"快晴"	"快晴"	"0"	"127,922"	"0%"	"78.11%"	"163,762"	"127,922"	"0"	"25"	"26"	"96.15%"	"5,117"	"6,299"	"81.24%"
+"20260105"	"20241230"	"月"	"曇り"	"曇り"	"0"	"34,054"	"0%"	"19.86%"	"171,453"	"34,054"	"0"	"12"	"30"	"40%"	"2,838"	"5,715"	"49.66%"
+"MD53週"	""	""	"‐"	"‐"	"0"	"161,976"	"0%"	"48.32%"	"335,215"	"161,976"	"0"	"37"	"56"	"66.07%"	"4,378"	"5,986"	"73.13%"
+"20260106"	"20250107"	"火"	"曇り"	"にわか雨"	"0"	"15,012"	"0%"	"36.37%"	"41,276"	"16,212"	"1,200"	"6"	"9"	"66.67%"	"2,502"	"4,586"	"54.55%"
+"20260107"	"20250108"	"水"	"にわか雨"	"晴れ"	"0"	"28,187"	"0%"	"72.05%"	"39,119"	"28,187"	"0"	"8"	"9"	"88.89%"	"3,523"	"4,347"	"81.06%"
+"20260108"	"20250109"	"木"	"晴れ"	"晴れ"	"0"	"35,074"	"0%"	"50.19%"	"69,877"	"35,274"	"200"	"6"	"10"	"60%"	"5,846"	"6,988"	"83.66%"
+"20260109"	"20250110"	"金"	"快晴"	"快晴"	"0"	"53,283"	"0%"	"171.55%"	"31,059"	"53,283"	"0"	"10"	"2"	"500%"	"5,328"	"15,530"	"34.31%"
+"20260110"	"20250111"	"土"	"快晴"	"曇り"	"0"	"49,501"	"0%"	"74.95%"	"66,048"	"49,701"	"200"	"12"	"18"	"66.67%"	"4,125"	"3,669"	"112.42%"
+"MD1週"	""	""	"‐"	"‐"	"0"	"181,057"	"0%"	"73.19%"	"247,379"	"182,657"	"1,600"	"42"	"48"	"87.5%"	"4,311"	"5,154"	"83.65%"
+"20260111"	"20250112"	"日"	"快晴"	"雨"	"0"	"52,292"	"0%"	"55.51%"	"94,204"	"52,292"	"0"	"9"	"17"	"52.94%"	"5,810"	"5,541"	"104.85%"
+"20260112"	"20250113"	"月"	"快晴"	"晴れ"	"0"	"46,820"	"0%"	"40.86%"	"114,585"	"47,120"	"300"	"11"	"4"	"275%"	"4,256"	"28,646"	"14.86%"
+"20260113"	"20250114"	"火"	"晴れ"	"晴れ"	"0"	"21,993"	"0%"	"41.14%"	"53,453"	"21,993"	"0"	"5"	"12"	"41.67%"	"4,399"	"4,454"	"98.75%"
+"20260114"	"20250115"	"水"	"晴れ"	"快晴"	"0"	"38,859"	"0%"	"137.18%"	"28,327"	"39,659"	"800"	"7"	"12"	"58.33%"	"5,551"	"2,361"	"235.17%"
+"20260115"	"20250116"	"木"	"曇り"	"曇り"	"0"	"43,131"	"0%"	"80.31%"	"53,708"	"44,231"	"1,100"	"12"	"14"	"85.71%"	"3,594"	"3,836"	"93.69%"
+"20260116"	"20250117"	"金"	"快晴"	"晴れ"	"0"	"71,744"	"0%"	"142.86%"	"50,221"	"72,444"	"700"	"21"	"10"	"210%"	"3,416"	"5,022"	"68.03%"
+"20260117"	"20250118"	"土"	"晴れ"	"快晴"	"0"	"50,516"	"0%"	"46.02%"	"109,765"	"50,916"	"400"	"12"	"20"	"60%"	"4,210"	"5,488"	"76.7%"
+"MD2週"	""	""	"‐"	"‐"	"0"	"325,355"	"0%"	"64.52%"	"504,263"	"328,655"	"3,300"	"77"	"89"	"86.52%"	"4,225"	"5,666"	"74.58%"
+"20260118"	"20250119"	"日"	"快晴"	"曇り"	"0"	"129,039"	"0%"	"91.15%"	"141,567"	"129,439"	"400"	"26"	"20"	"130%"	"4,963"	"7,078"	"70.12%"
+"20260119"	"20250120"	"月"	"曇り"	"曇り"	"0"	"10,604"	"0%"	"21.87%"	"48,491"	"10,604"	"0"	"3"	"14"	"21.43%"	"3,535"	"3,464"	"102.05%"
+"20260120"	"20250121"	"火"	"晴れ"	"曇り"	"0"	"8,363"	"0%"	"34.04%"	"24,566"	"8,463"	"100"	"3"	"9"	"33.33%"	"2,788"	"2,730"	"102.13%"
+"20260121"	"20250122"	"水"	"曇り"	"晴れ"	"0"	"12,208"	"0%"	"17.33%"	"70,464"	"12,208"	"0"	"4"	"14"	"28.57%"	"3,052"	"5,033"	"60.64%"
+"20260122"	"20250123"	"木"	"晴れ"	"曇り"	"0"	"17,100"	"0%"	"383.92%"	"4,454"	"17,100"	"0"	"4"	"1"	"400%"	"4,275"	"4,454"	"95.98%"
+"20260123"	"20250124"	"金"	"晴れ"	"曇り"	"0"	"33,621"	"0%"	"31.9%"	"105,404"	"33,721"	"100"	"11"	"7"	"157.14%"	"3,056"	"15,058"	"20.3%"
+"20260124"	"20250125"	"土"	"快晴"	"曇り"	"0"	"77,624"	"0%"	"116.18%"	"66,814"	"78,624"	"1,000"	"22"	"14"	"157.14%"	"3,528"	"4,772"	"73.93%"
+"MD3週"	""	""	"‐"	"‐"	"0"	"288,559"	"0%"	"62.49%"	"461,760"	"290,159"	"1,600"	"73"	"79"	"92.41%"	"3,953"	"5,845"	"67.63%"
+"20260125"	"20250126"	"日"	"曇り"	"晴れ"	"0"	"102,270"	"0%"	"166.69%"	"61,355"	"103,470"	"1,200"	"24"	"5"	"480%"	"4,261"	"12,271"	"34.73%"
+"20260126"	"20250127"	"月"	"晴れ"	"曇り"	"0"	"27,493"	"0%"	"80.38%"	"34,202"	"27,493"	"0"	"7"	"9"	"77.78%"	"3,928"	"3,800"	"103.35%"
+"20260127"	"20250128"	"火"	"曇り"	"快晴"	"0"	"24,813"	"0%"	"86.14%"	"28,805"	"24,813"	"0"	"6"	"9"	"66.67%"	"4,136"	"3,201"	"129.21%"
+"20260128"	"20250129"	"水"	"曇り"	"晴れ"	"0"	"39,887"	"0%"	"119.49%"	"33,380"	"40,187"	"300"	"13"	"10"	"130%"	"3,068"	"3,338"	"91.92%"
+"20260129"	"20250130"	"木"	"曇り"	"晴れ"	"0"	"29,489"	"0%"	"76.01%"	"38,795"	"29,489"	"0"	"4"	"2"	"200%"	"7,372"	"19,398"	"38.01%"
+"20260130"	"20250131"	"金"	"快晴"	"快晴"	"0"	"19,975"	"0%"	"51%"	"39,168"	"20,175"	"200"	"5"	"2"	"250%"	"3,995"	"19,584"	"20.4%"
+"20260131"	"20250201"	"土"	"晴れ"	"曇り"	"0"	"81,738"	"0%"	"68.18%"	"119,880"	"82,538"	"800"	"17"	"18"	"94.44%"	"4,808"	"6,660"	"72.19%"
+"MD4週"	""	""	"‐"	"‐"	"0"	"325,665"	"0%"	"91.59%"	"355,585"	"328,165"	"2,500"	"76"	"55"	"138.18%"	"4,285"	"6,465"	"66.28%"
+"20260201"	"20250202"	"日"	"快晴"	"雨"	"0"	"73,462"	"0%"	"80.8%"	"90,922"	"73,762"	"300"	"20"	"17"	"117.65%"	"3,673"	"5,348"	"68.68%"
+"20260202"	"20250203"	"月"	"快晴"	"曇り"	"0"	"22,369"	"0%"	"82.13%"	"27,235"	"22,469"	"100"	"8"	"7"	"114.29%"	"2,796"	"3,891"	"71.87%"
+"20260203"	"20250204"	"火"	"快晴"	"晴れ"	"0"	"18,580"	"0%"	"207.69%"	"8,946"	"18,780"	"200"	"8"	"3"	"266.67%"	"2,323"	"2,982"	"77.88%"
+"20260204"	"20250205"	"水"	"快晴"	"晴れ"	"0"	"24,456"	"0%"	"69.26%"	"35,312"	"24,456"	"0"	"7"	"6"	"116.67%"	"3,494"	"5,885"	"59.36%"
+"20260205"	"20250206"	"木"	"快晴"	"快晴"	"0"	"27,324"	"0%"	"73.74%"	"37,056"	"27,324"	"0"	"8"	"0"	"0%"	"3,416"	"0"	"0%"
+"20260206"	"20250207"	"金"	"快晴"	"快晴"	"0"	"10,950"	"0%"	"19.78%"	"55,367"	"11,050"	"100"	"3"	"7"	"42.86%"	"3,650"	"7,910"	"46.15%"
+"20260207"	"20250208"	"土"	"雪"	"快晴"	"0"	"43,323"	"0%"	"118.7%"	"36,498"	"44,023"	"700"	"9"	"13"	"69.23%"	"4,814"	"2,808"	"171.46%"
+"MD5週"	""	""	"‐"	"‐"	"0"	"220,464"	"0%"	"75.67%"	"291,336"	"221,864"	"1,400"	"63"	"53"	"118.87%"	"3,499"	"5,497"	"63.66%"
+"20260208"	"20250209"	"日"	"雪"	"晴れ"	"0"	"12,222"	"0%"	"18.59%"	"65,748"	"12,522"	"300"	"2"	"6"	"33.33%"	"6,111"	"10,958"	"55.77%"
+"20260209"	"20250210"	"月"	"晴れ"	"曇り"	"0"	"44,056"	"0%"	"45.84%"	"96,098"	"44,456"	"400"	"7"	"28"	"25%"	"6,294"	"3,432"	"183.38%"
+"20260210"	"20250211"	"火"	"曇り"	"快晴"	"0"	"21,196"	"0%"	"13.99%"	"151,507"	"21,396"	"200"	"6"	"20"	"30%"	"3,533"	"7,575"	"46.63%"
+"20260211"	"20250212"	"水"	"雨"	"曇り"	"0"	"39,500"	"0%"	"60.97%"	"64,783"	"40,400"	"900"	"9"	"7"	"128.57%"	"4,389"	"9,255"	"47.42%"
+"20260212"	"20250213"	"木"	"晴れ"	"晴れ"	"0"	"37,652"	"0%"	"165.31%"	"22,777"	"37,752"	"100"	"12"	"2"	"600%"	"3,138"	"11,389"	"27.55%"
+"20260213"	"20250214"	"金"	"曇り"	"曇り"	"0"	"18,280"	"0%"	"25.23%"	"72,463"	"18,480"	"200"	"6"	"9"	"66.67%"	"3,047"	"8,051"	"37.84%"
+"20260214"	"20250215"	"土"	"晴れ"	"快晴"	"0"	"106,106"	"0%"	"113.47%"	"93,514"	"107,406"	"1,300"	"16"	"16"	"100%"	"6,632"	"5,845"	"113.47%"
+"MD6週"	""	""	"‐"	"‐"	"0"	"279,012"	"0%"	"49.22%"	"566,890"	"282,412"	"3,400"	"58"	"88"	"65.91%"	"4,811"	"6,442"	"74.68%"
+"20260215"	"20250216"	"日"	"晴れ"	"曇り"	"0"	"72,086"	"0%"	"57.5%"	"125,361"	"72,086"	"0"	"10"	"17"	"58.82%"	"7,209"	"7,374"	"97.75%"
+"20260216"	"20250217"	"月"	"曇り"	"曇り"	"0"	"41,150"	"0%"	"124.75%"	"32,987"	"41,350"	"200"	"10"	"6"	"166.67%"	"4,115"	"5,498"	"74.85%"
+"20260217"	"20250218"	"火"	"曇り"	"曇り"	"0"	"15,391"	"0%"	"44%"	"34,978"	"15,491"	"100"	"5"	"10"	"50%"	"3,078"	"3,498"	"88%"
+"20260218"	"20250219"	"水"	"曇り"	"快晴"	"0"	"9,998"	"0%"	"37.04%"	"26,992"	"10,298"	"300"	"3"	"6"	"50%"	"3,333"	"4,499"	"74.08%"
+"20260219"	"20250220"	"木"	"晴れ"	"晴れ"	"0"	"69,947"	"0%"	"168.88%"	"41,419"	"71,147"	"1,200"	"18"	"0"	"0%"	"3,886"	"0"	"0%"
+"20260220"	"20250221"	"金"	"曇り"	"晴れ"	"0"	"22,036"	"0%"	"27.64%"	"79,725"	"22,036"	"0"	"9"	"17"	"52.94%"	"2,448"	"4,690"	"52.21%"
+"20260221"	"20250222"	"土"	"晴れ"	"晴れ"	"0"	"87,305"	"0%"	"152.65%"	"57,193"	"87,505"	"200"	"22"	"15"	"146.67%"	"3,968"	"3,813"	"104.08%"
+"MD7週"	""	""	"‐"	"‐"	"0"	"317,913"	"0%"	"79.75%"	"398,655"	"319,913"	"2,000"	"77"	"71"	"108.45%"	"4,129"	"5,615"	"73.53%"
+"20260222"	"20250223"	"日"	"曇り"	"快晴"	"0"	"89,291"	"0%"	"61.79%"	"144,504"	"89,791"	"500"	"17"	"29"	"58.62%"	"5,252"	"4,983"	"105.41%"
+"20260223"	"20250224"	"月"	"晴れ"	"曇り"	"0"	"60,004"	"0%"	"50.07%"	"119,830"	"61,104"	"1,100"	"16"	"4"	"400%"	"3,750"	"29,958"	"12.52%"
+"20260224"	"20250225"	"火"	"曇り"	"快晴"	"0"	"18,752"	"0%"	"45.64%"	"41,087"	"18,852"	"100"	"4"	"13"	"30.77%"	"4,688"	"3,161"	"148.33%"
+"20260225"	"20250226"	"水"	"にわか雨"	"快晴"	"0"	"67,513"	"0%"	"87.18%"	"77,437"	"67,713"	"200"	"12"	"6"	"200%"	"5,626"	"12,906"	"43.59%"
+"20260226"	"20250227"	"木"	"曇り"	"晴れ"	"0"	"21,554"	"0%"	"79.93%"	"26,967"	"21,654"	"100"	"8"	"2"	"400%"	"2,694"	"13,484"	"19.98%"
+"20260227"	"20250228"	"金"	"曇り"	"曇り"	"0"	"28,128"	"0%"	"50.96%"	"55,192"	"28,928"	"800"	"10"	"21"	"47.62%"	"2,813"	"2,628"	"107.02%"
+"20260228"	"20250301"	"土"	"曇り"	"快晴"	"0"	"55,285"	"0%"	"48.51%"	"113,967"	"56,085"	"800"	"11"	"14"	"78.57%"	"5,026"	"8,141"	"61.74%"
+"MD8週"	""	""	"‐"	"‐"	"0"	"340,527"	"0%"	"58.81%"	"578,984"	"344,127"	"3,600"	"78"	"89"	"87.64%"	"4,366"	"6,505"	"67.11%"
+"MD9週"	""	""	"‐"	"‐"	"0"	"295,850"	"0%"	"83.76%"	"353,227"	"297,750"	"1,900"	"78"	"66"	"118.18%"	"3,793"	"5,352"	"70.87%"
+"MD10週"	""	""	"‐"	"‐"	"0"	"93,137"	"0%"	"14.65%"	"635,664"	"93,237"	"100"	"24"	"84"	"28.57%"	"3,881"	"7,567"	"51.28%"
+"MD11週"	""	""	"‐"	"‐"	"0"	"0"	"0%"	"0%"	"483,720"	"0"	"0"	"0"	"74"	"0%"	"0"	"6,537"	"0%"
+"MD12週"	""	""	"‐"	"‐"	"0"	"0"	"0%"	"0%"	"462,843"	"0"	"0"	"0"	"65"	"0%"	"0"	"7,121"	"0%"
+"MD13週"	""	""	"‐"	"‐"	"0"	"0"	"0%"	"0%"	"101,901"	"0"	"0"	"0"	"21"	"0%"	"0"	"4,852"	"0%"
+"20260301"	"20250302"	"日"	"快晴"	"曇り"	"0"	"81,320"	"0%"	"72.46%"	"112,221"	"81,920"	"600"	"19"	"23"	"82.61%"	"4,280"	"4,879"	"87.72%"
+"20260302"	"20250303"	"月"	"曇り"	"雨"	"0"	"23,984"	"0%"	"45.12%"	"53,158"	"24,784"	"800"	"11"	"8"	"137.5%"	"2,180"	"6,645"	"32.81%"
+"20260303"	"20250304"	"火"	"曇り"	"曇り"	"0"	"14,138"	"0%"	"74.84%"	"18,890"	"14,138"	"0"	"4"	"6"	"66.67%"	"3,535"	"3,148"	"112.27%"
+"20260304"	"20250305"	"水"	"曇り"	"雨"	"0"	"45,813"	"0%"	"92.87%"	"49,328"	"45,813"	"0"	"7"	"14"	"50%"	"6,545"	"3,523"	"185.75%"
+"20260305"	"20250306"	"木"	"快晴"	"曇り"	"0"	"22,730"	"0%"	"73.44%"	"30,952"	"23,030"	"300"	"5"	"0"	"0%"	"4,546"	"0"	"0%"
+"20260306"	"20250307"	"金"	"曇り"	"晴れ"	"0"	"50,906"	"0%"	"147.29%"	"34,562"	"50,906"	"0"	"15"	"15"	"100%"	"3,394"	"2,304"	"147.29%"
+"20260307"	"20250308"	"土"	"晴れ"	"曇り"	"0"	"56,959"	"0%"	"105.25%"	"54,116"	"57,159"	"200"	"17"	"0"	"0%"	"3,351"	"0"	"0%"
+"20260308"	"20250309"	"日"	"快晴"	"晴れ"	"0"	"58,670"	"0%"	"48.35%"	"121,332"	"58,770"	"100"	"15"	"11"	"136.36%"	"3,911"	"11,030"	"35.46%"
+"20260309"	"20250310"	"月"	"曇り"	"快晴"	"0"	"15,369"	"0%"	"16.26%"	"94,542"	"15,369"	"0"	"3"	"2"	"150%"	"5,123"	"47,271"	"10.84%"
+"20260310"	"20250311"	"火"	"霧"	"雨"	"0"	"19,098"	"0%"	"35.29%"	"54,118"	"19,098"	"0"	"6"	"9"	"66.67%"	"3,183"	"6,013"	"52.93%"
+"20260311"	"20250312"	"水"	"晴れ"	"霧"	"0"	"11,309"	"0%"	"36.48%"	"30,998"	"11,309"	"0"	"4"	"3"	"133.33%"	"2,827"	"10,333"	"27.36%"
+"20260312"	"20250313"	"木"	"快晴"	"曇り"	"0"	"23,747"	"0%"	"37.71%"	"62,973"	"23,747"	"0"	"4"	"24"	"16.67%"	"5,937"	"2,624"	"226.26%"
+"20260313"	"20250314"	"金"	"曇り"	"曇り"	"0"	"53,785"	"0%"	"39.88%"	"134,861"	"53,785"	"0"	"6"	"29"	"20.69%"	"8,964"	"4,650"	"192.76%"
+"20260314"	"20250315"	"土"	"晴れ"	"曇り"	"0"	"84,998"	"0%"	"62.11%"	"136,840"	"84,998"	"0"	"19"	"6"	"316.67%"	"4,474"	"22,807"	"19.62%"
+"20260315"	"20250316"	"日"	"晴れ"	"雨"	"0"	"73,423"	"0%"	"125.03%"	"58,723"	"73,423"	"0"	"19"	"6"	"316.67%"	"3,864"	"9,787"	"39.48%"
+"20260316"	"20250317"	"月"	"曇り"	"晴れ"	"0"	"54,997"	"0%"	"105.1%"	"52,330"	"54,997"	"0"	"11"	"14"	"78.57%"	"5,000"	"3,738"	"133.76%"
+"20260317"	"20250318"	"火"	"曇り"	"曇り"	"0"	"31,876"	"0%"	"94.53%"	"33,719"	"31,876"	"0"	"12"	"10"	"120%"	"2,656"	"3,372"	"78.78%"
+"20260318"	"20250319"	"水"	"曇り"	"雪"	"0"	"16,802"	"0%"	"49.54%"	"33,916"	"16,802"	"0"	"5"	"5"	"100%"	"3,360"	"6,783"	"49.54%"
+"20260319"	"20250320"	"木"	"曇り"	"晴れ"	"0"	"26,370"	"0%"	"24.81%"	"106,303"	"26,370"	"0"	"6"	"14"	"42.86%"	"4,395"	"7,593"	"57.88%"
+"20260320"	"20250321"	"金"	"曇り"	"快晴"	"0"	"45,886"	"0%"	"62.9%"	"72,945"	"45,886"	"0"	"8"	"22"	"36.36%"	"5,736"	"3,316"	"172.99%"
+"20260321"	"20250322"	"土"	"快晴"	"快晴"	"0"	"27,181"	"0%"	"21.61%"	"125,784"	"27,181"	"0"	"8"	"3"	"266.67%"	"3,398"	"41,928"	"8.1%"
+"20260322"	"20250323"	"日"	"快晴"	"快晴"	"0"	"71,397"	"0%"	"59.66%"	"119,679"	"71,397"	"0"	"11"	"3"	"366.67%"	"6,491"	"39,893"	"16.27%"
+"20260323"	"20250324"	"月"	"雨"	"曇り"	"0"	"40,488"	"0%"	"108.75%"	"37,230"	"40,488"	"0"	"13"	"0"	"0%"	"3,114"	"0"	"0%"
+"20260324"	"20250325"	"火"	"快晴"	"快晴"	"0"	"60,383"	"0%"	"111.86%"	"53,980"	"60,383"	"0"	"10"	"11"	"90.91%"	"6,038"	"4,907"	"123.05%"
+"20260325"	"20250326"	"水"	"曇り"	"快晴"	"0"	"27,635"	"0%"	"31.25%"	"88,419"	"27,635"	"0"	"8"	"26"	"30.77%"	"3,454"	"3,401"	"101.58%"
+"20260326"	"20250327"	"木"	"雨"	"晴れ"	"0"	"8,240"	"0%"	"26.63%"	"30,937"	"8,240"	"0"	"3"	"0"	"0%"	"2,747"	"0"	"0%"
+"20260327"	"20250328"	"金"	"曇り"	"にわか雨"	"0"	"47,492"	"0%"	"55.39%"	"85,741"	"47,492"	"0"	"7"	"22"	"31.82%"	"6,785"	"3,897"	"174.08%"
+"20260328"	"20250329"	"土"	"曇り"	"雨"	"0"	"45,417"	"0%"	"96.93%"	"46,857"	"45,417"	"0"	"9"	"3"	"300%"	"5,046"	"15,619"	"32.31%"
+"20260329"	"20250330"	"日"	"快晴"	"曇り"	"0"	"64,103"	"0%"	"79.82%"	"80,310"	"64,503"	"400"	"14"	"19"	"73.68%"	"4,579"	"4,227"	"108.33%"
+"20260330"	"20250331"	"月"	"曇り"	"曇り"	"0"	"16,818"	"0%"	"77.89%"	"21,591"	"17,218"	"400"	"6"	"2"	"300%"	"2,803"	"10,796"	"25.96%"
+"20260331"	"20250401"	"火"	"曇り"	"雨"	"0"	"31,702"	"0%"	"223.81%"	"14,165"	"31,702"	"0"	"7"	"2"	"350%"	"4,529"	"7,083"	"63.94%"
+"20260401"	"20250402"	"水"	"曇り"	"雨"	"0"	"51,588"	"0%"	"240.18%"	"21,479"	"51,688"	"100"	"12"	"4"	"300%"	"4,299"	"5,370"	"80.06%"
+"20260402"	"20250403"	"木"	"曇り"	"雨"	"0"	"48,863"	"0%"	"66.64%"	"73,323"	"49,263"	"400"	"13"	"13"	"100%"	"3,759"	"5,640"	"66.64%"
+"20260403"	"20250404"	"金"	"晴れ"	"曇り"	"0"	"48,315"	"0%"	"111.44%"	"43,354"	"48,315"	"0"	"7"	"13"	"53.85%"	"6,902"	"3,335"	"206.97%"
+"20260404"	"20250405"	"土"	"にわか雨"	"曇り"	"0"	"42,845"	"0%"	"63.63%"	"67,330"	"42,845"	"0"	"9"	"17"	"52.94%"	"4,761"	"3,961"	"120.2%"
+"20260405"	"20250406"	"日"	"曇り"	"曇り"	"0"	"58,125"	"0%"	"74.14%"	"78,394"	"58,325"	"200"	"15"	"17"	"88.24%"	"3,875"	"4,611"	"84.03%"
+"20260406"	"20250407"	"月"	"曇り"	"曇り"	"0"	"26,317"	"0%"	"86.99%"	"30,252"	"26,517"	"200"	"9"	"8"	"112.5%"	"2,924"	"3,782"	"77.33%"
+"20260407"	"20250408"	"火"	"雨"	"曇り"	"0"	"47,575"	"0%"	"112.05%"	"42,457"	"48,175"	"600"	"11"	"13"	"84.62%"	"4,325"	"3,266"	"132.43%"
+"20260408"	"20250409"	"水"	"快晴"	"晴れ"	"0"	"19,158"	"0%"	"39.58%"	"48,398"	"19,758"	"600"	"8"	"15"	"53.33%"	"2,395"	"3,227"	"74.22%"
+"20260409"	"20250410"	"木"	"曇り"	"曇り"	"0"	"23,939"	"0%"	"38.13%"	"62,777"	"24,539"	"600"	"11"	"12"	"91.67%"	"2,176"	"5,231"	"41.6%"
+"20260410"	"20250411"	"金"	"にわか雨"	"曇り"	"0"	"5,832"	"0%"	"10.68%"	"54,610"	"5,832"	"0"	"2"	"15"	"13.33%"	"2,916"	"3,641"	"80.1%"
+"20260411"	"20250412"	"土"	"快晴"	"晴れ"	"0"	"64,709"	"0%"	"97.13%"	"66,622"	"64,909"	"200"	"20"	"6"	"333.33%"	"3,235"	"11,104"	"29.14%"
+"20260412"	"20250413"	"日"	"快晴"	"雨"	"0"	"44,321"	"0%"	"84.23%"	"52,617"	"44,421"	"100"	"10"	"15"	"66.67%"	"4,432"	"3,508"	"126.35%"
+"20260413"	"20250414"	"月"	"曇り"	"曇り"	"0"	"69,008"	"0%"	"177.56%"	"38,865"	"69,108"	"100"	"7"	"11"	"63.64%"	"9,858"	"3,533"	"279.02%"
+"20260414"	"20250415"	"火"	"曇り"	"晴れ"	"0"	"35,313"	"0%"	"82.83%"	"42,634"	"35,313"	"0"	"11"	"14"	"78.57%"	"3,210"	"3,045"	"105.42%"
+"20260415"	"20250416"	"水"	"曇り"	"快晴"	"0"	"18,790"	"0%"	"30.03%"	"62,573"	"18,790"	"0"	"6"	"14"	"42.86%"	"3,132"	"4,470"	"70.07%"
+"20260416"	"20250417"	"木"	"曇り"	"快晴"	"0"	"29,036"	"0%"	"45.26%"	"64,160"	"29,236"	"200"	"10"	"18"	"55.56%"	"2,904"	"3,564"	"81.46%"
+"20260417"	"20250418"	"金"	"快晴"	"曇り"	"0"	"14,454"	"0%"	"65.23%"	"22,157"	"14,654"	"200"	"5"	"7"	"71.43%"	"2,891"	"3,165"	"91.33%"
+"20260418"	"20250419"	"土"	"曇り"	"快晴"	"0"	"113,664"	"0%"	"139.45%"	"81,509"	"113,964"	"300"	"22"	"15"	"146.67%"	"5,167"	"5,434"	"95.08%"
+"20260419"	"20250420"	"日"	"曇り"	"快晴"	"0"	"58,206"	"0%"	"57.55%"	"101,140"	"58,606"	"400"	"15"	"7"	"214.29%"	"3,880"	"14,449"	"26.86%"
+"20260420"	"20250421"	"月"	"曇り"	"快晴"	"0"	"16,823"	"0%"	"33.75%"	"49,841"	"16,823"	"0"	"3"	"13"	"23.08%"	"5,608"	"3,834"	"146.26%"
+"20260421"	"20250422"	"火"	"曇り"	"曇り"	"0"	"35,756"	"0%"	"190.95%"	"18,725"	"35,756"	"0"	"6"	"5"	"120%"	"5,959"	"3,745"	"159.13%"
+"20260422"	"20250423"	"水"	"曇り"	"雨"	"0"	"25,857"	"0%"	"319.89%"	"8,083"	"26,257"	"400"	"7"	"3"	"233.33%"	"3,694"	"2,694"	"137.1%"
+"20260423"	"20250424"	"木"	"曇り"	"霧"	"0"	"26,462"	"0%"	"54.9%"	"48,202"	"26,662"	"200"	"8"	"10"	"80%"	"3,308"	"4,820"	"68.62%"
+"20260424"	"20250425"	"金"	"曇り"	"雨"	"0"	"24,299"	"0%"	"42.69%"	"56,919"	"24,299"	"0"	"5"	"17"	"29.41%"	"4,860"	"3,348"	"145.15%"
+"20260425"	"20250426"	"土"	"曇り"	"曇り"	"0"	"74,908"	"0%"	"64.8%"	"115,601"	"77,908"	"3,000"	"15"	"24"	"62.5%"	"4,994"	"4,817"	"103.68%"
+"20260426"	"20250427"	"日"	"曇り"	"晴れ"	"0"	"136,399"	"0%"	"96.75%"	"140,974"	"136,999"	"600"	"30"	"34"	"88.24%"	"4,547"	"4,146"	"109.66%"
+"20260427"	"20250428"	"月"	"雨"	"雨"	"0"	"33,885"	"0%"	"83.46%"	"40,599"	"34,385"	"500"	"9"	"13"	"69.23%"	"3,765"	"3,123"	"120.56%"
+"20260428"	"20250429"	"火"	"曇り"	"雨"	"0"	"44,913"	"0%"	"40.89%"	"109,831"	"44,913"	"0"	"15"	"15"	"100%"	"2,994"	"7,322"	"40.89%"
+"20260429"	"20250430"	"水"	"曇り"	"快晴"	"0"	"57,476"	"0%"	"114.27%"	"50,299"	"57,476"	"0"	"14"	"12"	"116.67%"	"4,105"	"4,192"	"97.94%"
+"20260430"	"20250501"	"木"	"曇り"	"晴れ"	"0"	"38,997"	"0%"	"43.17%"	"90,328"	"38,997"	"0"	"8"	"26"	"30.77%"	"4,875"	"3,474"	"140.31%"`;
+
+(function(){
+  // 埋め込み人件費データ（初期値）
+  var builtinLabor={"2023-10": 533189, "2023-11": 1263147, "2023-12": 798325, "2024-01": 690300, "2024-02": 585652, "2024-03": 598930, "2024-04": 565152, "2024-05": 623207, "2024-06": 627958, "2024-07": 929044, "2024-08": 845933, "2024-09": 629830, "2024-10": 605242, "2024-11": 566894, "2024-12": 658938, "2025-01": 641804, "2025-02": 598889, "2025-03": 684393, "2025-04": 647049, "2025-05": 651318, "2025-06": 671543, "2025-07": 807118, "2025-08": 777399, "2025-09": 689549, "2025-10": 625126, "2025-11": 559643, "2025-12": 609786, "2026-01": 575330, "2026-02": 514296, "2026-03": 555738, "2026-04": 544079};
+  var savedLabor=loadLabor();
+  // 埋め込みデータを常に最新として上書き（HTMLを更新したら即反映）
+  Object.keys(builtinLabor).forEach(function(k){savedLabor[k]=builtinLabor[k];});
+  state.laborData=savedLabor;
+  saveLabor();
+  // 埋め込みCSVを常にベースデータとして使用
+  // LocalStorageには追加アップロード分のみマージ
+  var base=processCSV(SAMPLE_CSV);
+  var baseKeys={};
+  base.forEach(function(m){baseKeys[m.key]=1;});
+  var saved=loadData();
+  var extra=saved?saved.filter(function(m){return !baseKeys[m.key];}):[];
+  state.allData=base.concat(extra).sort(function(a,b){return a.key.localeCompare(b.key);});
+  // LocalStorageも最新状態に更新
+  saveData();
+  var l=state.allData[state.allData.length-1];
+  state.selYear=getFiscalYear(l.key);state.selKey=null;
+  render();
+})();
+</script>
+</body>
+</html>
 
 /* ─ ヘッダー ─ */
 .hdr{display:flex;justify-content:space-between;align-items:flex-start;
